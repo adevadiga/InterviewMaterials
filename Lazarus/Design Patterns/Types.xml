@@ -1,0 +1,28 @@
+< Creational Design Patterns>
+Creational patterns are used to create objects for a suitable class that serves as a solution for a problem
+>Singleton
+  -  Logger Classes
+  -  Configuration Classes
+  -  Accesing resources in shared mode
+>Factory
+>Factory Method
+>Abstract Factory
+>Builder
+< Behavioral Patterns>
+Behavioral patterns describe interactions between objects and focus on how objects communicate with each other
+>Command
+>Iterator
+>Chain Of Responsibility
+>Observer
+>Strategy
+>Template Method
+
+< Structural Design Pattern>
+>Adapater:
+    Convert the interface of a class into another interface clients expect. 
+	Adapter lets classes work together, that could not otherwise because of incompatible interfaces.
+>Decorator:
+    Add additional responsibilities dynamically to an object.
+>Proxy:
+    provide a “Placeholder” for an object to control references to it.
+	

@@ -1,0 +1,569 @@
+1. What's hibernate first level cache?
+=>First level cache is associated with Session object.
+As we know session object is created on demand from session factory and it is lost, once the session is closed. 
+The first-level cache is the Session cache and is a mandatory cache through which all requests must pass.
+The Session object keeps an object under its own power before committing it to the database.
+
+> When we query an entity first time, it is retrieved from database and stored in first level cache associated with hibernate session.
+> If we query same object again with same session object, it will be loaded from cache and no sql query will be executed
+>evict() is used to remove particular object from Session and clear() is used to remove all cached object from Session.
+------------------------------------
+2. Second level cache?
+=>This is across SessionFactory scope. Shared across Session.
+Second level cache is created in session factory scope and is available to be used in all sessions which are created using that particular session factory.
+The object is first looked up in first level cache and then in second level cache if enabled.
+
+Different vendors have provided the implementation of Second Level Cache.
+ >EH Cache
+ >Swarm Cache
+ >OS Cache
+ >JBoss Cache
+ Each implementation provides different cache usage functionality.There are four ways to use second level cache.
+ > read-only: caching will work for read only operation.
+ > nonstrict-read-write: caching will work for read and write but one at a time.
+ > read-write: caching will work for read and write, can be used simultaneously.
+ > transactional: caching will work for transaction.
+ 
+EH Cache config:
+1. Add 2 configuration setting in hibernate.cfg.xml file
+     <property name="cache.provider_class">org.hibernate.cache.EhCacheProvider</property>  
+     <property name="hibernate.cache.use_second_level_cache">true</property>  
+2) Add cache usage setting in hbm file
+     <cache usage="read-only" />  
+3) Create ehcache.xml file
+	<?xml version="1.0"?>  
+	<ehcache>  
+  
+	<defaultCache   	
+	maxElementsInMemory="100"   
+	eternal="false"   
+	timeToIdleSeconds="120"   
+	timeToLiveSeconds="200" />  
+	</ehcache>  
+	
+Note: One more cache The query cache is a separate cache that stores query results only.
+-------------------------------------------------------------------------------
+
+3. Difference between save(), persist() and update()?
+=>save() and persist() are used to insert a new entity in the database.
+save() is Hibernate-proprietary where as persist() is JPA standard method.
+JPA is  the standard given by JAVA for Object relational mapping which has been followed by hibernate and IBatis.
+save() is guaranteed to assign and return an ID for the entity, whereas persist() is not.
+save() will return a generated identifier.
+
+update will always try to update an exiting record if not found it will throw exception.
+and in case of save if the object is already there in DB it will throw exception like primary key violation.
+
+And SaveOrUpdate will check if the object is already there in DB or session update it otherwise  save a new Object.
+
+Note save() can be executed without a transaction where as persist() wont.
+---------------------------------------------------------------------------------
+
+4. Difference between merge(), update() and saveOrUpdate()?
+=>All these methods are used to update records in database.
+update -> update if the record is found in the database,if not found it will throw unchecked exception. return type is void.
+merge ->  update if the record is found in the database, if not found it will add that particular record in the database also it returns a persistent object of java pojo class whose object is going to insert in table. 
+saveOrUpdate -> session.saveOrUpdate() method will update the record if the record is found in database, if record is not found in database it will add that particular record in table, but does not returns any thing as result of method call because its return type is void.
+
+***********
+Since save does return the identifier the INSERT statement has to be executed instantly regardless of the state of the transaction (which generally is a bad thing).
+Persist won't execute any statements outside of the currently running transaction just to assign the identifier.
+Save/Persist both work on transient instances, i.e instances which have no identifier assigned yet and as such are not saved in the DB.
+
+Update and Merge both work on detached instances, ie instances which have a corresponding entry in the DB but which are currently not attached to (or managed by) a Session. The difference between them are what happens to the instance which is passed to the function. update tries to reattach the instance, that means that there may be no other instance of the persistent entity attached to the Session right now otherwise a exception is thrown. merge, however, just copies all values to a persistent instance in the Session (which will be loaded if it is not currently loaded). The input object is not changed. So merge is more general than update, but may use more resources.
+-------------------------------------------
+5. Object states in hibernate?
+=>Transient: An object has been instantiated using new and it is not associated with hibernate session.
+ It has no persistence representation in database and no identifier value has been assigned. Use hibernate Session to make object Persistent.
+
+Persistent:A persistence instance has a representation in database and has identifier value.  Its in the scope of Session.
+Hibernate will detect any changes made to object in persistence state and will synchronize the state with database.
+
+Detached: a detached instance is an object that has been persistent, but its Session has been closed. A detached instance can be re-attached to Session
+at later point in time, making it persistent again.
+
+Making Object Persistent:
+-----------------------
+If the Object has "generated identifier", the identifier will be generated and assigned to the Object when save is called.
+If the object has "assigned identifier" or composite-key, identifier should be assigned to the Object before calling save.
+You can use persist() instead of save()
+>Persist() makes transient object persistent, It doesn't guarantee identifier value will be assigned to the persistence instance immediately.
+ The assignment might happen during flush time.
+ persist() also guarantees that it will not execute an INSERT statement if it is called outside of transaction boundaries.
+>save() does guarantee to return an identifier.
+ If an INSERT has to be executed to get the identifier ( e.g. "identity" generator, not "sequence"), this INSERT happens immediately, no matter if you are inside or outside of a transaction. 
+ 
+ 
+ Loading an Object:
+ ------------------
+ load() methods of Session provides a way to retrieve a persistent object if you know its identifier.
+ Cat fritz = (Cat) session.load(Cat.class, generatedId);
+ load() will throw an exception if no matching row found.
+ If you are not certain that a matching row exists, you should use the get() method which hits the database immediately and returns null if there is no matching row.
+ 
+ Executing Queries:
+ ------------------
+ HQL and native SQL queries are represented with an instance of org.hibernate.Query. 
+ 
+ List cats = session.createQuery(
+    "from Cat as cat where cat.birthdate < ?")
+    .setDate(0, date)
+    .list();
+
+List cats = 	sess.createQuery(
+        "select cat.color, min(cat.birthdate), count(cat) from Cat cat " +
+        "group by cat.color")
+        .list();
+Iterator it = cats.iterator();
+while(it.hasNext()){
+       Object[] row = it.next()
+	   String color = (String)row[0];
+	   Data d = (Date)row[1];
+	   Integer count = (Integer) row[2];
+}
+Named Parameter:
+Query q = sess.createQuery("from DomesticCat cat where cat.name = :name");
+q.setString("name", "Fritz");
+Iterator cats = q.list().iterate();
+
+Positional Parameter:
+Query q = sess.createQuery("from DomesticCat cat where cat.name = ?");
+q.setString(0, "Izi"); //Hibenrate is zero based unlike jdbc which is 1 based
+Iterator cats = q.iterate();
+
+named parameter list:
+List names = new ArrayList();
+names.add("Izi");
+names.add("Fritz");
+Query q = sess.createQuery("from DomesticCat cat where cat.name in (:namesList)");
+q.setParameterList("namesList", names);
+List cats = q.list();
+
+Pagination:
+-------
+Query q = sess.createQuery("from DomesticCat cat");
+q.setFirstResult(20);
+q.setMaxResults(10);
+List cats = q.list();
+
+Criteria Queries:(Alternate to HQL)
+----------------------------------
+Criteria crit = session.createCriteria(Cat.class);
+crit.add( Restrictions.eq( "color", eg.Color.BLACK ) );
+crit.setMaxResults(10);
+List cats = crit.list();
+
+Native SQL:
+----------
+List cats = session.createSQLQuery("SELECT {cat.*} FROM CAT {cat} WHERE ROWNUM<10")
+    .addEntity("cat", Cat.class)
+.list();
+
+-----------------------------------------------------------------------------------------------------------------------------
+Modifying Persistent Object:
+--------------------------
+Transactional persistent instances (i.e. objects loaded, saved, created or queried by the Session) can be manipulated by the application, and any changes to persistent state will be persisted when the Session is flushed. 
+There is no need to call a particular method (like update(), which has a different purpose) to make your modifications persistent. 
+The most straightforward way to update the state of an object is to load() it and then manipulate it directly while the Session is open:
+
+DomesticCat cat = (DomesticCat) sess.load( Cat.class, new Long(69) );
+cat.setName("PK");
+sess.flush();  // changes to cat are automatically detected and persisted
+Sometimes this programming model is inefficient, as it requires in the same session both an SQL SELECT to load an object and an SQL UPDATE to persist its updated state. Hibernate offers an alternate approach by using detached instances.
+
+Modifying Detached Objects:
+-------------------------
+Application normally retrieve object in one transaction,  send it to UI layer for manipulation, then save changes in a new transaction.
+Applications that use this kind of approach in a high-concurrency environment usually use "versioned" data to ensure isolation for the "long" unit of work.
+
+Hibernate supports this model by providing for "reattachment of detached instances" using the Session.update() or Session.merge() methods:
+
+// in the first session
+Cat cat = (Cat) firstSession.load(Cat.class, catId);
+Cat potentialMate = new Cat();
+firstSession.save(potentialMate);
+
+
+// in a higher layer of the application -UI
+cat.setMate(potentialMate);
+
+// later, in a new session
+secondSession.update(cat);  // update cat
+secondSession.update(mate); // update mate
+
+If the Cat with identifier catId had already been loaded by secondSession when the application tried to reattach it, an exception would have been thrown.
+[If the Session had already has an Cat when we try to re-attach using update() an exception will be thrown]
+
+==>Use update() if you are certain that the session does not contain an already persistent instance with the same identifier.
+==>Use merge() if you want to merge your modifications at any time without consideration of the state of the session.
+In other words, update() is usually the first method you would call in a fresh session, ensuring that the reattachment of your detached instances is the first operation that is executed.
+
+-------------------------------------------------------------------------------------------------------------------
+Automatic State detection:
+-----------------------
+saveOrUpdate() Method that either saves a transient instance by generating a new identifier or updates/re-attaches the detached instance  with its current identifier.
+
+/ in the first session
+Cat cat = (Cat) firstSession.load(Cat.class, catID);
+
+// in a higher tier of the application
+Cat mate = new Cat();
+cat.setMate(mate);
+
+// later, in a new session
+secondSession.saveOrUpdate(cat);   // update existing state (cat has a non-null id)
+secondSession.saveOrUpdate(mate);  // save the new instance (mate has a null id)
+
+
+Differences:
+----------
+Firstly, so long as you are not trying to use instances from one session in another new session, you should not need to use update(), saveOrUpdate(), or merge(). 
+
+
+Usually update() or saveOrUpdate() are used in the following scenario:
+>the application loads an object in the first session
+>the object is passed up to the UI tier
+>some modifications are made to the object
+>the object is passed back down to the business logic tier
+>the application persists these modifications by calling update() in a second session
+
+saveOrUpdate() does the following:
+>if the object is already persistent in this session, do nothing
+>if another object associated with the session has the same identifier, throw an exception
+>if the object has no identifier property, save() it
+>if the object's identifier has the value assigned to a newly instantiated object, save() it
+>if the object is versioned by a <version> or <timestamp>, and the version property value is the same value assigned to a newly instantiated object, save() it
+otherwise update() the object.
+
+and merge() is very different:
+>if there is a persistent instance with the same identifier currently associated with the session, copy the state of the given object onto the persistent instance
+>if there is no persistent instance currently associated with the session, try to load it from the database, or create a new persistent instance
+>the persistent instance is returned
+>the given instance does not become associated with the session, it remains detached.*******
+The given instance remain detached..............************************$$$$$$$$$$$$$$$$$^^^^^^^^^^^^^^^^^^^^^^
+
+----------------------------------------------------------------------------------------
+
+Deleting Persistent instance:
+Session.delete() will remove an object's state from the database. Your application, however, can still hold a reference to a deleted object. It is best to think of delete() as making a persistent instance, transient. ^^^^^^^^^^^%%%%$$$$$$####
+sess.delete(cat);
+-------------------------------------------------------------------------------------------
+
+Flushing the session:
+-------------------
+Session will execute the SQL statements needed to synchronize the JDBC connection's state with the state of objects held in memory.
+flush occurs by default at following point
+ >before some query executions
+ >from org.hibernate.Transaction.commit()
+ >from Session.flush()
+ 
+***Objects using native ID generation are inserted when they are saved.
+
+Session session = SessionFactory.openSession();
+Transaction xt = session.beginTransaction();
+
+tx.commit(); // flush occurs
+sess.close();
+----------------------------------------------------------------------------------------------
+
+Transitive persistence:
+----------------------
+It is quite cumbersome to save, delete, or reattach individual objects, especially if you deal with a graph of associated objects. 
+A common case is a parent/child relationship.
+Hibernate does not implement persistence by reachability by default. Explicitly cascade need to be mentioned.
+If you want an operation to be cascaded along an association, you must indicate that in the mapping document.*****
+
+<one-to-one name="person" cascade="persist,delete,lock"/>
+You can even use cascade="all" to specify that all operations should be cascaded along the association. The default cascade="none" specifies that no operations are to be cascaded.
+In case you are using annotations you probably have noticed the cascade attribute taking an array of CascadeType as a value.
+
+* Cascading is often useful for one-to-one and one-to-many associations.
+* If the child object's lifespan is bounded by the lifespan of the parent object, make it a life cycle object by specifying cascade="all,delete-orphan"
+* Furthermore, a mere reference to a child from a persistent parent will result in save/update of the child. This metaphor is incomplete, however.
+A child which becomes unreferenced by its parent is not automatically deleted, except in the case of a one-to-many association mapped with cascade="delete-orphan".
+
+Semantics of cascading operations for a parent/child relationship are as follows:
+1. If a parent is passed to persist(), all children are passed to persist()
+2. If a parent is passed to merge(), all children are passed to merge()
+3. If a parent is passed to save(), update() or saveOrUpdate(), all children are passed to saveOrUpdate()
+4. If a transient or detached child becomes referenced by a persistent parent, it is passed to saveOrUpdate()
+5. If a parent is deleted, all children are passed to delete()
+6. If a child is dereferenced by a persistent parent, nothing special happens - the application should explicitly delete the child if necessary - unless cascade="delete-orphan", in which case the "orphaned" child is deleted.
+-------------------------------------------------------------------------------------------------------------------
+
+Hibernate Mapping:
+----------------
+A UNIDIRECTIONAL SET-BASED ASSOCIATION:
+
+Person, Event table. Note that relationship is Many-to-Many. We need an association table Person_Event.
+We can chose to have a collection from Person. From Events we might not need to keep track of Persons, we can query if we need.
+<class name="Person" table="person">
+   <id name="id" columns="person_id">
+      <generator class="native">
+   </id>
+   <property name="age"/>
+   <property name="firstName"/>
+   <property name="lastName"/>
+   
+   <set name="events" table="PERSON_EVENT">
+      <key column="PERSON_ID"/> <!--person_id and event_id are columns of person_event association table -->
+	  <many-to-many column="EVENT_ID" class="Event"/>
+   </set>
+</class>
+
+ private void addPersonToEvent(Long personId, Long eventId) {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        session.beginTransaction();
+
+        Person aPerson = (Person) session.load(Person.class, personId);
+        Event anEvent = (Event) session.load(Event.class, eventId);
+        aPerson.getEvents().add(anEvent);
+
+        session.getTransaction().commit();
+    }
+There is no explicit call to update() or save(); Hibernate automatically detects that the collection has been modified and needs to be updated. This is called automatic dirty checking.
+
+Association with a Entity opposed to value type:
+If you have a table like PERSON_EMAIL_ADDRD with columns PERSON_ID,EMAIL_ADDR. This table will have a composite primary key
+You dont need to have entiry for PERSON_EMAIL_ADDRD. This kind of association you van define as follows
+ <set name="emailAddresses" table="PERSON_EMAIL_ADDR">
+            <key column="PERSON_ID"/>
+            <element column="EMAIL_ADDR" type="string" />
+        </set>
+======================================================================================================
+ Bi-directional associations:
+ -----------------------------
+
+ This mapping when added to Events class in the above example makes the association Bi-directional.
+ <set name="participants" table="PERSON_EVENT" inverse="true">
+            <key column="EVENT_ID"/>
+            <many-to-many column="PERSON_ID" class="Person"/>
+ </set>
+ Notice that the column names in key and many-to-many swap in both mapping documents. Notice the inverse="true".
+ What this means is that Hibernate should take the other side, the Person class, when it needs to find out information about the link between the two. 
+ Hibernate, however, does not have enough information to correctly arrange SQL INSERT and UPDATE statements (to avoid constraint violations) without inverse. 
+ Making one side of the association inverse tells Hibernate to consider it a mirror of the other side.
+
+ The rules are straightforward: all bi-directional associations need one side as inverse.
+ In a one-to-many association it has to be the many-side, and in many-to-many association you can select either side.
+ ======================================================================================================
+ Unidirectional associations:
+ --------------------------
+   1) Many-to-one:
+       <class name="Person" table="person">
+	     <id name="id" column="person_id">
+		    <generator class="native"/>
+		 </id>
+		 <many-to-one name="address" column="address_id" not-null="true"/>
+	    </class>
+		<class name="Address">
+		  <id name="id" column="address_id">
+		    <generator class="native"/>
+		</id>
+		</class>
+		
+		create table Person ( personId bigint not null primary key, addressId bigint not null )
+        create table Address ( addressId bigint not null primary key )
+        
+    2)One-to-One:
+	The only difference is the column unique constraint.
+		<class name="Person">
+		<id name="id" column="personId">
+			<generator class="native"/>
+		</id>
+		<many-to-one name="address"  column="addressId" unique="true"  not-null="true"/>
+		</class>
+
+		<class name="Address">
+			<id name="id" column="addressId">
+				<generator class="native"/>
+			</id>
+		</class>
+		create table Person ( personId bigint not null primary key, addressId bigint not null unique )
+		create table Address ( addressId bigint not null primary key )
+		
+		
+	3)One-to-many:
+	A unidirectional one-to-many association on a foreign key is an unusual case, and is not recommended.
+
+	<class name="Person">
+		<id name="id" column="personId">
+			<generator class="native"/>
+		</id>
+		<set name="addresses">
+		  <key column="person_id" not-null="true"/>
+		  <one-to-many  class="Address"/>
+		 </set>
+
+		 create table Person ( personId bigint not null primary key )
+		 create table Address ( addressId bigint not null primary key, personId bigint not null )
+
+		 ****You should instead use a join table for this kind of association.
+
+=================================================================================================
+4) Unidirectional associations with join tables:
+--------------------------------------------
+1> One-to-many:
+A unidirectional one-to-many association on a join table is the preferred option. Specifying unique="true", changes the multiplicity from many-to-many to one-to-many.
+
+<class name="Person">
+    <id name="id" column="personId">
+        <generator class="native"/>
+    </id>
+    <set name="addresses" table="PersonAddress">
+        <key column="personId"/>
+        <many-to-many column="addressId"
+            unique="true"
+            class="Address"/>
+    </set>
+</class>
+
+<class name="Address">
+    <id name="id" column="addressId">
+        <generator class="native"/>
+    </id>
+</class>
+create table Person ( personId bigint not null primary key )
+create table PersonAddress ( personId not null, addressId bigint not null primary key )
+create table Address ( addressId bigint not null primary key )
+
+
+      
+2>Many-to-one:
+
+A unidirectional many-to-one association on a join table is common when the association is optional. For example:
+
+<class name="Person">
+    <id name="id" column="personId">
+        <generator class="native"/>
+    </id>
+    <join table="PersonAddress" 
+        optional="true">
+        <key column="personId" unique="true"/>
+        <many-to-one name="address"
+            column="addressId" 
+            not-null="true"/>
+    </join>
+</class>
+
+<class name="Address">
+    <id name="id" column="addressId">
+        <generator class="native"/>
+    </id>
+</class>
+create table Person ( personId bigint not null primary key )
+create table PersonAddress ( personId bigint not null primary key, addressId bigint not null )
+create table Address ( addressId bigint not null primary key )
+        
+		
+3>Many-to-many:
+Finally, here is an example of a unidirectional many-to-many association.
+
+<class name="Person">
+    <id name="id" column="personId">
+        <generator class="native"/>
+    </id>
+    <set name="addresses" table="PersonAddress">
+        <key column="personId"/>
+        <many-to-many column="addressId"
+            class="Address"/>
+    </set>
+</class>
+
+<class name="Address">
+    <id name="id" column="addressId">
+        <generator class="native"/>
+    </id>
+</class>
+create table Person ( personId bigint not null primary key )
+create table PersonAddress ( personId bigint not null, addressId bigint not null, primary key (personId, addressId) )
+create table Address ( addressId bigint not null primary key )
+        
+====================================================================================================================
+Hibernate Transactions:
+----------------------
+SessionFactory is thread-safe, shared by all application threads.
+It is created once, usually on application startup, from a Configuration instance.
+
+A Session is an inexpensive, non-threadsafe object that should be used once and then discarded for: a single request, a conversation or a single unit of work. A Session will not obtain a JDBC Connection, or a Datasource, unless it is needed. It will not consume any resources until used.
+
+Your application code can access a "current session" to process the request by calling sessionFactory.getCurrentSession(). 
+You will always get a Session scoped to the current database transaction. 
+
+You can extend the scope of a Session and database transaction until the "view has been rendered".
+This is especially useful in servlet applications that utilize a separate rendering phase after the request has been processed.
+Extending the database transaction until view rendering, is achieved by implementing your own interceptor. 
+However, this will be difficult if you rely on EJBs with container-managed transactions. A transaction will be completed when an EJB method returns, before rendering of any view can start.  Solution: Open Session in View pattern.
+
+Ending a Session usually involves four distinct phases:
+1. flush the session
+2. commit the transaction
+3. close the session
+4. handle exceptions
+
+=======================================================================================================
+Optimistic concurrency control:
+Version checking uses version numbers, or timestamps, to detect conflicting updates and to prevent lost updates. 
+
+1. Least Efficient manual version checking
+// foo is an instance loaded by a previous Session
+session = factory.openSession();
+Transaction t = session.beginTransaction();
+
+int oldVersion = foo.getVersion();
+session.load( foo, foo.getKey() ); // load the current state
+if ( oldVersion != foo.getVersion() ) throw new StaleObjectStateException();
+foo.setProperty("bar");
+
+t.commit();
+session.close();
+
+The version property is mapped using <version>, and Hibernate will automatically increment it during flush if the entity is dirty.
+<version name="persistenceVersion" type="long" column="VERSION" />
+
+Manual version checking is only feasible in trivial circumstances and not practical for most applications. Often not only single instances, but complete graphs of modified objects, have to be checked. 
+Hibernate checks instance versions at flush time, throwing an exception if concurrent modification is detected. 
+=======================================================================================================
+
+Lazy Initialization:
+By default, Hibernate3 uses lazy select fetching for collections and lazy proxy fetching for single-valued associations. 
+Access to a lazy association outside of the context of an open Hibernate session will result in an exception. 
+
+s = sessions.openSession();
+Transaction tx = s.beginTransaction();            
+User u = (User) s.createQuery("from User u where u.name=:userName")
+    .setString("userName", userName).uniqueResult();
+Map permissions = u.getPermissions();
+tx.commit();
+s.close();
+
+Integer accessLevel = (Integer)collection permissions.get("accounts");  // Error!
+Since the permissions  was not initialized when the Session was closed, the collection will not be able to load its state. 
+Hibernate does not support lazy initialization for detached objects. This can be fixed by moving the code that reads from the collection to just before the transaction is committed.
+
+Fetch Plan for association:
+----------------------
+To prevent several immediate selects being used to execute a particular HQL query you can use fetching strategy.
+Either while defining association or while querying
+
+<set name="permissions"
+            fetch="join">
+    <key column="userId"/>
+    <one-to-many class="Permission"/>
+</set
+
+User user = (User) session.createCriteria(User.class)
+                .setFetchMode("permissions", FetchMode.JOIN)
+                .add( Restrictions.idEq(userId) )
+                .uniqueResult();
+=======================================================================================================
+Second Level Cache:
+A Hibernate Session is a transaction-level cache of persistent data. 
+It is possible to configure a cluster or JVM-level (SessionFactory-level) cache on a class-by-class and collection-by-collection basis. 
+You have the option to tell Hibernate which caching implementation to use by specifying the name of a class that implements org.hibernate.cache.CacheProvider using the property hibernate.cache.provider_class. 
+
+By default, entities are not part of the second level cache and we recommend you to stick to this setting. 
+
+Query Cache: Query result set can also be cached. By default its not enabled. Its an overhead. Since hibernate need to ensure when to invalidate the cache if persistent gets updated.
+                .uniqueResult();
+=======================================================================================================

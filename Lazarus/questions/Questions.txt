@@ -1,0 +1,15 @@
+Configure data source in JBOSS.
+Bin dir in jdk.
+extends keyword -> Class, Interface, generics wildcard
+Types of design pattern.
+Abstraction is in necessary for having encapsulation.
+Class.forName why its used. What if i have constructor taking args and how i create objects?
+Classpath vs Path?
+How you set classpath?
+Various flags used in java and java?
+ATOS annotaion in web service?
+Diff types of design pattern?
+What pattern Behaivioral falls?
+IOC?
+
+Prototype?

@@ -1,0 +1,668 @@
+
+0) int foo(){ return 1;}
+    
+    Ovveride it in subclass Integer foo(){return 100}
+    what is the output?
+
+   =>Compilation error. Only sane return type or co-varint return type are supported
+
+   long foo() override with int foo()  -> Compiler error.
+
+  *Same type or co0variant type are allowed. Nothing else
+
+
+=============================================================
+1. New Feature in Java 1.6 and 1.7
+
+Java 1.5 has -> Generics, Autoboxing and Unboxing, Enums, Static Import, Enhanced for loops, Var args, Metadata support(Annotataions)
+
+Java 1.6:
+
+The main difference in the language is that in Java 6 you can add @Override to methods which implement interfaces and in Java 5.0 you cannot
+
+Deque -> A double ended queue. Supporting element insertion and deletion at both ends. Extends Queue interface. 
+BlockingDeQue ->A deque with operations that wait for the queue to become non empty when retrieving element, and wait for space to become availiable while storing an element. Extends both DeQue and BlockingQueue
+NavigabaleSet - SortedSet extended with navigation methods reporting closest matches for given search targets
+NavigableMap - SortedMap extended with navigation methods returning the closest matches for given search targets. 
+ConcurrentNavigableMap -  ConcurrentMap that is also a NavigableMap.
+
+There are implementataion classes for these. TreeSet implements NavigableSet similarly TreeMap.
+LinkedList Implements Deque.
+
+The Arrays utility class now has methods copyOf and copyOfRange that can efficiently resize, truncate, or copy subarrays for arrays of all types.
+Before:
+
+int[] newArray = new int[newLength];
+System.arraycopy(oldArray, 0, newArray, 0, oldArray.length);
+After:
+
+int[] newArray = Arrays.copyOf(a, newLength);
+
+
+Java 1.7:
+-----------
+1. String in switch statements including in case.
+2. Binary literals with prefix 0b or 0B. Before you can use only octal or hex
+3. Underscore for numeric literals. Ex: double aDouble = 3.1415_9265;
+4. Catching multiple exception types.
+  Ex: catch(ClassNotFoundException|SQLException ex){}
+5. The try-with-resources Statement.
+ static String readFirstLineFromFile(String path) throws IOException {
+   try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+     return br.readLine();
+   }
+  }
+ Any object that implements java.lang.AutoCloseable, which includes all objects which implement java.io.Closeable, can be used as a resource.
+ 
+6.Type Inference for Generic Instance Creation
+   List<String> lst2 = new ArrayList<>(); //Pre Java 7 not possible
+   
+7. New file system API (NIO 2.0) - Non blocking IO
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+2). Abstract classes vs Interface
+1. Abstract class can have defualt method impl.
+2. All methods are public abstract and properties are public static constant.
+3. Multiple inheritance
+
+Abstract class purpose is to establish an appropriate superclass from which other classes can inherit and share a common design.
+It establishes an inheritance tree.
+Interface is a contract and establishes CAN_DO_THIS hierarchy. Where as abstract class establishes IS_A heirarchy.
+Ex: Shape is abstract class. Cloneable, Fly etc belong to CAN_DO_THIS.
+
+Define skeleton using abstract class.
+Define contact using interface. 
+
+ArrayList extends AbstarctList, implements List or RandomAcess.
+------------------------------------
+3)Is it possible A class implements a interface but doesn't provide the implementation for interface methods?
+ =>Abstract class
+------------------------------------
+4)class A is having only parametrized constructor and class B extending class A. now try to create object of class B like B b=new B()?
+=>Compile time error.  Java does not insert default constructor if the class got already one. So subclass should explicitly call the super constructor super(1).
+------------------------------------
+5)Accessibility in inheritance
+=>While overriding access modifiers cannot be more restrictive. It can be less restrictive.
+That is public you cannot change to default or protected.  But default can be changed to public.
+Same applies to exception.
+------------------------------------
+6)why multiple inheritance not supported in java. and How it is possible with interface
+=>
+1) First reason is ambiguity around Diamond problem. A has foo() B and C inherit foo() and D inherit from both B and C.
+2) Multiple inheritances does complicate the design and creates problem during casting, constructor chaining etc and given that there are not many scenario on which you need multiple inheritance its wise decision to omit it for the sake of simplicity.  Since interface only have method declaration and doesn't provide any implementation there will only be just one implementation of specific method hence there would not be any ambiguity.
+
+Class can implement multiple interface.
+----------------------------------------
+7)Can we create a subclass of a class which has only private constructor?
+=>Compiler error
+----------------------------------------
+8) use of enumeration constants?
+=> When you need a predefined list of values which do not represent some kind of numeric or textual data, you should use an enum. For instance, in a chess game you could represent the different types of pieces as an enum:
+If you use enums instead of integers (or String codes), you increase compile-time checking and avoid errors from passing in invalid constants, and you document which values are legal to use.
+
+Its type safe. Ex: object.color = Color.Red;
+
+Ex: LogLevel
+enum score { poor, average, good };
+---------------------------------------
+9)What are the Java Class-loader? java.lang.ClassLoder
+=>The Java Classloader is a part of the Java Runtime Environment that dynamically loads Java classes into the Java Virtual Machine.
+The Java run time system does not need to know about files and file systems because of classloader.
+A class with a given name can only be loaded once by a given classloader.
+
+When the JVM is started, three class loaders are used:
+1. Bootstrap class loader
+2. Extensions class loader
+3. System(Application) class loader
+
+The bootstrap class loader loads the core Java libraries[5] located in the <JAVA_HOME>/jre/lib directory. This class loader, which is part of the core JVM, is written in native code.
+The extensions class loader loads the code in the extensions directories (<JAVA_HOME>/jre/lib/ext,[6] or any other directory specified by the java.ext.dirs system property). It is implemented by the sun.misc.Launcher$ExtClassLoader class.
+The system class loader loads code found on java.class.path, which maps to the CLASSPATH environment variable. This is implemented by the sun.misc.Launcher$AppClassLoader class.
+----------------------------------------------
+10) Example of  dynamic class loading
+class LoadingClassCustom{
+	static{
+		System.out.println("LoadingClassCustom is loading!!!");
+	}
+}
+public class MainClass {
+  public static void main(String[] args){
+    ClassLoader classLoader = MainClass.class.getClassLoader();
+    try {
+        Class aClass = classLoader.loadClass("com.jenkov.MyClass");
+        System.out.println("aClass.getName() = " + aClass.getName());
+		
+		
+		//Interesting
+		ClassLoader classLoder = ClassLoderTest.class.getClassLoader();
+		Class l;
+		try {
+			l = classLoder.loadClass("com.hell.mylife.LoadingClassCustom");//Does not initiliaze
+			System.out.println(l.getName());
+			try {
+				l.newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+
+}
+
+
+You can get classLoader of particular class on the Class instance.
+i.e this.getClass().getClassLoader().
+Using this classLoader u can load other class.
+classLoader.loadClass("className"). Note that it doesn't initialize the class.
+If u class loadClass("className") nothing happens.
+
+A class can be loaded by multiple class loaders. They are not same.
+That means, that a class MyObject loaded by class loader A, is not the same class as the MyObject class loaded with class loader B.
+You cant cast those two objects, they are different classes altogether.
+
+Note: Class.forName will also load the class. For forName u can even pass a classLoader. It can initilize the class as well based on
+boolean paramter.
+Each classLoader will have its parent, But not for String,.
+i.e String.class.getClassLoader().getParent() is null.
+-------------------------------------------------------------------
+11) What is the difference between NoClassDefFoundException and ClassNotFoundException?
+=>Both these are related to missing class in class-path, their root-cause is different.
+ClassNotFoundExcpetion comes when you try to load a class at runtime by using Class.forName() or loadClass() and requested class is not present in classpath for example oracle driver class and their jar is not present.
+
+In case of NoClassDefFoundError the requested class was present at compile time but not available at runtime.
+Some time due to exception during class initialization e.g. exception from static block causes NoClassDefFoundError, when failed-to-load class was later referenced by runtime.
+
+ClassNotFoundException is checked exception. NoClassDefFoundError  is Error derived from LinkageError.
+
+Thrown when an application tries to load in a class through its string name using:
+
+ClassNotFoundException: Thrown from below scenario
+>The forName method in class Class.
+>The findSystemClass method in class ClassLoader.
+>The loadClass method in class ClassLoader.
+
+NoClassDefFoundError: THrown from below scenario
+as part of a normal method call or as part of creating a new instance using the new expression.
+
+ClassLoader seems to remember failed class loaders. You see only the NCDFE with absolutely no clue as to what really happened.
+
+----------------------------------------------------------------------
+Clousere:
+def isOdd = { int i-> i%2 == 1 }                            
+assert isOdd(3) == true   
+
+----------------------------------------------------------------------
+12) Mock and Stub
+It is common in unit tests to mock or stub collaborators of the class under test so that the test is independent of the implementation of the 
+collaborators. 
+
+A stub exists just to supply enough data to keep things going. For example, a stub of a logging service could discard everything. A stub of a user lookup service could always return a single static user or no user at all.
+
+A mock allows you test how your services are called(u use it in ur assert).
+For example, you may want to test that when you supply bad data, the logging service gets called.
+If you create a user, you want to assert that the user service got called to store it.
+
+mocks have expectations on which of their methods will be called while
+stubs are configured to return some set of data but make no assertions on if or how many times that data is requested. In many cases a single test double might act as both a mock and a stub.
+----------------------------------------------------------------------
+13) final keyword declarations and initialization and use?
+Final -> can be applied member variables, methods, class and local variables in Java.
+Final methods use compile time binding as opposed to run time binding.
+
+Final member variable must be initialized at the time of declaration or inside constructor, 
+failure to do so will result in compilation error.
+
+Local variable if u not initilize the issue comes when u try to use it. 
+int i;
+if u not used it at all, no issue
+but if u do syso(i);;//Compilation fails
+
+Final and abstract are two opposite keyword and a final class can not be abstract in java.
+Compilation Error.
+
+Also constructor cannot be final. SInce constructor cannot be overridden. Complier Error
+---------------------------------------------------------------------
+
+Volatile keyword in java:
+Volatile keyword is an indicator to compiler and thread that donot cache value of this variable, but always read it from main memory.
+It also prevents compiler or JVM reordering code.
+
+
+--------------------------------------------------------------------
+13) ArrayList Iterator
+private class Itr implements Iterator<E> {
+        int cursor;       // index of next element to return
+        int lastRet = -1; // index of last element returned; -1 if no such
+        int expectedModCount = modCount;
+
+        public boolean hasNext() {
+            return cursor != size;
+        }
+
+        @SuppressWarnings("unchecked")
+        public E next() {
+            checkForComodification();
+            int i = cursor;
+            if (i >= size)
+                throw new NoSuchElementException();
+            Object[] elementData = ArrayList.this.elementData;
+            if (i >= elementData.length)
+                throw new ConcurrentModificationException();
+            cursor = i + 1;
+            return (E) elementData[lastRet = i];
+        }
+
+        public void remove() {
+            if (lastRet < 0)
+                throw new IllegalStateException();
+            checkForComodification();
+
+            try {
+                ArrayList.this.remove(lastRet);
+                cursor = lastRet;
+                lastRet = -1;
+                expectedModCount = modCount;
+            } catch (IndexOutOfBoundsException ex) {
+                throw new ConcurrentModificationException();
+            }
+        }
+
+        final void checkForComodification() {
+            if (modCount != expectedModCount)
+                throw new ConcurrentModificationException();
+        }
+    }
+-------------------------------------------------------------------
+14) catch(FileNotFoundException|IOException e) //Compiler error. FileNotFoundException is already caught by IOException
+
+------------------------------------------------------------------
+15) There are four buffered stream classes used to wrap unbuffered streams: BufferedInputStream and BufferedOutputStream create buffered byte streams, while BufferedReader and BufferedWriter create buffered character streams.
+BufferedReader, BufferedWriter create buffered character streams.
+BufferedInputStream, BufferedOutputStream create buffered byte streams.
+
+The character encoding is not, in general, explicit: it's not saved as part of the file itself. Thus, a program that consumes a text file should know beforehand what its encoding is. If it doesn't, then the best it can do is make an assumption. Problems with encoding usually show up as weird characters in a tool that has read the file.
+
+The FileReader and FileWriter classes are a bit tricky, since they implicitly use the system's default character encoding.
+
+--------------------------------------------------------------------
+***
+-------------------------------------------------------------------
+16)What is perm gem space in Java?
+=>PermGen Space of heap is used to store classes and Meta data about classes in Java.
+This includes the name and fields of the class, methods with the method bytecode, constant pool information, object arrays and type arrays associated with a class and Just In Time compiler optimizations.
+Hence PermGen size requirements depend both on the number of classes loaded as well as the size of such class declarations. 
+
+When a class is loaded by a classloader it got stored in PermGen space, it gets unloaded only when the classloader which loaded this class got garbage collected, since classloader has a reference to the loaded class. Unitl classloader gets garbage collected, its associated loaded class also doesnot garbage collected.
+
+when you deploy your web application a new Clasloader gets created and it loads the classes used by web application.
+When you redeploy an application, you would expect that Garbage Collection will get rid of the previous classloader referencing all the previously loaded classes and it gets replaced with a classloader loading new versions of the classes.
+So if Classloader doesn't get garbage collected when your web application stops you will have memory leak in tomcat.
+-------------------------------------------------------------------------
+17) Finally calls after the System.exit() statement?
+=>No. JVM Stops.
+Does JVM stops or Main thread stops?
+
+***Terminates the currently running Java Virtual Machine.
+So each main will create a new JVM?********************************************
+
+java A ->One JVM started
+java B ->One more JVM started.
+A Java virtual machine starts up by loading a specified class and then invoking the method main in this specified class.
+-----------------------------------------------------------------------------
+
+17 A) When garbage collection runs all application threads are stopped. Resuting in pause.
+----------------------------------------------------------------------
+18)Deep and shallow cloning?
+Shallow Copy: Is a bitwise copy of an object. Cloned object will have exact copy of values in the original object.
+If there are reference variable refering to objects only the reference address are copied. Not the object itself.
+Both the cloned and old object will point to same objects in that case.
+
+Deep Copy:
+A deep copy copies all fields, and makes copies of dynamically allocated memory pointed to by the fields. 
+A deep copy occurs when an object is copied along with the objects to which it refers.
+
+Cloneable interface the clone() method is in Object. It creates Shallow copy by default.
+Note: Serialization does a deep copy.
+
+Clone() is declared as protected and native. Ovveriding class will call super.clone() and takes the Object and casts it.
+The class Object does not itself implement the interface Cloneable, so calling the clone method on an object whose class is Object will result in throwing an exception at run time.
+For primitive and Immutable object shallow copy is fine.
+   
+By convention, classes that implement this interface should override Object.clone (which is protected) with a public method
+    public Rectangle clone() throws CloneNotSupportedException {
+        return (Rectangle) super.clone();
+    }
+
+>If you want your subclass not to be cloneable where as your super class is, then override clone and throw CloneNotSupportedexcerption.
+>Singleton should not implement cloneable.
+>clone() and final fields
+If an object reference is declared as final, if u want to copy that object in your clone you are in deep shit.
+final cannot be assigned again.
+Solution is to user Serialization.
+>One notable point here is to make sure you implement the clone() method all across the inheritance hierarcy else the outcome will be undesired/you will end up working half cooked object.
+-----------------------------------------------------------------------
+19)How to create an object without using new operator?
+>new keyword
+>Class.newInstance(), Constructor.newInstance()
+   Using Class.forName()
+   Test t = (Test)Class.forName('com.anoop.test').newInstance();
+>Using clone()
+>Using deserialization
+   ObjectInputStream inStream = new ObjectInputStream(anInputStream );
+   MyObject object = (MyObject) inStream.readObject();
+   
+*int ia[][] = { {1, 2}};
+*String s ="12344";
+Integer d = 5;
+---------------------------------------------------------------------
+20) What is Cloneable and what method it has. clone is a method of which class.why is the clone method is placed in Object class.and why the method is protected?
+
+Note: Abstract type does not define clone() method. Only their implementation does.
+Ex: List does not have clone() method defined. ArrayList() does. This is opposite to abstraction.
+=>Cloneable is an marker interface.
+A class implements the Cloneable interface to indicate to the Object.clone() method that it is legal for that method to make a field-for-field copy of instances of that class.
+Clone is a method of Object class.
+In class Object, the clone() method is declared protected. If all you do is implement Cloneable, only subclasses and members of the same package will be able to invoke clone() on the object. 
+To enable any class in any package to access the clone() method, you'll have to override it and declare it public, as is done below.
+
+=>Why clone() is protected?
+To prevent default cloneability in every class you create, the clone( ) method is protected in the base class Object. 
+If its public no way u can reduce its visibility. Any client can access it.
+*It's supposed to be only used internally in a class to clone an instance of itself. 
+Whether a class provides a public clone API (for people outside the class to use) is up to the class's designers. Object.clone() simply provides a facility for the class to use when implementing its own clone method, should it choose to do so.
+
+Not only does this mean that it's not available by default to the client programmer who is simply using the class
+but it also means that you cannot call clone( ) via a reference to the base class. 
+You cannt caste to Cloneable and call methods.
+
+If clone() method is within the Cloneable interface, since all methods in the interface are public,
+anybody can cast my object to Cloneable and call clone().
+********There is no way for me to restrict the cloning of my class****
+U can throw Exception but this will restrict cloning within my package as well.
+So the design idea is to have marker interface and protected clone() method in Object.
+---------------------------------------------------------------------
+
+21)What is the use of serialversionUID?
+The serialization runtime associates with each serializable class a version number, called a serialVersionUID, which is used during deserialization to verify that the sender and receiver of a serialized object have loaded classes for that object that are compatible with respect to serialization.
+If the receiver has loaded a class for the object that has a different serialVersionUID than that of the corresponding sender's class, then deserialization will result in an InvalidClassException
+
+when we don't declare SerialVersionUID serialization mechanism creates it for us. 
+This mechanism is sensitive to many details including fields in your class, there access modifier, the interface they implement and even different Compiler implementations, any change on class or using different compiler may result in different SerialVersionUID, which many eventually stop reloading serialized data.
+You can only de-serialize a class if it's SerialVersionUID matches with the serialized instance.
+
+*Defualt version id depends even on compiler implementations.
+  Also class name, implemented interfaces, and all public and protected members.(Imagine question around this).
+*Private modifier 
+
+---------------------------------------------------------------------
+22)What is externalizable?
+=>Externalizable extends Serializable.
+Only the identity of the class of an Externalizable instance is written in the serialization stream and it is the responsibility of the class to save and restore the contents of its instances.
+The writeExternal and readExternal methods of the Externalizable interface are implemented by a class to give the class complete control over the format and contents of the stream for an object and its supertypes.
+These methods must explicitly coordinate with the supertype to save its state. 
+
+When an Externalizable object is reconstructed, an instance is created using the public no-arg constructor, then the readExternal method called.
+If ur class has no no-arg constructor you will get an exception while trying to de serialize it.
+java.io.InvalidClassException: com.javaio.example.questions.TestExternalizable; no valid constructor
+
+An Externalizable instance can designate a substitution object via the writeReplace and readResolve methods documented in the Serializable interface.
+
+-----------------------------------------------------------------------
+23) Which class has writeReplace and readResolve methods?
+ObjectInputStream has desc.hasReadResolveMethod() which checks for existence of readResolve() and call that method.
+invokeReadResolve().
+Ex: EnumeratedType like Gender. Return a substituted object.
+------------------------------------------------------------------------
+24)How java does the memory allocation for a simple program?
+=>1. Heap memory is used by all part of application, where as stack memory used only by one thread of execution.
+  2.Object is created in heap where as reference to it is created in stack. Stack memory contains local primitive variables and reference variable.
+  3. Stack memory cannot be accessed by other threads.
+  4.Heap memory is divided into young generation, old generation, perm gen space(constant pool) etc.
+  5. When statck memeory is full you will get StackOverflowError. Heap is full you will get OutOfMemory error.
+  
+ Java garbage collector (gc) can logically separate the heap into different areas, so that the gc can faster identify objects which can get removed.
+
+ Stack is where the method invocations and the local variables are stored. If a method is called then its stack frame is put onto the top of the call stack.The stack frame holds the state of the method including which line of code is executing and the values of all local variables. 
+ The method at the top of the stack is always the current running method for that stack. Threads have their own call stack.
+-----------------------------------------------------------------------------
+Marker Interface: They identify a class as having a particular capability.
+-----------------------------------------------------------------------------
+25)What is RandamAccess Interface(Marker interface)?
+The RandomAccess interface identifies that a particular java.util.List implementation has fast random access.
+If repeated access using the List.get(i) method is faster than repeated access using the Iterator.next() method, then the List has fast random access.
+>for (int i=0, n=list.size(); i < n; i++)
+  o = list.get(i);
+
+Object o;
+>for (Iterator itr=list.iterator(); itr.hasNext(); )
+  o = itr.next();
+
+ Avoiding repeated hasNext() call 
+ Iterator itr=list.iterator();
+>for (int i=0, n=list.size(); i < n; i++)
+{
+  Object o = itr.next();
+ 
+Because random access in a LinkedList is O(n), while it's O(1) in an ArrayList.
+=>
+--------------------------------------------------------------------------------------
+26)JNI- Java Native Interface and native java methods?
+=>JNI allows java code running on JVM to call and be called by native applications and libraries written in c, c++ and assembly.
+EX: File I/O and sound capability.
+
+Native method: The method is implemented in "native" code. That is, code that does not run in the JVM. It's typically written in C or C++.
+-----------------------------------------------------------
+
+27)Bit wise operator >> and >>> ?
+>> -> Signed right shift operator.
+>>> ->Unsigned right shift
+
+---------------------------------------------
+28)New features in Java1.8?
+They enable you to treat functionality as a method argument, or code as data. Lambda expressions let you express instances of single-method interfaces (referred to as functional interfaces) more compactly.
+
+-----------------------------------------
+29) Fail fast and fail safe iterator?
+=>Concurrent Modification: When one or more thread is iterating over the collection, in between one thread changes the structure of the collection(adding, removing an element or updating the value at particular position in the collection).
+
+Fail fast: immediately throws ConcurrentModificationException is there is structural modification. 
+Iterator fails quickly, instead of risking  non-deterministic behaviour at an undetermined time in the future.
+   >Single threaded scenario: After the creation of iterator , structure is modified other than iterators remove method.
+   >Multi threaded scenario: One thread modifies structure while other is iterating over it.
+According to  Oracle docs , the fail-fast behavior of an iterator cannot be guaranteed as it is, generally speaking, impossible to make any hard guarantees in the presence of unsynchronized concurrent modification. Fail-fast iterators throw ConcurrentModificationException on a best-effort basis. Therefore, it would be wrong to write a program that depended on this exception for its correctness: the fail-fast behavior of iterators should be used only to detect bugs. 
+Normally collection keep count of structural modification. As iterator is inner class it will copy the modification count as its instance variable. When it executes hasNext() or next() it checks for the modification counter.
+
+
+Fail Safe:
+---------
+Fail Safe Iterator makes copy of the internal data structure (object array) and iterates over the copied data structure.
+Any structural modification done to the iterator affects the copied data structure.  
+No ConcurrentModificationException throws by the fail safe iterator.
+
+Two  issues associated with Fail Safe Iterator are :
+1.Overhead of maintaining the copied data structure i.e memory.
+2.Fail safe iterator does not guarantee that the data being read is the data currently in the original data structure.
+
+HashMap is fail fast while ConcurrentHashMap is fail safe.
+-------------------------------------------------------------------
+30)String class internal code and how it works?
+=>String pool is JVM's particular implementation of concept of string interning.
+ String interning is a method of storing only one copy of each distinct string value, which must be immutable.
+ 
+ In Java 6 String pool were been stored in perm gen space inside heap which has fixed size and not garbage collected.
+ In Java 7 string pool will be inside heap.
+--------------------------------------------------
+31)SubString(int beginIndex)
+=>If beginIndex is zero the string is returned as it is, without copying.
+=>if beginIndex is equal to length in substring, empty string is returned. Not exception.
+  Same is the case when beginIndex and endIndex is equal.
+  StringIndexBoundException only if beginIndex is negative or more than endIndex/length of string.
+  
+How substring works:
+substring calls the String constructor like this new String(value, beginIndex, subLen);
+subLen -> value.length - beginIndex;
+The constructor will use Arrays.copyOfRange to create new String.
+
+ public String(char value[], int offset, int count) {
+        if (offset < 0) {
+            throw new StringIndexOutOfBoundsException(offset);
+        }
+        if (count < 0) {
+            throw new StringIndexOutOfBoundsException(count);
+        }
+        // Note: offset or count might be near -1>>>1.
+        if (offset > value.length - count) {
+            throw new StringIndexOutOfBoundsException(offset + count);
+        }
+        this.value = Arrays.copyOfRange(value, offset, offset+count);
+    }
+---------------------------------------------------------------------
+32)WHy password is stored in char array then string?
+=>if you store password as plain text it will be available in memory until Garbage collector clears it.
+Since String are used in String pool for re-usability there is pretty high chance that it will be remain in memory for long duration.
+If someone access memory dump and can see the password in plain text.
+String is immutable you cannot change the contents of string, however for char[] you can set all elements to zero.
+
+
+String will be garbage collected. But if the instance variable is String then until your class loader gets garbage collected,
+String will not be.
+------------------------------------------------------------------------- 
+33)Immutable class?
+     Immutable objects are the objects whose state can not be changed once constructed. e.g. String class
+   1. Dont provide setter methods.
+   2. Make all fields final and private.
+     *private because public client can change the value.
+	 *Why final?
+	    =>Just making final does not work. Assume that final Date d; here even though i cant change reference d, the object value i can change.
+	3. Don't allow subclasses to override methods. The simplest way to do this is to declare the class as final. A more sophisticated approach is to make the constructor private and construct instances in factory methods.
+    4.If the instance fields include references to mutable objects, don't allow those objects to be changed:
+      >Don't provide methods that modify the mutable objects.
+      >Don't share references to the mutable objects. Never store references to external, mutable objects passed to the constructor; if necessary, create copies, and store references to the copies. Similarly, create copies of your internal mutable objects when necessary to avoid returning the originals in your methods.
+	  
+	  
+> Immutable objects are automatically thread safe.
+> String and Wrapper classes.
+> Use as keys of hashMap, reference sharing without copy or clone
+	
+Ex: public final class ImmutableClass {
+
+	private Date d;
+	ImmutableClass(Date d){//Make it private use factoyr
+		this.d = new Date(d.getTime());//Copy else client can change the value
+	}
+	
+	public Date getDate(){
+		  //Return new Object
+		return new Date(d.getTime()); //If u return d, Client can change the value
+	}
+	
+	public ImmutableClass changeDate(Date d){
+		Date newDate = new Date(d.getTime()); //Create a copy
+		return new ImmutableClass(newDate);//return new Object
+	}
+}
+---------------------------------------------------------------------
+***********
+33.1)StringBuffer a=new StringBuffer("abc");
+		StringBuffer b=new StringBuffer("abc");	
+		a.equals(b) -> ?
+		a==b -> ?   
+		
+	False,False. Both will do reference comparision.
+	StringBuffer,StringBuilder doesn't override equals() method. ****	
+--------------------------------------------------------------------------------------
+34)StringBuffer and StringBuilder in multi threading?
+=>StringBuffers are thread-safe. The methods all are synchronized.
+  StringBuilder's access is not synchronized so that it is not thread-safe. 
+  Performance of StringBuilder is better than buffer due to not being synchronized.
+  In the method local variable you should always use StringBuilder.
+  
+  Only using StringBuffer is not enough to ensure thread safety.
+  
+    private StringBuffer sb = new StringBuffer();
+    public void addProperty(String name, String value) {
+        if (value != null && value.length() > 0) {
+            if (sb.length() > 0) {
+                sb.append(',');
+            }
+            sb.append(name).append('=').append(value);
+        }
+    }
+	Imagine three threads call (in no particular order)
+     T1: addProperty("a", "b");
+     T2: addProperty("c", "d");
+     T3: sb.toString();
+	 
+	 T3 can have lots of combination. Its not thread safe code.
+	 Note also that StringBuffer mainly be used in local methods. Using it just slows down.
+  
+Don't use String concatenation in a loop!. + will be replaced by StringBuilder.
+while (guard) {
+  string += value;
+}
+while(guard)({
+string = new StringBuilder().append(string).append(value).toString();
+}
+Note: + operator uses StringBuilder
+------------------------------------------------------------------
+35)What is String.intern() method does?
+=>
+string interning is a method of storing only one copy of each distinct string value, which must be immutable. Interning strings makes some string processing tasks more time- or space-efficient at the cost of requiring more time when the string is created or interned. The distinct values are stored in a string intern pool.
+
+
+String s = new String("anoop").intern() stores the string in intern pool opposed to heap. If already string exist in pool , s will refer to it.
+If the public static final String = "anoop".intern() is defined, if this constant was refereed from some other class, this constant value wont be substituted. Instead it will still refer to it.
+The downside is that interning a String takes more time than simply throwing it on the heap, and that the space for interned Strings may be limited, depending on the Java implementation
+
+------------------------------------------------------------
+36)AtomicInteger?
+=>Lock free, thread safe programming on single variable. Hold an int value that allows it to be updated atomically.
+Ex: To handle a counter that is accessed by different threads simultaneously.
+Similar: AtomicInteger, AtomicLong, AtomicReference you can use it.
+
+Make counter of how many objects are created u can use AtomicInteger.
+Which method? => incrementAndGet().
+
+Volatile variables can also be used to store shared variables at a lower cost than that of synchronization, but they have limitations. While writes to volatile variables are guaranteed to be immediately visible to other threads, there is no way to render a read-modify-write sequence of operations atomic, meaning, for example, that a volatile variable cannot be used to reliably implement a mutex (mutual exclusion lock) or a counter.
+
+You can't ensure read-modify-write operation to be atomic using volatile.
+The atomic variable classes all expose a compare-and-set primitive (similar to compare-and-swap). 
+Use hardware supplied lock free, wait free algorithms. 
+To user these hardware feature(CAS-compare and set) are provided via atomic class in java concurrent API.
+----------------------------------------------------------------
+37) ReadReplace, WriteResolve in Serilization ALong with Singleton example?
+38) readObject and writeObject() in Serialization?
+39) Cloneable?
+-----------------------------------------------
+40) List<String> l = new ArrayList<String>(); 
+     l.add(1, "Anoo");//IndexOufOfBound
+	 
+	  List<String> l = new ArrayList<String>(10); 
+     l.add(1, "Anoo");//IndexOufOfBound
+	 
+	 If the size of array is 5 , then u can add using index as 6.
+	 If empty u can only add it to index 0. Not for index 1.
+	  private void rangeCheckForAdd(int index) {
+        if (index > size || index < 0)
+            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
+    }
+
+
+
+
+
+
+ 
+
+
+   
+
+

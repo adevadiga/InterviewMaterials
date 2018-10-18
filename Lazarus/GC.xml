@@ -1,0 +1,71 @@
+Odd and Even print,
+Blocking Queue
+
+Garbage collection algorithm
+1)< Mark and Sweep>
+
+The mark-and-sweep algorithm consists of two phases
+ >In the first phase, it finds and marks all accessible objects(GC Roots)
+ >In the second phase, the garbage collection algorithm scans through the heap and reclaims all the unmarked objects
+ 
+ > Program need to be stopped to execute GC.
+ 
+Fragmentation Problem:
+phenomenon that occurs in a long-running program that has undergone garbage collection several times.
+Live objects end up being separated by many, small unused memory regions. 
+The problem in this situation is that it may become impossible to allocate memory for an object.
+
+2)< Stop-and-Copy Garbage Collection >:
+approach that collects garbage and defragments the heap called stop-and-copy.
+When using the stop-and-copy garbage collection algorithm, the heap is divided into two separate regions.
+At any point in time, all dynamically allocated object instances reside in only one of the two regions--the active region. 
+The other, inactive region is unoccupied.
+
+When the memory in the active region is exhausted, the program is suspended and the garbage-collection algorithm is invoked.
+The stop-and-copy algorithm copies all of the live objects from the active region to the inactive region.
+As each object is copied, all references contained in that object are updated to reflect the new locations 
+of the referenced objects.
+
+In effect, the storage occupied by the garbage is reclaimed all at once when the active region becomes inactive.
+As the stop-and-copy algorithm copies the live objects from the active region to the inactive region, it stores the objects in contiguous memory locations.
+
+Limitation:
+  >the algorithm requires that all live objects be copied every time garbage collection is invoked(Minor GC).
+  If an application program has a large memory footprint, the time required to copy all objects can be quite significant.
+  >A second cost associated with stop-and-copy is the fact that it requires twice as much memory as the program actually uses.
+  When garbage collection is finished, at least half of the memory space is unused.
+
+  Algorithm:
+  
+3)< Mark-and-Compact Garbage Collection >
+    mark-and-sweep algorithm fragments the heap  and 
+	stop and copy avoids fragmentation at the expense of doubling the size of heap.
+	mark-and-compact eliminates fragmentation without space penalty of stop and copy.
+	
+	Two phases
+	 > Find and Mark all live objects.
+	 > Compact the heap by moving all live objects into contiguous memory location.
+	 
+	 for each root variable r
+        mark (r);
+      compact ();
+	  
+	  
+=============================================================================================
+< Garbage-Collection Roots >:
+There are four kinds of GC roots in Java
+1. <Local variables> are kept alive by the stack of a thread. This is not a real object virtual reference and thus is not visible.
+   For all intents and purposes, local variables are GC roots.
+   
+2. <Active Java threads> are always considered live objects and are therefore GC roots. 
+   This is especially important for thread local variables
+   
+3. Static variables are referenced by their classes. This fact makes them de facto GC roots.
+   Classes themselves can be garbage-collected, which would remove all referenced static variables.(When the class loader
+   get garbage colected)
+   
+4. JNI References
+
+
+
+

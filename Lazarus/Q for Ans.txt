@@ -1,0 +1,24 @@
+1. mvc and other design patterns and implementation details; pros and cons of approaches taken. traversal of arrays, optimization, O-analysis, lists (search, removal), trees (search, traversal, removal, deletion), hashmaps; you will be well prepared if you study "Programming Interviews Exposed" and "Cracking the Coding Interview". All questions are designed to see if you are fundamentally sound.
+
+
+2. web app optimization and debugging; scenarios, challenges, approach / resolution, rendering time, basics of http, javascript internals, single threaded model, etc. All are questions designed to see if your skills and experience match what they need to hire for.
+3. behavioral, personality, cultural fit, challenges, achievements, motivation, interests; All are questions designed to see if you are going to work well with the people there.  
+
+4. . Java Programme to find avg sal per employee based on the case given.  
+
+5. singleton pattern & factory pattern  
+
+6. Design a pizza ordering and delivery system  
+
+7. anagram question
+
+8.  Implement LRU Cache, wrote code.
+
+9. Loop in linkedlist
+
+10.Given a collection of numbers, print the pair whose sum is X  
+
+11.Lowest common ancestor in a binary tree.  
+
+12.Check if a number can be generated form the following process: take 1, multiply by 3 any number of times or add 5 any number of times. Output the path or not possible.
+Eg: 13 = 1 * 3 + 5 + 5, 15 : Not possible  

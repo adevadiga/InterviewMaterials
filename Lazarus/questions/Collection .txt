@@ -1,0 +1,105 @@
+Important methods in Object
+1. wait(), notify(), notifyAll() ->final methods
+2. finalize()
+3. equals() and hashCode() ->public methods along with toString
+4. toString() ->Class name and @ symbol followed by unsigned hexadecimal representation of the object's hashcode
+
+boolean equals (Object obj) -> decides whether two objects are meaningfully equal
+int hashCode() -> returns a hashcode int value for object so that object can be used in Collection classes that uses hashing Ex: HashSet
+
+if you dont oveeride equals u cant use the object as key in hashtable andyou wont get accurate sets.
+
+equals() and hashCode() are bound together by a joint contract, that specifies if two objects are considered equals by equals() method then they must have identical hashcode values.
+So rule of thumb is if you ovveride equals overide hascode as well.
+
+What is the default hashCode?
+
+HashCode: Used to increase performance of large collection of data.
+If you don't override hashCode each new object will give diff hashcode. So if u put it into collection, u can search only if u used the same object refernce.
+You cannot create new object identical to the one you put it and search it. Since each new instance will have different hashcode.
+
+Now can you see why if two objects are considered equal, their hashcodes must
+also be equal? Otherwise, you'd never be able to find the object since the default
+hashcode method in class Object virtually always comes up with a unique number
+for each object, even if the equals() method is overridden in such a way that two
+or more objects are considered equal.
+
+
+Collection, List, Queue
+Set, Map, NavigableSet
+SortedSet, SortedMap, NavigableMap
+
+Maps: HashMap, Hashtable, LinkedHashMap, TreeMap
+Set : HashSet, LinkedHashSet, TreeSet
+List : ArrayList, Vector, LinkedList
+Queues: PriorityQueue
+
+Utilities: ArrayList,Collections
+
+
+
+Generics:
+---------
+< One of the use is for type safe collections.  Parameterezid type or type parameter.>
+
+Type Erasure: The type information does not exist at runtime. Its only compiler.
+Compiler makes sure that you dont put wrong this to collection. 
+You do not assign what you get from collection to wrong refernce type.
+
+Ordered When a collection is ordered, it means you can iterate through the
+collection in a specific (not-random) order.
+
+ArrayList establishes order by elements index position. Note that it does not maintain insertion order. You can insert at any position.
+LinkedHashSet establishes order by insertion, so that last element inserted is last element in the linkedHashSet. InsertionOrder.
+
+So Index, insertion order, natural ordering
+Some collection maintains natural ordering of elements.
+Natural Ordering
+
+
+Comparable: is an Interface that defines how instances of class can be compared to one another.
+---------
+Comparator:  Define multiple sort order.
+-----------
+
+ArrayList - Fast iteration and fast random access. Implements RandomAccess marker interface. Use if u need fast itration but not so much insertion delettion.
+
+Set -  cares about uniqueness. Does not allow duplicates. Uses equals() method. what if both compareTo and equals exist.
+
+
+Comparable gives only one sort order. If you want your objects to sort in multiple was then we need to use Comparator
+Iterator is an object that is associated with a specific collection.
+
+TreeSet and TreeMap => Either the objects you want to be in collection and u implement Comparable to make it mutually Comparable.
+Else you can create TreeSet and TreeMap by passign a comparator in their constructor.
+if that is the case when u add element , it will use the that Comparator.
+
+Enum can be used as key in HashMap that implies Enum also oveerides equals() and hashCode().
+----------------------------------------------------------------------------------------------------
+Animal[] array = new Dog[10]; //Works
+ArrayList<Animal> list = new ArrayList<Dog>(); //Does not work. Compilation error.
+
+In the case of arrays, it is possible if a method takes Animal[] and you have passed Dog[] to the method, the method might add sub type of Animal, say new Cat().
+In case of array an exception will be thrown 'ArrayStoreException'.
+But for collection there is no similar exception because of type erasure.
+Hence compiler does not allow the collection scenario.  Since JVM doesnot know about type info. So it cannot stop adding wrong type.
+
+----------------------------------------------------------------------------------------------------
+List<? extends Animal> You cannot add anything for this List. However it can take any list of type that is-a Animal.
+List<? super Animal> You can add. 
+
+
+List<?> and List<Object>
+List<?> means list of any type(unknown type). U can assign List<Dog>, List<Foo>, List<Integer> anything. 
+You cannot add anything to this list.
+For List<Object> you can assign only List<Object>. You cannot assign List<Dog>, List<Foo> nothing.
+You can add elements of any type for this.
+
+List<?> and List<? extends Object> are identical.
+
+----------------------------------------------------------------------------------------------------
+Exception handling allows you to isolate your error-correction code into separate
+blocks so that the main code doesn't become cluttered by error-checking code.
+Another elegant feature allows you to handle similar errors with a single errorhandling
+block, without code duplication.
+Also, the error handling can be deferred to methods further back on the call stack.

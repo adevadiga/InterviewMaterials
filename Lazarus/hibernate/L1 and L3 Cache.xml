@@ -1,0 +1,15 @@
+The benefit of using a database access abstraction layer is that caching can be implemented transparently, without leaking into the business logic code.
+< First Level Cache>
+Hibernate Persistence Context acts as a transactional write-behind cache, translating entity state transitions into DML statements.
+
+The Persistence Context acts as a logical transaction storage, and each Entity instance can have at-most one managed reference. No matter how many times we try to load the same Entity, the Hibernate Session will always return the same object reference. 
+This behavior is generally depicted as the first-level cache.
+
+< Second Level Cache>
+A proper caching solution would have to span across multiple Hibernate Sessions and that’s the reason Hibernate supports an additional second-level cache as well. 
+The second-level cache is bound to the SessionFactory life-cycle, so it’s destroyed only when the SessionFactory is closed (topically when the application is shutting down)
+The second-level cache is primarily entity-based oriented, although it supports an optional query-caching solution as well.
+
+The Session is always inspected first because it might already contain a managed entity instance. The second-level cache is verified before hitting the database, so its main purpose is to reduce the number of database accesses.
+
+https://vladmihalcea.com/2015/04/09/how-does-hibernate-store-second-level-cache-entries/

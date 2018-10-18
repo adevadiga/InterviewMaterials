@@ -1,0 +1,71 @@
+1. Abstract class can have constructor.
+   Even Abstract class can have "private" constructor. Only cause is that u cannot extends that class.
+   But compiler wont complaint for having private constructor inside abstract class.
+   
+2. How much interfaces a class file can implement?
+   The number of direct super interfaces of a class or interface is limited to 65535 by the size of the interfaces_count item of the ClassFile structure.
+   A class file consists of a single ClassFile structure
+   ClassFile {
+    u4             magic;
+    u2             minor_version;
+    u2             major_version;
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+  }
+  
+  Refer this for JVM inof https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html
+  
+3. When will you use static inner class?
+=>An inner class, by definition, cannot be static, so I am going to recast your question as "What is the difference between static and non-static nested classes?
+A non-static nested class (sometimes incorrectly referred to as an 'inner class') has full access to the members of the class within which it is nested. A static nested class does not have a reference to a nesting instance, so a static nested class cannot invoke non-static methods or access non-static fields of an instance of the class within which it is nested.
+
+Each instance of a nonstatic [nested] class is implicitly associated with an enclosing instance of its containing class... It is possible to invoke methods on the enclosing instance.
+
+Read: Read about nested classes.
+
+4. When will you use static nested class?
+A nested class is a member of its enclosing class. Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class.
+...
+
+Note: A static nested class interacts with the instance members of its outer class (and other classes) just like any other top-level class. In effect, a static nested class is behaviourally a top-level class that has been nested in another top-level class for packaging convenience.
+
+There is no need for HashMap.Entry to be top-level class as it is only used by HashMap.
+And since it does not need access to HashMap's members, it makes sense for it to be static - it's a much cleaner approach.
+
+In our project we have certain finiteValue. Where this finite value is loaded from DB.
+========================================================================================
+5. Static block or static method, which gets loaded first?
+=>static initialization blocks are executed in the order in which they appear in source code. Note that a static method can be used
+    public static varType myVar = initializeClassVariable();        
+    private static varType initializeClassVariable() {
+        // initialization code goes here
+    }
+
+  Normal initialization blocks - compiler will copy into "every" constructor. Therefore, this approach can be used to share a block of code between multiple constructors.
+    private varType myVar = initializeInstanceVariable();        
+    protected final varType initializeInstanceVariable() {
+        // initialization code goes here
+    }
+	The method is final because calling non-final methods during instance initialization can cause problems.
+	Its a good practice.
+	
+=========================================================================================
+6. Does Collection implements Serializable or Cloneable? 
+   => java.util.Collection interface does not implement any of them.
+      java.util.List also does not.
+	  java.util.ArrayList implements both of them.
+	  
+	  The semantics and the implications of either cloning or serializing come into play when dealing with the actual implementation; that is, the concrete implementation should decide how it should be cloned or serialized, or even if it can be cloned or serialized. In some cases, depending on what the actual backing-implementation is, cloning and serialization may not make much sense. So mandating cloning and serialization in all implementations is actually less flexible and more restrictive. The specific implementation should make the decision as to whether it can be cloned or serialized.
+
+

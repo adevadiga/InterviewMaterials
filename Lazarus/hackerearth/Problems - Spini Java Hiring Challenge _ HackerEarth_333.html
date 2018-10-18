@@ -1,0 +1,1281 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- saved from url=(0098)https://www.hackerearth.com/spini-java-hiring-challenge/problems/484da557ef5d4bd9bbc697b216e58b03/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="description" content="
+HackerEarth Online Test
+">
+        <link rel="canonical" href="https://www.hackerearth.com/spini-java-hiring-challenge/problems/">
+        <meta name="msvalidate.01" content="1BF418E510B5A17A2D71685C571BF4EB">
+
+        <!-- Errorception tracking snippet -->
+        <script type="application/javascript" async="" defer="" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/track.js"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/55ba39a81acd32ac7d0002d4.js" async=""></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/cb=gapi.loaded_0" async=""></script><script type="text/javascript" async="" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/5F90ycbP4JOg1fOUoELScA.js"></script><script type="text/javascript" async="" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/plusone.js" gapi_processed="true"></script><script id="twitter-wjs" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/widgets.js"></script><script id="facebook-jssdk" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/all.js"></script><script type="text/javascript" async="" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/mixpanel-2.2.min.js"></script><script async="" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/analytics.js"></script><script>
+            (function(_,e,rr,s){_errs=[s];var c=_.onerror;_.onerror=function(){var a=arguments;_errs.push(a);
+            c&&c.apply(this,a)};var b=function(){var c=e.createElement(rr),b=e.getElementsByTagName(rr)[0];
+            c.src="//beacon.errorception.com/"+s+".js";c.async=!0;b.parentNode.insertBefore(c,b)};
+            _.addEventListener?_.addEventListener("load",b,!1):_.attachEvent("onload",b)})
+            (window,document,"script","55ba39a81acd32ac7d0002d4");
+        </script>
+
+        <!-- MathJax -->
+        <script type="text/x-mathjax-config;executed=true">
+            MathJax.Hub.Config({messageStyle: "none",
+                tex2jax: {
+                    inlineMath: [['$$','$$']],
+                    displayMath: [['$$$', '$$$']],
+                    preview: "none"
+            }
+        });
+        </script>
+        <script type="text/javascript" async="" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/MathJax.js">
+        </script>
+        <script type="text/javascript" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/MathJax(1).js"></script>
+
+        <script type="text/javascript">
+            window.addEventListener("load", function() {
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+                    });
+        </script>
+
+        
+<meta name="google-site-verification" content="ozqyeStBcz4eehbY9Ohb_IUQcA4y8BKzzDCT-H1QPPc">
+
+
+        <title>Problems - Spini Java Hiring Challenge | HackerEarth</title>
+
+        
+        
+        <link rel="shortcut icon" href="https://hackerearth.global.ssl.fastly.net/static/hackerearth/images/logo/HE_identity.png" type="image/x-icon">
+        
+        <link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/base_common_combined.css">
+        <link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/tipTip.css">
+        <link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/offline-theme-slide.css">
+        <link rel="stylesheet" type="text/css" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/jquery.mCustomScrollbar.min.css">
+        <!--<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">-->
+        <link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/font-awesome.min.css">
+        <link href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/css" rel="stylesheet" type="text/css">
+        <link href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/css(1)" rel="stylesheet" type="text/css">
+        
+<link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/base_candidate.0.1.css">
+
+
+        
+<link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/problems.css">
+<link rel="stylesheet" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/editor1.css">
+<link href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/jquery-ui-1.8.21.custom.css" media="screen" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/pagedown.css">
+<link href="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/prettify.css" type="text/css" rel="stylesheet">
+
+
+
+
+        <!-- For chartbeat -->
+        <script type="text/javascript">var _sf_startpt=(new Date()).getTime();</script>
+
+        <!-- Make the static variable available for all js files -->
+        <script>
+            var STATIC_URL = "https://hackerearth.global.ssl.fastly.net/static/";
+        </script>
+
+        <!-- Store CSRF_COOKIE -->
+        <script>
+            var CSRF_COOKIE_USED = "True";
+            var CSRF_COOKIE = "FyqtK5RUUckl3AZgOccrjsbK8Xe3IX2B";
+        </script>
+
+        
+
+    <script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/bigpipe.js" crossorigin="anonymous"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 2px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 2px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: 1em}
+.MathJax_MenuRadioCheck.RTL {right: 1em; left: auto}
+.MathJax_MenuLabel {padding: 2px 2em 4px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #CCCCCC; margin: 4px 1px 0px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: Highlight; color: HighlightText}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css" media="screen">.uv-icon{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block;cursor:pointer;position:relative;-moz-transition:all 300ms;-o-transition:all 300ms;-webkit-transition:all 300ms;transition:all 300ms;width:39px;height:39px;position:fixed;z-index:100002;opacity:0.8;-moz-transition:opacity 100ms;-o-transition:opacity 100ms;-webkit-transition:opacity 100ms;transition:opacity 100ms}.uv-icon.uv-bottom-right{bottom:10px;right:12px}.uv-icon.uv-top-right{top:10px;right:12px}.uv-icon.uv-bottom-left{bottom:10px;left:12px}.uv-icon.uv-top-left{top:10px;left:12px}.uv-icon.uv-is-selected{opacity:1}.uv-icon svg{width:39px;height:39px}.uv-popover{font-family:sans-serif;font-weight:100;font-size:13px;color:black;position:fixed;z-index:100001}.uv-popover-content{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;background:white;position:relative;width:325px;height:325px;-moz-transition:background 200ms;-o-transition:background 200ms;-webkit-transition:background 200ms;transition:background 200ms}.uv-bottom .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) 0 -10px 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-top .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) 0 10px 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-left .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) 10px 0 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-right .uv-popover-content{-moz-box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;-webkit-box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px;box-shadow:rgba(0,0,0,0.3) -10px 0 60px,rgba(0,0,0,0.1) 0 0 20px}.uv-ie8 .uv-popover-content{position:relative}.uv-ie8 .uv-popover-content .uv-popover-content-shadow{display:block;background:black;content:'';position:absolute;left:-15px;top:-15px;width:100%;height:100%;filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius=15,MakeShadow=true,ShadowOpacity=0.30);z-index:-1}.uv-popover-tail{border:9px solid transparent;width:0;z-index:10;position:absolute;-moz-transition:border-top-color 200ms;-o-transition:border-top-color 200ms;-webkit-transition:border-top-color 200ms;transition:border-top-color 200ms}.uv-top .uv-popover-tail{bottom:-20px;border-top:11px solid white}.uv-bottom .uv-popover-tail{top:-20px;border-bottom:11px solid white}.uv-left .uv-popover-tail{right:-20px;border-left:11px solid white}.uv-right .uv-popover-tail{left:-20px;border-right:11px solid white}.uv-popover-loading{background:white;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;position:absolute;width:100%;height:100%;left:0;top:0}.uv-popover-loading-text{position:absolute;top:50%;margin-top:-0.5em;width:100%;text-align:center}.uv-popover-iframe-container{height:100%}.uv-popover-iframe{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;overflow:hidden}.uv-is-hidden{display:none}.uv-is-invisible{display:block !important;visibility:hidden !important}.uv-is-transitioning{display:block !important}.uv-no-transition{-moz-transition:none !important;-webkit-transition:none !important;-o-transition:color 0 ease-in !important;transition:none !important}.uv-fade{opacity:1;-moz-transition:opacity 200ms ease-out;-o-transition:opacity 200ms ease-out;-webkit-transition:opacity 200ms ease-out;transition:opacity 200ms ease-out}.uv-fade.uv-is-hidden{opacity:0}.uv-scale-top,.uv-scale-top-left,.uv-scale-top-right,.uv-scale-bottom,.uv-scale-bottom-left,.uv-scale-bottom-right,.uv-scale-right,.uv-scale-right-top,.uv-scale-right-bottom,.uv-scale-left,.uv-scale-left-top,.uv-scale-left-bottom,.uv-slide-top,.uv-slide-bottom,.uv-slide-left,.uv-slide-right{opacity:1;-moz-transition:all 80ms ease-out;-o-transition:all 80ms ease-out;-webkit-transition:all 80ms ease-out;transition:all 80ms ease-out}.uv-scale-top.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(-15%);-ms-transform:scale(0.8) translateY(-15%);-webkit-transform:scale(0.8) translateY(-15%);transform:scale(0.8) translateY(-15%)}.uv-scale-top-left.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(-15%) translateX(-10%);-ms-transform:scale(0.8) translateY(-15%) translateX(-10%);-webkit-transform:scale(0.8) translateY(-15%) translateX(-10%);transform:scale(0.8) translateY(-15%) translateX(-10%)}.uv-scale-top-right.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(-15%) translateX(10%);-ms-transform:scale(0.8) translateY(-15%) translateX(10%);-webkit-transform:scale(0.8) translateY(-15%) translateX(10%);transform:scale(0.8) translateY(-15%) translateX(10%)}.uv-scale-bottom.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(15%);-ms-transform:scale(0.8) translateY(15%);-webkit-transform:scale(0.8) translateY(15%);transform:scale(0.8) translateY(15%)}.uv-scale-bottom-left.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(15%) translateX(-10%);-ms-transform:scale(0.8) translateY(15%) translateX(-10%);-webkit-transform:scale(0.8) translateY(15%) translateX(-10%);transform:scale(0.8) translateY(15%) translateX(-10%)}.uv-scale-bottom-right.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateY(15%) translateX(10%);-ms-transform:scale(0.8) translateY(15%) translateX(10%);-webkit-transform:scale(0.8) translateY(15%) translateX(10%);transform:scale(0.8) translateY(15%) translateX(10%)}.uv-scale-right.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(15%);-ms-transform:scale(0.8) translateX(15%);-webkit-transform:scale(0.8) translateX(15%);transform:scale(0.8) translateX(15%)}.uv-scale-right-top.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(15%) translateY(-10%);-ms-transform:scale(0.8) translateX(15%) translateY(-10%);-webkit-transform:scale(0.8) translateX(15%) translateY(-10%);transform:scale(0.8) translateX(15%) translateY(-10%)}.uv-scale-right-bottom.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(15%) translateY(10%);-ms-transform:scale(0.8) translateX(15%) translateY(10%);-webkit-transform:scale(0.8) translateX(15%) translateY(10%);transform:scale(0.8) translateX(15%) translateY(10%)}.uv-scale-left.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(-15%);-ms-transform:scale(0.8) translateX(-15%);-webkit-transform:scale(0.8) translateX(-15%);transform:scale(0.8) translateX(-15%)}.uv-scale-left-top.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(-15%) translateY(-10%);-ms-transform:scale(0.8) translateX(-15%) translateY(-10%);-webkit-transform:scale(0.8) translateX(-15%) translateY(-10%);transform:scale(0.8) translateX(-15%) translateY(-10%)}.uv-scale-left-bottom.uv-is-hidden{opacity:0;-moz-transform:scale(0.8) translateX(-15%) translateY(10%);-ms-transform:scale(0.8) translateX(-15%) translateY(10%);-webkit-transform:scale(0.8) translateX(-15%) translateY(10%);transform:scale(0.8) translateX(-15%) translateY(10%)}.uv-slide-top.uv-is-hidden{-moz-transform:translateY(-100%);-ms-transform:translateY(-100%);-webkit-transform:translateY(-100%);transform:translateY(-100%)}.uv-slide-bottom.uv-is-hidden{-moz-transform:translateY(100%);-ms-transform:translateY(100%);-webkit-transform:translateY(100%);transform:translateY(100%)}.uv-slide-left.uv-is-hidden{-moz-transform:translateX(-100%);-ms-transform:translateX(-100%);-webkit-transform:translateX(-100%);transform:translateX(-100%)}.uv-slide-right.uv-is-hidden{-moz-transform:translateX(100%);-ms-transform:translateX(100%);-webkit-transform:translateX(100%);transform:translateX(100%)}
+</style><style type="text/css" media="screen">.uv-icon:hover{opacity:1}</style><style type="text/css" media="print">#uvTab,.uv-tray,.uv-icon,.uv-popover,.uv-bubble{display:none!important}</style><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/event.js" crossorigin="anonymous"></script><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/problems.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/history.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/Markdown.All.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/prettifyall.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/webcam.min.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/candidate_snapshot.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/activity_log.js" crossorigin="anonymous"></script><script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/test_proctor.js" crossorigin="anonymous"></script><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow-x:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_reset .fb_dialog_legacy{overflow:visible}.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}.fb_dialog_content{background:#fff;color:#333}.fb_dialog_close_icon{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_close_icon:active{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}.fb_dialog_loader{background-color:#f6f7f8;border:1px solid #606060;font-size:24px;padding:20px}.fb_dialog_top_left,.fb_dialog_top_right,.fb_dialog_bottom_left,.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}.fb_dialog_top_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}.fb_dialog_top_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}.fb_dialog_bottom_left{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}.fb_dialog_bottom_right{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}.fb_dialog_vert_left,.fb_dialog_vert_right,.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}.fb_dialog_vert_left,.fb_dialog_vert_right{width:10px;height:100%}.fb_dialog_vert_left{margin-left:-10px}.fb_dialog_vert_right{right:0;margin-right:-10px}.fb_dialog_horiz_top,.fb_dialog_horiz_bottom{width:100%;height:10px}.fb_dialog_horiz_top{margin-top:-10px}.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3a5795;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{-webkit-transform:none;height:100%;margin:0;overflow:visible;position:absolute;top:-10000px;left:0;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{width:auto;height:auto;min-height:initial;min-width:initial;background:none}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{color:#fff;display:block;padding-top:20px;clear:both;font-size:18px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#4966A6), color-stop(.5, #355492), to(#2A4887));border:1px solid #2f477a;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset, rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f6f7f8;border:1px solid #555;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/yD/r/t-wz8gw1xG1.png);background-repeat:no-repeat;background-position:50% 50%;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_hide_iframes iframe{position:relative;left:-10000px}.fb_iframe_widget_loader{position:relative;display:inline-block}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}.fb_iframe_widget_loader .FB_Loader{background:url(https://fbstatic-a.akamaihd.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}</style><script type="text/javascript" charset="UTF-8" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/common.js"></script><script type="text/javascript" charset="UTF-8" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/util.js"></script><script type="text/javascript" charset="UTF-8" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/stats.js"></script></head>
+
+    <body><div id="MathJax_Message" style="display: none;"></div>
+
+        <!-- Placeholder for any error message on the site -->
+        <div id="alert-message-holder">
+            
+
+            <!-- put a dummy message box so that it can be used when cloning
+                 and adding more -->
+            
+        <div class="alert-message hidden">
+                <div class="message float-left"></div>
+                <div class="cross-holder float-left"><span class="small-cross sprites"></span></div>
+                <div class="clear"></div>
+            </div></div> <!-- end alert-message-holder -->
+
+        
+    <script>
+        navigator.sayswho= (function(){
+            var ua= navigator.userAgent,
+                N= navigator.appName, tem,
+                M= ua.match(/(opera|chrome|safari|firefox|msie|trident)\/?\s*([\d\.]+)/i) || [];
+            M= M[2]? [M[1], M[2]]:[N, navigator.appVersion, '-?'];
+            if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+            return M.join(' ');
+        })();
+
+        var browser = navigator.sayswho;
+        var parts = browser.split(" ");
+        browser = parts[0].toLowerCase();
+        version = parts[1];
+        var version_parts = version.split(".");
+        version = parseInt(version_parts[0]);
+
+        if ((browser == 'chrome' && version < 11) || (browser == 'firefox' && version < 10) || (browser == 'msie' && version < 10)) {
+            window.location.href = "/browser-not-supported/";
+        }
+    </script>
+
+    
+    <div class="header">
+        <div class="float-left box-padding">
+            
+
+            
+
+            <div class="header-name ellipsis">
+            
+            Spini Java Hiring Challenge 
+            
+            </div>
+            
+            <div class="clear"></div>
+        </div>
+        <div class="float-right box-padding">
+            
+            <div class="user-name light float-left"> [anoopkundapur@gmail.com]</div>
+            
+            
+            <div class="timer" time="7200" started="True" end-test="/AJAX/spini-java-hiring-challenge/time-completed/" test-completed="/spini-java-hiring-challenge/mark-completed/">
+                <div class="time-widget">
+                    <div id="hours">01</div>
+                    <div class="colon">:</div>
+                    <div id="mins">56</div>
+                    <div class="colon">:</div>
+                    <div id="secs">33</div>
+                    <div class="light less-margin-left">
+                        left
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div> <!-- end timer -->
+            <div class="sprites test-information show-modal" target="instructions-modal"></div>
+            <a href="https://www.hackerearth.com/spini-java-hiring-challenge/problems/484da557ef5d4bd9bbc697b216e58b03/#" class="end-test button btn-red show-modal" target="end-test-modal">Finish Test</a>
+            <div class="clear"></div>
+            
+        </div>
+        <div class="clear"></div>
+        
+        <div id="logout-reason-url" class="hidden" ajax="/utilityapp/log-user-logout-reason/" event_id="11353" user_id="469611"></div>
+        
+        <div id="get-user-logout-data" class="hidden" ajax="/utilityapp/get-user-logout-data/" event_id="11353" user_id="469611"></div>
+    </div> <!-- end header -->
+    
+
+    <div class="body">
+        
+<div class="problem-list nice-scrollbar load-javascript-div hidden" attempted-dots-url="/AJAX/event/11353/attempted-dots/" tabindex="5000" style="overflow: hidden; outline: none; display: block;">
+    <span class="collapse-expand-button button btn-white"><span class="sprites collapse-icon"></span></span>
+    <div class="trivia">
+        <span class="form-label regular darker"> <span class="bold">12</span> questions </span>
+        <span class="total-score regular dark"> Max. Marks: <span class="bold">300.0</span></span>
+    </div>
+
+    
+    <div class="question-section standard-margin">
+        <div class="section-header"><span class="light bold">10 Multiple-Choice Questions</span></div>
+        
+        <div id="3a48f0fd7de64ae7b846c5ad2d024c55" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/3a48f0fd7de64ae7b846c5ad2d024c55/" level="1">
+            <div class="status tool-tip" id="status-o172324">
+                
+                    
+                        <div class="">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">1.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172324 countdown-left-172324" id="question-172324">Time Up!</div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="10333090449443359ff877ca34c2b8f4" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/10333090449443359ff877ca34c2b8f4/" level="1">
+            <div class="status tool-tip" id="status-o172325">
+                
+                    
+                        <div class="">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">2.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172325 countdown-left-172325" id="question-172325">Time Up!</div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="44712210504a43b2a6c27ed6cda7c16a" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/44712210504a43b2a6c27ed6cda7c16a/" level="1">
+            <div class="status tool-tip" id="status-o172326">
+                
+                    
+                        <div class="">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">3.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172326 countdown-left-172326" id="question-172326">00:02</div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="2dd98036f4c9489c882d25b39a7338bd" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/2dd98036f4c9489c882d25b39a7338bd/" level="1">
+            <div class="status tool-tip" id="status-o172328">
+                
+                    
+                        <div class="">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">4.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172328 countdown-left-172328" id="question-172328">00:45</div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="484da557ef5d4bd9bbc697b216e58b03" class="question-item load-section history selected" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/484da557ef5d4bd9bbc697b216e58b03/" level="1">
+            <div class="status tool-tip" id="status-o172329">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">5.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172329 countdown-left-172329" id="question-172329">01:41</div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="41a8343fa804436ca9301c52bd64a622" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/41a8343fa804436ca9301c52bd64a622/" level="1">
+            <div class="status tool-tip" id="status-o172548">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">6.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172548 countdown-left-172548" id="question-172548"></div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="91c50a0226a947739f47c2e053beafa9" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/91c50a0226a947739f47c2e053beafa9/" level="1">
+            <div class="status tool-tip" id="status-o172549">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">7.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172549 countdown-left-172549" id="question-172549"></div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="f740d54aa5b94c38abbc6a521e5cfb5b" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/f740d54aa5b94c38abbc6a521e5cfb5b/" level="1">
+            <div class="status tool-tip" id="status-o172550">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">8.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172550 countdown-left-172550" id="question-172550"></div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="97db352e705b4a7da83f5f9c26b42d99" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/97db352e705b4a7da83f5f9c26b42d99/" level="1">
+            <div class="status tool-tip" id="status-o172551">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">9.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172551 countdown-left-172551" id="question-172551"></div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+        <div id="b46d1f7655c741feb1b11e7abbda494c" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/b46d1f7655c741feb1b11e7abbda494c/" level="1">
+            <div class="status tool-tip" id="status-o172552">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">10.</div>
+            <div class="text darker">
+                
+                <div class="float-left">Timed Question</div>
+                <div class="float-right">
+                    <div class="countdown-172552 countdown-left-172552" id="question-172552"></div>
+                </div>
+                <div class="clear"></div>
+                
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                <span>Max. Marks: 10.0</span>
+                <span class="less-margin-left"></span>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+
+    
+
+    
+    <div class="question-section standard-margin">
+        <div class="section-header"><span class="light bold">2 Programming Questions</span></div>
+        
+        <div id="54eb94ae755844f584b33ae25d662e36" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/algorithm/54eb94ae755844f584b33ae25d662e36/" level="1">
+           <div class="status tool-tip" id="status-p47662">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">11.</div>
+            <div class="text darker">
+                Chandu and Primes
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                Max. Marks: 100.0
+            </div>
+        </div>
+        
+        <div id="715bd768d5fd477d897d51e796c871b4" class="question-item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/algorithm/715bd768d5fd477d897d51e796c871b4/" level="1">
+           <div class="status tool-tip" id="status-p47663">
+                
+                    
+                        <div class="hidden">
+                            <div class="attempted-circle"></div>
+                        </div>
+                    
+                
+            </div>
+            <div class="serial-no">12.</div>
+            <div class="text darker">
+                Gori's Crush
+            </div>
+            <div class="clear"></div>
+            <div class="dark smaller less-margin margin-left-30">
+                Max. Marks: 100.0
+            </div>
+        </div>
+        
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+</div> <!-- problem-list -->
+
+<div class="problem-list-small hidden nice-scrollbar" tabindex="5001" style="overflow: hidden; outline: none;">
+    <span class="collapse-expand-button button btn-white"><span class="sprites expand-icon"></span></span>
+    <div class="place-holder"></div>
+    
+        <div id="3a48f0fd7de64ae7b846c5ad2d024c55" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/3a48f0fd7de64ae7b846c5ad2d024c55/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172324">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">1.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="10333090449443359ff877ca34c2b8f4" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/10333090449443359ff877ca34c2b8f4/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172325">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">2.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="44712210504a43b2a6c27ed6cda7c16a" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/44712210504a43b2a6c27ed6cda7c16a/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172326">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">3.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="2dd98036f4c9489c882d25b39a7338bd" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/2dd98036f4c9489c882d25b39a7338bd/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172328">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">4.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="484da557ef5d4bd9bbc697b216e58b03" class="item load-section history selected" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/484da557ef5d4bd9bbc697b216e58b03/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172329">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">5.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="41a8343fa804436ca9301c52bd64a622" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/41a8343fa804436ca9301c52bd64a622/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172548">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">6.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="91c50a0226a947739f47c2e053beafa9" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/91c50a0226a947739f47c2e053beafa9/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172549">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">7.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="f740d54aa5b94c38abbc6a521e5cfb5b" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/f740d54aa5b94c38abbc6a521e5cfb5b/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172550">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">8.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="97db352e705b4a7da83f5f9c26b42d99" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/97db352e705b4a7da83f5f9c26b42d99/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172551">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">9.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="b46d1f7655c741feb1b11e7abbda494c" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/objective/b46d1f7655c741feb1b11e7abbda494c/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-o172552">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">10.</div>
+            <div class="clear"></div>
+        </div>
+    
+
+    
+
+    
+        <div id="54eb94ae755844f584b33ae25d662e36" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/algorithm/54eb94ae755844f584b33ae25d662e36/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-p47662">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">11.</div>
+            <div class="clear"></div>
+        </div>
+    
+        <div id="715bd768d5fd477d897d51e796c871b4" class="item load-section history" targets="1" target1="problem-detail" ajax="/AJAX/load-problem/11353/algorithm/715bd768d5fd477d897d51e796c871b4/" level="1">
+            <!--
+            <div class="status tool-tip" title="Attempted" id="status-small-p47663">
+                
+                <div class="hidden">
+                    <div class="attempted-circle"></div>
+                </div>
+                
+            </div>
+            -->
+            <div class="s-no">12.</div>
+            <div class="clear"></div>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+</div>
+
+<div id="problem-detail-wrapper" class="problem-detail-wrapper ">
+    <div id="problem-detail" class="problem-detail">
+
+    <div class="mcq" data-id="484da557ef5d4bd9bbc697b216e58b03">
+        
+            <span class="timer-section regular dark" id="countdown-172329"><i class="fa fa-clock-o"></i> Time left: <span class="countdown-172329">01:41</span></span>
+            <div class="clear"></div>
+        
+        <div class="serial-number content-heading">5.</div>
+        <div class="problem-statement">
+            <div class="regular darker"><p><strong>(Java)</strong>Predict the output of below Java code:</p>
+<pre class="prettyprint prettyprinted"><code><span class="kwd">class</span><span class="pln"> </span><span class="typ">ExampleFive</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">public</span><span class="pln"> </span><span class="kwd">static</span><span class="pln"> </span><span class="kwd">void</span><span class="pln"> main</span><span class="pun">(</span><span class="typ">String</span><span class="pun">[]</span><span class="pln"> args</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">final</span><span class="pln"> </span><span class="kwd">int</span><span class="pln"> i </span><span class="pun">=</span><span class="pln"> </span><span class="lit">22</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">byte</span><span class="pln"> b </span><span class="pun">=</span><span class="pln"> i</span><span class="pun">;</span><span class="pln">
+        </span><span class="typ">System</span><span class="pun">.</span><span class="kwd">out</span><span class="pun">.</span><span class="pln">println</span><span class="pun">(</span><span class="pln">i </span><span class="pun">+</span><span class="pln"> </span><span class="str">", "</span><span class="pln"> </span><span class="pun">+</span><span class="pln"> b</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">}</span></code></pre></div>
+        </div>
+        <div class="problem-score">
+            <span class="section-header">Max. Marks</span> <span class="regular dark bold">10.0</span>
+            <br>
+            
+        </div>
+        <div class="clear"></div>
+        <div class="submit-form">
+            
+            <form name="mcq-form" class="ajax-form" method="POST" ajax="/AJAX/save-mcq-answer/172329/">
+            
+                <div class="answer-172329">
+    <div class="wrapper vertical-alignment mcq-options">
+        <ul>
+<li><label for="id_correct_ans_0"><input type="radio" id="id_correct_ans_0" value="695521" name="correct_ans"> 22, 20 </label></li>
+<li><label for="id_correct_ans_1"><input type="radio" id="id_correct_ans_1" value="695522" name="correct_ans"> Cannot type cast int to byte </label></li>
+<li><label for="id_correct_ans_2"><input type="radio" id="id_correct_ans_2" value="695523" name="correct_ans"> 22, 22</label></li>
+<li><label for="id_correct_ans_3"><input type="radio" id="id_correct_ans_3" value="695524" name="correct_ans"> Compile Time Error.</label></li>
+</ul>
+        
+    </div>
+    <hr class="border-line form-line">
+    <p class="buttons">
+        
+        <input type="submit" class="button btn-blue float-left" clicked="Saving.." name="submit" value="Save Answer">
+        <label class="save-message hidden float-left">Answer saved</label>
+        <a href="https://www.hackerearth.com/spini-java-hiring-challenge/problems/484da557ef5d4bd9bbc697b216e58b03/#" class="link-2 float-left load-section link-near-button-left" targets="1" target1="problem-detail" ajax="/AJAX/reset-mcq-answer/172329/">Reset Answer</a>
+        <a href="https://www.hackerearth.com/spini-java-hiring-challenge/problems/484da557ef5d4bd9bbc697b216e58b03/#" class="load-next-question link-2 float-right" target="41a8343fa804436ca9301c52bd64a622">Skip Question</a>
+        
+    </p>
+</div>
+
+
+
+            </form>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+</div>
+</div>
+
+<div class="load-javascript heading-1 standard-margin standard-margin-left" style="display: none;">
+    Loading...
+</div>
+
+
+<div id="event-url" class="hidden">/spini-java-hiring-challenge/</div>
+<div id="upload-snapshot-url" class="hidden">/AJAX/spini-java-hiring-challenge/upload-snapshot/</div>
+<div id="activity-log-url" class="hidden">/spini-java-hiring-challenge/log_activity/</div>
+
+    <div id="ascrail2000" class="nicescroll-rails" style="width: 7px; z-index: auto; cursor: default; position: absolute; top: 0px; left: 313px; height: 551px; opacity: 1; display: block; background: rgb(238, 238, 238);"><div style="position: relative; top: 0px; float: right; width: 7px; height: 350px; border: none; border-radius: 0px; background-color: rgb(204, 204, 204); background-clip: padding-box;"></div></div><div id="ascrail2000-hr" class="nicescroll-rails" style="height: 7px; z-index: auto; top: 544px; left: 0px; position: absolute; opacity: 1; cursor: default; display: none; width: 313px; background: rgb(238, 238, 238);"><div style="position: relative; top: 0px; height: 7px; width: 320px; border: none; border-radius: 0px; background-color: rgb(204, 204, 204); background-clip: padding-box;"></div></div><div id="ascrail2001" class="nicescroll-rails" style="width: 7px; z-index: auto; cursor: default; position: absolute; top: -48px; left: 83px; height: 595px; opacity: 1; display: none; background: rgb(238, 238, 238);"><div style="position: relative; top: 0px; float: right; width: 7px; height: 0px; border: none; border-radius: 0px; background-color: rgb(204, 204, 204); background-clip: padding-box;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails" style="height: 7px; z-index: auto; top: 540px; left: 0px; position: absolute; opacity: 1; cursor: default; display: none; background: rgb(238, 238, 238);"><div style="position: relative; top: 0px; height: 7px; width: 0px; border: none; border-radius: 0px; background-color: rgb(204, 204, 204); background-clip: padding-box;"></div></div></div> <!-- end body -->
+
+    
+        <div id="end-test-modal" class="modal-window small-modal">
+    <div class="modal-header">
+        End Test
+    </div>
+    <div class="modal-content">
+        <h1>Are you sure you want to end the test?</h1>
+    </div>
+    <div class="modal-footer">
+        
+            <a id="end-test-click" href="https://www.hackerearth.com/spini-java-hiring-challenge/finish-test/" class="button btn-blue float-right">Yes</a>
+        
+        <div class="clear"></div>
+    </div>
+</div>
+
+        <div id="instructions-modal" class="modal-window very-large-modal">
+    <div class="modal-header">
+        Description and Instructions
+    </div>
+    <div class="modal-content">
+        <div class="content-heading">Timings (Asia/Kolkata)</div>
+        <div class="body-font test-timing-info">
+            <div class="section-margin">
+                <div class="gray-text param">Opens</div>
+                <div class="value">Jan. 22, 2016<span class="gray-text"> | </span>6:30 a.m.</div>
+                <div class="clear"></div>
+            </div>
+            <div class="section-margin">
+                <div class="gray-text param">Closes</div>
+                <div class="value">Jan. 24, 2016<span class="gray-text"> | </span>11:30 a.m.</div>
+                <div class="clear"></div>
+            </div>
+            <div class="section-margin">
+                <div class="gray-text param">Duration</div>
+                <div class="value">2 hrs </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+        <div class="content-heading standard-margin"> Description </div>
+        <div class="body-font">
+            <p>Interested in building a Scalable Java Grails Backend for a massive network of one of a kind online marketplace which helps the masses monetize information!? </p>
+<p><strong>Spini</strong> is looking to hire talented <strong>Java Back-end Developers</strong> for their energetic, vibrant team in <strong>Bangalore</strong>. If you are up for this then take up the challenge and get shortlisted!</p>
+<p>Follow the event and show your interest on <a href="https://www.facebook.com/events/1056884941020805/">FB page</a> ! </p>
+        </div>
+
+        <div class="content-heading standard-margin"> Instructions </div>
+        <div class="body-font">
+            <ol>
+<li>For the programming questions in the test, you need to choose one language from the given list and attempt.</li>
+<li>All inputs for the programming problem are from STDIN and output to STDOUT. </li>
+<li>To understand more about the judge environment, time limits, etc. you can read the <a href="https://www.hackerearth.com/judge/">FAQ</a> here. </li>
+<li>Programming questions have a 'Compile and Test' option where you can run your solution against sample test cases, before submitting. </li>
+<li>You can submit solution for a programming problem as many times         as you want. For subjective and objective problems you can change         your answer any number of times </li>
+<li>For objective and subjective questions you have to click submit to record your response. </li>
+</ol>
+        </div>
+    </div>
+</div>
+
+    
+
+
+
+        <!-- for adding extra html to the body, generally if you want to add absolute position that appear on click
+             then add them in this block. Please make sure that this block is not already being filled by the parent
+             template, if that is the case then to block.super after extending this block -->
+        
+        
+        
+
+        <!-- Store any json returned for bigpipe -->
+        <div id="bigpipe-json" class="hidden">
+            
+        </div>
+
+        <!-- Store any json returned for bigpipe -->
+        <div id="user-prompt-json" class="hidden">
+            {}
+        </div>
+
+        <!-- realtime host -->
+        <div id="realtime-host" class="hidden">realtime.hackerearth.com</div>
+        <!-- realtime port -->
+        <div id="realtime-port" class="hidden">80</div>
+
+        <!-- client name for updating parts of page in realtime -->
+        <div id="pusher-channel-name-0" class="hidden">fa6f242ff2a342755f041bab55fe620b3613d344</div>
+        
+        
+        <div id="pusher-channel-name-1" class="hidden" realtime="true">private-482076d4b21354676feccdc89b1f0d578c00fa99</div>
+        <div id="pusher-channel-name-2" class="hidden">private-f7c362f0f814202df525efd1c491498657419bf3</div>
+        
+        
+
+        
+            <div id="common-notification">
+            </div>
+        
+        <!-- pusher app key -->
+        <div id="pusher-app-key" class="hidden">58a29e5cae2309f04b28</div>
+
+        <!-- ping url for user presence -->
+        <div id="ghost-ping-url" class="hidden" ajax="/ghost/ping/"></div>
+
+        <!-- All the scripts go here -->
+        <script>
+            var CURRENT_PATH = "https://www.hackerearth.com/spini-java-hiring-challenge/problems/";
+            var HISTORY = '[]';
+        </script>
+
+        
+<script type="text/javascript" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/alljs.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/progress_bar.js" crossorigin="anonymous"></script>
+<script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/base1.0.1.js" crossorigin="anonymous"></script>
+<!-- Don't load other js files from base -->
+
+        <script>
+            Offline.options = {
+                interceptRequests: false,
+                requests: false,
+            };
+        </script>
+
+        <script>
+            // do all maps stuff here
+            function initializeMaps(){
+
+                // Call other map functions
+                try{
+                    window.mapStuff();
+                } catch(err){
+                }
+
+                try{
+                    // Display footer maps
+                    var myOptions = {
+                        zoom:14,
+                        center:new google.maps.LatLng(12.9337468, 77.6149422),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    var map = new google.maps.Map(document.getElementById("gmap_canvas"), myOptions);
+                    var marker = new google.maps.Marker({
+                                map: map,
+                                position: new google.maps.LatLng(12.9337468, 77.6149422)
+                            });
+                    var infowindow = new google.maps.InfoWindow({
+                                    content:"<b>HackerEarth Technologies</b>"
+                                });
+                    google.maps.event.addListener(marker, "click", function(){
+                            infowindow.open(map,marker);
+                    });
+
+                }
+                catch(e){}
+            }
+
+            function loadMaps() {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places&callback=initializeMaps'
+                document.body.appendChild(script);
+            }
+
+            $(document).ready(function(){
+                loadMaps();
+            });
+
+        </script>
+        
+<script src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/jquery.nicescroll.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/redirect_on_event_end.js" crossorigin="anonymous"></script>
+
+
+        <script>
+            // Used in search
+            var is_user_logged_in = true;
+        </script>
+
+        <script type="text/javascript" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/detect_timezone.js" crossorigin="anonymous"></script>
+        <script>
+            $(document).ready(function(){
+                var timezone = jstz.determine_timezone(); // Now you have an instance of the TimeZone object.
+
+                
+
+                
+                    var profile_timezone = "America/Havana";
+                    if (timezone.name() !== profile_timezone) {
+                        $.ajax({
+                            type: "POST",
+                            url:"/users/AJAX/set-timezone/",
+                            data: {
+                            'timezone': timezone.name(),
+                            },
+                        });
+                    }
+                
+
+                
+            });
+        </script>
+
+        
+            
+        
+
+        <script type="text/javascript">
+            
+            $(document).ready(function(){
+                //mixpanel delegate links custom method
+                mixpanel.delegate_links = function (parent, selector, event_name, properties) {
+                    properties = properties || {};
+                    parent = parent || document.body;
+                    parent = $(parent);
+                    parent.on('click', selector, function (event) {
+                        var new_tab = event.which === 2 || event.metaKey || event.target.target === '_blank' || this.target === '_blank';
+                        properties.url = event.target.href || this.href;
+                        function callback() {
+                            if (new_tab) {
+                                return;
+                            }
+                            window.location = properties.url;
+                        }
+                        if (!new_tab) {
+                            event.preventDefault();
+                            setTimeout(callback, 300);
+                        }
+                        mixpanel.track(event_name, properties, callback);
+                    });
+                };
+            });
+            
+        </script>
+
+        
+<script>
+    G_SCRIPTS = G_SCRIPTS.concat([
+        "https://hackerearth.global.ssl.fastly.net/static/bigpipe/bigpipe.js?v=0.5",
+        "https://hackerearth.global.ssl.fastly.net/static/hackathon/private/event.js?v=0.5",
+        "https://hackerearth.global.ssl.fastly.net/static/hackathon/private/problems.js?v=0.5",
+        "https://hackerearth.global.ssl.fastly.net/static/base/history.js?v=0.1",
+        "https://hackerearth.global.ssl.fastly.net/static/markdown/Markdown.All.js",
+        "https://hackerearth.global.ssl.fastly.net/static/google-code-prettify/prettifyall.js",
+        "https://hackerearth.global.ssl.fastly.net/static/js/webcam.min.js",
+        "https://hackerearth.global.ssl.fastly.net/static/hackathon/private/candidate_snapshot.js?v=0.4",
+        "https://hackerearth.global.ssl.fastly.net/static/hackathon/activity_log.js",
+        "https://hackerearth.global.ssl.fastly.net/static/hackathon/private/test_proctor.js?v=0.1",
+    ]);
+
+    $(document).ready(function() {
+        loadScripts(G_SCRIPTS, function() {
+            G_SCRIPTS_LOADED = true;
+            $('.load-javascript').hide();
+            
+                $('.load-javascript-div').show();
+            
+            
+            
+            
+        });
+    });
+
+    var gEditorScriptsLoaded = false;
+    var gEditorScriptsLoading = false;
+</script>
+
+
+        
+        <!-- google analytics start -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-34729975-1', 'auto');
+            ga('require', 'displayfeatures');
+            
+            ga('set', '&uid', 469611);
+            
+            ga('send', 'pageview');
+        </script>
+        <!-- google analytics end -->
+        
+
+        
+        <!-- mixpanel analytics start -->
+        <script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===e.location.protocol?"https:":"http:")+'//cdn.mxpnl.com/libs/mixpanel-2.2.min.js';f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f);b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.track_charge people.clear_charges people.delete_user".split(" ");for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);mixpanel.init("4c30b8635363027dfb780d5a61785112");</script>
+        <!-- mixpanel analytics end -->
+        <script type="text/javascript">
+            
+                
+                    mixpanel.register({
+                        "url_path": "/spini-java-hiring-challenge/problems/",
+                        "username": "anoopkundapur",
+                        "email": "anoopkundapur@gmail.com",
+                        "date_of_joining": "Aug. 26, 2015, 3:09 a.m.",
+                        "user_bucket": "11"
+                    });
+                    
+                
+            
+        </script>
+        
+
+        <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" title="Facebook Cross Domain Communication Frame" aria-hidden="true" tabindex="-1" id="fb_xdm_frame_https" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/xd_arbiter.html" style="border: none;"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="f2a18db2b" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/ping.html" style="display: none;"></iframe></div></div></div>
+        <script>
+            <!-- facebook button -->
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=109964005787822";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            <!-- twitter button -->
+            !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+            <!-- google+ button -->
+            (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+
+        
+        <script>
+        // Include the UserVoice JavaScript SDK (only needed once on a page)
+        UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/5F90ycbP4JOg1fOUoELScA.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
+
+        //
+        // UserVoice Javascript SDK developer documentation:
+        // https://www.uservoice.com/o/javascript-sdk
+        //
+
+        // Set colors
+        UserVoice.push(['set', {
+          accent_color: '#448dd6',
+          trigger_color: 'white',
+          trigger_background_color: 'rgba(46, 49, 51, 0.6)'
+        }]);
+
+        // Identify the user and pass traits
+        // To enable, replace sample data with actual user traits and uncomment the line
+        UserVoice.push(['identify', {
+          //email:      'john.doe@example.com', // User’s email address
+          //name:       'John Doe', // User’s real name
+          //created_at: 1364406966, // Unix timestamp for the date the user signed up
+          //id:         123, // Optional: Unique id of the user (if set, this should not change)
+          //type:       'Owner', // Optional: segment your users by type
+          //account: {
+          //  id:           123, // Optional: associate multiple users with a single account
+          //  name:         'Acme, Co.', // Account name
+          //  created_at:   1364406966, // Unix timestamp for the date the account was created
+          //  monthly_rate: 9.99, // Decimal; monthly rate of the account
+          //  ltv:          1495.00, // Decimal; lifetime value of the account
+          //  plan:         'Enhanced' // Plan name for the account
+          //}
+        }]);
+
+        // Add default trigger to the bottom-right corner of the window:
+        UserVoice.push(['addTrigger', { mode: 'contact', trigger_position: 'bottom-right' }]);
+
+        // Or, use your own custom trigger:
+        //UserVoice.push(['addTrigger', '#id', { mode: 'contact' }]);
+
+        // Autoprompt for Satisfaction and SmartVote (only displayed under certain conditions)
+        UserVoice.push(['autoprompt', {}]);
+        </script>
+        
+    
+
+<div id="tiptip_holder" style="max-width:200px;"><div id="tiptip_arrow"><div id="tiptip_arrow_inner"></div></div><div id="tiptip_content"></div></div><script type="text/javascript" src="./Problems - Spini Java Hiring Challenge _ HackerEarth_333_files/js"></script><div class="offline-ui offline-ui-up"><div class="offline-ui-content"></div></div><div data-html2canvas-ignore="true" class="uv-icon uv-bottom-right"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="39px" height="39px" viewBox="0 0 39 39" enable-background="new 0 0 39 39" xml:space="preserve">
+<g>
+	<path class="uv-bubble-background" fill="rgba(46, 49, 51, 0.6)" d="M31.425,34.514c-0.432-0.944-0.579-2.007-0.591-2.999c4.264-3.133,7.008-7.969,7.008-13.409
+		C37.842,8.658,29.594,1,19.421,1S1,8.658,1,18.105c0,9.446,7.932,16.79,18.105,16.79c1.845,0,3.94,0.057,5.62-0.412
+		c0.979,1.023,2.243,2.3,2.915,2.791c3.785,2.759,7.571,0,7.571,0S32.687,37.274,31.425,34.514z" style="fill: rgba(46, 49, 51, 0.6);"></path>
+	<g>
+		<g>
+			<path class="uv-bubble-foreground" fill="#FFFFFF" d="M16.943,19.467c0-3.557,4.432-3.978,4.432-6.058c0-0.935-0.723-1.721-2.383-1.721
+				c-1.508,0-2.773,0.725-3.709,1.87l-2.441-2.743c1.598-1.9,4.01-2.924,6.602-2.924c3.891,0,6.271,1.959,6.271,4.765
+				c0,4.4-5.037,4.732-5.037,7.265c0,0.481,0.243,0.994,0.574,1.266l-3.316,0.965C17.303,21.459,16.943,20.522,16.943,19.467z
+				 M16.943,26.19c0-1.326,1.114-2.441,2.44-2.441c1.327,0,2.442,1.115,2.442,2.441c0,1.327-1.115,2.441-2.442,2.441
+				C18.058,28.632,16.943,27.518,16.943,26.19z" style="fill: white;"></path>
+		</g>
+	</g>
+</g>
+</svg>
+</div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;"></iframe></body></html>

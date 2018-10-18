@@ -1,0 +1,160 @@
+1. LazyInitializationException?
+=>Indicates access to unfetched data outside of a session context. For example, when an uninitialized proxy or collection 
+is accessed after the session was closed.
+
+Lazy Initialization allows framework to lazily initialize dependencies, relationship or association lazily from database on need basis.
+For example, if you are dealing with User object, which has relationship with Permission object like one user can have multiple permissions, then Hibernate may choose not to initialize the collection which holds all permissions at the time it initialized User object and instead returns a proxy object.
+At this point, if you close your session and later tries to access an attribute from Permission object, you will get "org.hibernate.LazyInitializationException: could not initialize proxy - no Session in Hibernate".
+ 
+Proxy object is only initialized in Hibernate if you access any attribute other than id itself, that's why you would only see LazyInitializationException if you try to access an attribute other than id. 
+========================================
+2. Open Session In View -pattern to solve lazy initialization?
+=>Solves the lazy initialization needs in the view. 
+ If you access detached objects that have been loaded in the Session inside your JSP (or any other view rendering mechanism), you might hit an unloaded collection or a proxy that isn't initialized. 
+ The solution, in two-tiered systems, with the action execution, data access through the Session, and the rendering of the view all in the same virtual machine, is to keep the Session open until the view has been rendered.
+ > Using an interceptor: Now you only need some kind of interceptor that runs after the view has been rendered, and that will then commit the database transaction, hence close the Session.  Note that we need  to use getCurrentSession to deal with single session.
+ 
+ In most applications you need the following: when an HTTP request has to be handled, a new Session and database transaction will begin. Right before the response is send to the client, and after all the work has been done, the transaction will be committed, and the Session will be closed.
+ 
+ 
+ public class HibernateSessionRequestFilter implements Filter {    
+    private static Log log = LogFactory.getLog(HibernateSessionRequestFilter.class);    
+    private SessionFactory sf;    
+    public void doFilter(ServletRequest request,  
+                         ServletResponse response,  
+                         FilterChain chain)  
+            throws IOException, ServletException {  
+  
+        try {  
+            log.debug("Starting a database transaction");  
+            sf.getCurrentSession().beginTransaction();  
+  
+            // Call the next filter (continue request processing)  
+            chain.doFilter(request, response);  
+  
+            // Commit and cleanup  
+            log.debug("Committing the database transaction");  
+            sf.getCurrentSession().getTransaction().commit();  
+  
+        } catch (StaleObjectStateException staleEx) {  
+            log.error("This interceptor does not implement optimistic concurrency control!");  
+            log.error("Your application will not work until you add compensation actions!");  
+            // Rollback, close everything, possibly compensate for any permanent changes  
+            // during the conversation, and finally restart business conversation. Maybe  
+            // give the user of the application a chance to merge some of his work with  
+            // fresh data... what you do here depends on your applications design.  
+            throw staleEx;  
+        } catch (Throwable ex) {  
+            // Rollback only  
+            ex.printStackTrace();  
+            try {  
+                if (sf.getCurrentSession().getTransaction().isActive()) {  
+                    log.debug("Trying to rollback database transaction after exception");  
+                    sf.getCurrentSession().getTransaction().rollback();  
+                }  
+            } catch (Throwable rbEx) {  
+                log.error("Could not rollback transaction after exception!", rbEx);  
+            }  
+  
+            // Let others handle it... maybe another interceptor for exceptions?  
+            throw new ServletException(ex);  
+        }  
+    }  
+  
+    public void init(FilterConfig filterConfig) throws ServletException {  
+        log.debug("Initializing filter...");  
+        log.debug("Obtaining SessionFactory from static HibernateUtil singleton");  
+        sf = HibernateUtil.getSessionFactory();  
+    }  
+  
+    public void destroy() {}  
+  
+}  
+
+
+ Caveat: Since the Session is flushed after the view has been rendered, database exceptions might occur after a successful output has been generated.s
+ 
+ 
+ Can I use two transactions in one Session?
+Yes, this is actually a better implementation of this pattern. One database transaction is used to read and write data during the processing of the request event. The second database transaction is only used to read data, during rendering of the view. No modifications to objects are made at this point. Hence, database locks are released early in the first transaction, allowing better scalability, and the second transaction can possibly be optimized (e.g. some databases require read-only transaction settings for best cleanup after transaction commit). To use two transactions you need a more powerful interceptor than a simple servlet filter - AOP is a good choice. The JBoss Seam frameworks uses this model.
+
+
+Note: In our case updates happens inside a transaction and the view rendering uses separate transaction.
+What about the session?
+ 
+ ================================================
+ 3) What is hibernate proxy?
+ =>load() throws exception if there is no matching row.
+   If the class is mapped with proxy, load() just returns an uninitialized proxy and does not 
+   actually hit the database until you invoke a method of the proxy. This is useful if you wish to create an association to an object without actually loading it from the database. It also allows multiple instances to be loaded as a batch if batch-size is defined for the class mapping.
+   
+   Proxies are classes generated dynamically by Hibernate to help lazy loading.
+   If you have a Cat class, Hibernate will generate a proxy class that extends Cat.
+   If  you get an uninitialized instance of this proxy, essentially all its fields will be null except the ID because Hibernate has not yet hit the database.
+   Now the first time you will call a method on this proxy, it will realize that it is not initialized and it will query the database to load it's attributes.
+   This is possible because the dynamically generated class overrides the base class's methods and adds this initialized/uninitialized check.
+
+   Now assume that your Cat class is not a proxy and that it has a father association, when you load a Cat object, Hibernate will need to load all it's attributes. So if you load a Cat object, Hibernate will also need to load its father and the father's father and so on. Using proxies enable Hibernate to only load the required instances.
+   
+   "BATCH-SIZE" is another feature of Hibernate that, in most instances, help dealing with lazy loading. Basically the idea is that Hibernate keeps track of the uninitialized proxies and when one of the needs to be initialized, a single query will be executed to load up to batch-size proxies (instead of just one proxy/query)
+   
+    Cat cat1 = (Cat) session.load(1);
+	Cat cat2 = (Cat) session.load(2);
+
+	cat1.meow(); // if batch-size >= 2, cat1 and cat2 will be loaded in a single query
+	cat2.meow(); // no query will be executed here
+====================================================
+4)What happens when you try to use an proxy object in hibernate when there is No records exist in DB?
+=>load() just returns an uninilized proxy object. So even if there is no record, since immediately it does not hit database, you will get an uninitialized object
+**
+Using load() has a further implication: The application may retrieve a valid reference (a proxy) to a persistent instance without hitting the database to retrieve its persistent state. So load() might not throw an exception when it doesn’t find the persistent object in the cache or database; the exception would be thrown later, when the proxy is accessed. 
+
+=====================================================
+5) Difference between load() and get()?*************************************************************
+=>load() will throw Exception if no row exist(unless its a proxy)  and get will return null if no record found.
+load() may return proxy object. get() never return proxy.
+
+=======================================================
+6)For which kind of application you will use Hibernate and JDBC.What are the condition to choose Hibernate?
+=>Faster development with hibernate.You get a lot of features for free - caching, optimistic locking and so on.
+
+
+
+=====================================================
+7) n+1 select probelm?
+ => Assume that you have a Supplier table. And the Product table.
+    A single supplier can supply many products. Basically the relationship is One-to-many.
+	
+	SELECT * FROM SUPPLIER;
+	
+	and for each Supplier
+	SELECT * FROM PRODUCTS WHERE SUPPLIER_ID = ? //We have 1 select for Supplier and then additional N select for Product, where N is number of Supplier.
+	
+	Influencing factors:
+	>Lazy mode for Supplier set to true
+	>Fetch mode used for querying on product is SELECT and not join.
+	
+	Solution: Use join Fetch.
+	
+	Either specify join Fetch strategy in relationship. Or you can specify while querying in hql or Criteria
+	
+	<set name="permissions"
+            fetch="join">
+    <key column="userId"/>
+    <one-to-many class="Permission"/>
+</set
+
+
+	"from SUPPLIER supplier join fetch supplier.Product products"
+	
+	session.createCriteria(Supplier.class)
+	        .setFetchMode("products", FetchMode.JOIN).list();
+ ==========================================================
+ 8)What will happen if we don’t have no-args constructor in Entity bean?
+Hibernate uses Reflection API to create instance of Entity beans, usually when you call get() or load() methods. The method Class.newInstance() is used for this and it requires no-args constructor. So if you won’t have no-args constructor in entity beans, hibernate will fail to instantiate it and you will get HibernateException.
+
+
+
+ 3. Using sequence how the identifier will be egenerated?
+ 
+ 

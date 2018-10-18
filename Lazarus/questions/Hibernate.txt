@@ -1,0 +1,56 @@
+Hibernate-Spring:
+------------------
+
+In Manh they have extended LocalSessionFactoryBean in order to provide way to load all hibernate mapping files across modules.
+
+1. Define a dataSource.
+<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">  
+        <property name="driverClassName"  value="oracle.jdbc.driver.OracleDriver"></property>  
+        <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"></property>  
+        <property name="username" value="system"></property>  
+        <property name="password" value="oracle"></property>  
+    </bean> 
+	
+2. Configure sessionFactory 
+   <bean id="sessionFactory"  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource"></property> 
+        <property name="mappingResources">  
+        <list>  
+        <value>employee.hbm.xml</value>  
+        </list>  
+        </property>
+        <property name="hibernateProperties">  
+            <props>  
+                <prop key="hibernate.dialect">org.hibernate.dialect.Oracle9Dialect</prop>  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.show_sql">true</prop>                    
+            </props>  
+        </property>  
+    </bean>  
+	
+	--dataSource, mappingResources, hibernateProperties
+	
+3. You can define hibernateTemplate as bean injecting sessionFactory to it.
+    <bean id="template" class="org.springframework.orm.hibernate3.HibernateTemplate">  
+      <property name="sessionFactory" ref="mysessionFactory"></property>  
+    </bean>  
+	
+4. Then your DAO layer can have hibernateTemplate injected as bean ref.
+    <bean id="d" class="com.javatpoint.EmployeeDao">  
+      <property name="template" ref="template"></property>  
+    </bean>
+	
+Creates Sessions. Usually an application has a single SessionFactory. Threads servicing client requests obtain Sessions from the factory.
+
+Little Bit about sessionFactoryBean:
+-----------------------------------
+org.springframework.orm.hibernate3.FactoryBean that creates a Hibernate SessionFactory. This is the usual way to set up a shared Hibernate SessionFactory in a Spring application context; the SessionFactory can then be passed to Hibernate-based DAOs via dependency injection.
+Either HibernateTransactionManager or JtaTransactionManager can be used for transaction demarcation, with the latter only necessary for transactions which span multiple databases.
+
+1.org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean
+2.org.springframework.orm.hibernate3.LocalSessionFactoryBean
+
+Executing using sesseionFactory:
+-------------------------------
+sessionFactory.getCurrentSession().saveOrUpdate(contact);
+sessionFactory.getCurrentSession().createQuery("from Contact c").list();

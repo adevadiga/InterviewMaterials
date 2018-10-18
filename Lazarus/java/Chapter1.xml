@@ -1,0 +1,159 @@
+1)Enum Types?
+=>An enum type is a special data type that enables for a variable to be a set of predefined constants. 
+Ex: Days of Week, Compass Directions
+public enum Day{
+ SUNDAY, MONDAY, TUESDAY...
+}
+
+Use enum type if you need to represent fixed set of constants.
+That includes natural enum types such as the planets in our solar system, data sets where you know all possible values at compile time—for example, the choices on a menu, command line flags, and so on.
+
+***
+If you use enums instead of integers(or string codes), you increase compile time checking and avoid errors from passing in invalid constants  and you document which values are legal to use.
+
+
+The enum declaration defines a class(called Enum type),The enum class body can include methods and other fields.
+Note the static values() methods.
+All enums implicitly extend java.lang.Enum. Because a class can only extend one parent (see Declaring Classes), the Java language does not support multiple inheritance of state, and therefore an enum cannot extend anything else.
+ 
+ 
+ public enum ActivityStatus {
+
+	OPEN(10), SAVE(20), CLOSE(30), CANCEL(40);
+	private final int value;
+	
+	ActivityStatus(int value){
+		this.value = value;
+	}
+
+	public int getValue() {
+		return value;
+	}
+	
+	//Not good OOP i guess
+	public static boolean isActivityValidForPurging(ActivityStatus status){
+		return status.getValue() > SAVE.getValue();
+	}
+}
+
+ActivityStatus status = ActivityStatus.CLOSE;
+ActivityStatus.CLOSE.getValue();
+
+=================================================================
+2)< Whatis aggregation, how is it different from composition > ?
+<Aggregation> =>Aggregation is a special case of association.
+When an object ‘has-a’ another object, then you have got an aggregation between them.
+Aggregation is also called a “Has-a” relationship.
+
+<Composition> =>Composition is a special case of aggregation. 
+In a more specific manner, a restricted aggregation is called composition.
+When an object contains the other object, if the contained object cannot exist without the existence of container object, then it is called composition.
+
+Example: A Library contains students and books.
+A student can exist without a library and therefore it is aggregation. A book cannot exist without a library and therefore its a composition.
+
+Spring injecting bean is aggregation while doing a new Inside of class is composition.
+==============================================================
+3)< Log is kind of reverse of power>
+Log of 8 base 2 is  = 3 , Log100 base 10  = 2
+If you sum Log => Its like product of large numbers
+If you subtract log=>Its like division
+===============================================================
+4)< Big O notation>?
+Big O Notation is a mechanism used to measure the relative efficiencies of algorithms in terms of space and time.
+It makes us understand how execution time and memory requirement of algorithm grows as function of input size.
+===============================================================
+5)< Java HotSpot VM heap division>?
+=> 1)<The-Young-generation>:This further consists of one Eden Space and two survivor spaces.
+     The VM initially assigns all objects to Eden space, and most objects die there.
+	 When VM performs a <minor GC>, it moves any remaining objects from the Eden space to one of the survivor spaces.
+   2)<Tenured_or_OldGeneration>:VM moves objects that live long enough in the survivor spaces to the "tenured" space.
+     When tenured generation fills up, there is a full GC that is often much slower because it involves all objects.
+   3)Permanent Generation(PermGen):Holds all reflective data of VM itself, such as Class and method objects.
+
+===============================================================
+5)< How garbage collection works in java>?
+  http://www.oracle.com/webfolder/technetwork/tutorials/obe/java/gc01/index.html
+  https://docs.oracle.com/cd/E13150_01/jrockit_jvm/jrockit/geninfo/diagnos/garbage_collect.html
+  http://www.dynatrace.com/en/javabook/how-garbage-collection-works.html
+  http://javapapers.com/java/how-java-garbage-collection-works/
+
+===============================================================
+6)< What is Synchronization>?
+=>Synchronization avoids thread interference and memory consistency errors by providing serialized access to shared state.
+  >It makes sure that the compound actions executes atomically by providing mutually exclusive access to the
+   shared state across the threads.
+  >It ensures the memory consistency by making the changes visible to all the threads upon method exit.
+  Getter may need to be synchronized to prevent from reading stale value if read from CPU cache.
+  
+  Volatile ensure visibility but not mutual exclusion.
+===============================================================
+7)Java memory model?
+=>
+
+
+
+
+
+
+================================================================
+8)< Initialization >.
+Static blocks are initialized in the order in which they are declared.
+<1>
+public class SignupServlet extends HttpServlet {
+    private static final Logger SERVLET_LOGGER=COMPANYLog.open(SignupServlet.class);  
+    private static final SignupServletObservableAgent signupObservableAgent = 
+        new SignupServletObservableAgent(null, SERVLET_LOGGER);//Its valid since initlizes in the order
+}
+<2>
+public class Foo{
+  static{
+     Syso(someStaticVar);//Compilation error, someStaticVar not defined
+  }
+  static int someStaticVar = 10;
+}
+
+<3>
+public class Foo1{
+   static int someStaticVar;
+   static{
+     System.out.println(staticVarA);	//Prints 0, since initlization happens in the order	
+   }
+   static{
+     someStaticVar = 10;
+   }
+}
+<4>static final variables can be initialized in static block
+ static final myFinalStatuVar;
+ static{
+ myFinalStatuVar = 10;
+ }
+ //Its bad idea to catch exception since ur final variables might not get initilized
+ 
+==============================================================================
+9)< Class loading>
+=><I>
+class A{
+	B instanceOfB = new B();
+}
+
+class B{
+	A instancdOfA = new A();
+}
+You will get StatckOverflowException in CircularClassLoading.java, A tries to load B and B tries to load A
+
+<II>
+If an error occurs during class loading, then an instance of one of the following subclasses of class LinkageError will be thrown at any point in the program that (directly or indirectly) uses the type:
+ >ClassCircularityError: A class or interface could not be loaded because it would be its own superclass or superinterface.
+ >ClassFormatError: The binary data that purports to specify a requested compiled class or interface is malformed.
+ >NoClassDefFoundError: No definition for a requested class or interface could be found by the relevant class loader.
+
+
+
+
+
+
+
+
+ 
+ 

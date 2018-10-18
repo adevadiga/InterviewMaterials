@@ -1,0 +1,3 @@
+/*
+ * Redirect to external url if present, after test completion.
+ */$(function(){var a=$("#end-test-click"),b=a.attr("redirect-url");b&&b!="None"&&a.on("click",function(c){c.preventDefault(),$("#end-test-modal .modal-footer").html(""),$("#end-test-modal .modal-content").html("<h1 class='align-center dark'>Redirecting to</h1><h2 class='align-center dark'>"+b+"</h2>"+"<div class='align-center'><i class='fa fa-spinner fa-3x fa-pulse light'></i></div>");var d=function(){window.location.href=a.attr("href")};setTimeout(d,5e3)})});

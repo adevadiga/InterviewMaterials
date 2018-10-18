@@ -1,0 +1,45 @@
+Serialization is not really meant to be used for storing data, but mainly as a way for different JVM instances to communicate over a network using the RMI protocol.
+
+The serialVersionUID is a universal version identifier for a Serializable class.
+Deserialization uses this number to ensure that a loaded class corresponds exactly to a serialized object. If no match is found, then an InvalidClassException is thrown.
+
+Because serialized binary format becomes part of Class's exported API and it can potentially break Encapsulation in Java provided by private and package-private fields.
+Like any public API, serialized form of an object becomes part of public API and when you change structure of your class by implementing addition interface, adding or removing any field can potentially break default serialization, this can be minimized by using a custom binary format but still requires lot of effort to ensure backward compatibility.
+If you don't explicitly declare SerialVersionUID then JVM generates its based upon structure of class which depends upon interfaces a class implements and several other factors which is subject to change. Suppose you implement another interface than JVM will generate a different SerialVersionUID for new version of class files and when you try to load old object object serialized by old version of your program you will get InvalidClassException.
+
+Externalizable provides us writeExternal() and readExternal() method which gives us flexibility to control java serialization mechanism instead of relying on Java's default serialization. 
+
+
+SerialVersionUID is an ID which is stamped on object when it get serialized usually hashcode of object,
+SerialVersionUID is used for version control of object. 
+Consequence of not specifying serialVersionUID is that when you add or modify any field in class then already serialized class will not be able to recover because serialVersionUID generated for new class and for old serialized object will be different.
+
+
+Static and Transient wont be serialized.
+
+ObjectOutputStream.writeObject(saveThisobject) and to deserialize that object we call ObjectInputStream.readObject() method
+
+Overriding default serialization by implementing writeObject and readObject - private methods to avoid being inherited, still JVM can call private methods.
+Inside u can call defaultWriteObject and defaultWriteObejct of ObjectOutputStream and ObjectInputStream.
+
+Question 8) Suppose super class of a new class implement Serializable interface, how can you avoid new class to being serialized?
+
+One of the tricky interview question in Serialization in Java. If Super Class of a Class already implements Serializable interface in Java then its already Serializable in Java, since you can not unimplemented an interface its not really possible to make it Non Serializable class but yes there is a way to avoid serialization of new class. To avoid Java serialization you need to implement writeObject() and readObject() method in your Class and need to throw NotSerializableException from those method. This is another benefit of customizing java serialization process as described in above Serialization interview question and normally it asked as follow-up question as interview progresses.
+
+
+Question 10) Suppose you have a class which you serialized it and stored in persistence and later modified that class to add a new field. What will happen if you deserialize the object already serialized?
+
+It depends on whether class has its own serialVersionUID or not. As we know from above question that if we don't provide serialVersionUID in our code java compiler will generate it and normally it’s equal to hashCode of object. by adding any new field there is chance that new serialVersionUID generated for that class version is not the same of already serialized object and in this case Java Serialization API will throw java.io.InvalidClassException and this is the reason its recommended to have your own serialVersionUID in code and make sure to keep it same always for a single class.
+
+
+11) What are the compatible changes and incompatible changes in Java Serialization Mechanism?
+The real challenge lies with change in class structure by adding any field, method or removing any field or method is that with already serialized object. As per Java Serialization specification adding any field or method comes under compatible change and changing class hierarchy or UN-implementing Serializable interfaces some under non compatible changes. For complete list of compatible and non compatible changes I would advise reading Java serialization specification.
+
+transient variable comes with default value.
+That is 
+transient int trump=10;
+
+when u de-serialize trump will comes up with zero. Since constructor has not run.
+Static gets the value of Class currently having.
+
+

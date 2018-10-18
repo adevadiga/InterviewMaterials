@@ -1,0 +1,69 @@
+1)Need of ConcurrentHashmap when we can synchronize hashmap [ Collections.synchornizedMap(HashMap) or Hashtable]?
+=>All methods in hashtable are synchronized. Its quite slow due to contention if number of thread increases.
+Synchronized Map is also not very different than Hashtable and provides similar performance in concurrent Java programs.
+You can wrap any map and create its synchronized version using Collections.synchronizedMap.
+On the other hand ConcurrentHashMap is especially designed for concurrent use i.e. more than one thread
+
+By default it allows 16 threads to read and write without any external synchronization.
+It never locks whole Map, instead it divides the map in segments and locking is done on those.
+Though it doesn't provide same level of synchronization as achieved by using Hashtable but its enough for most practical purpose.
+
+In ConcurrentHashMap, thread-safety is achieved by dividing whole Map into different partition based upon Concurrency level and only locking particular portion instead of locking whole Map.
+
+Key cannot be null in ConcurrentHashMap.
+
+< It allows concurrent modification of the Map from several threads without the need to block them. >
+The ConcurrentHashMap uses very sophisticated techniques to reduce the need for synchronization and allow parallel read access by multiple threads without synchronization and, more importantly, provides an 
+< Iterator that requires no synchronization>(hashtable will block while iterating)
+and even allows the Map to be modified during iteration (though it makes no guarantees whether or not elements that were inserted during iteration will be returned).
+
+Supports full concurrency of retrievals and adjustable expected concurrency for updates.
+However, even though all operations are thread-safe, retrieval operations do not entail locking, and there is not any support for locking the entire table in a way that prevents all access. 
+
+Retrieval operations (including get) generally do not block, so may overlap with update operations (including put and remove).
+Retrievals reflect the results of the most recently completed update operations holding upon their onset.
+Similarly, Iterators and Enumerations return elements reflecting the state of the hash table at some point at or since the creation of the iterator/enumeration.
+They do not throw ConcurrentModificationException. However, iterators are designed to be used by only one thread at a time(return new Object).
+< Iterators copy internal data structure. >
+
+The allowed concurrency among update operations is guided by the optional concurrencyLevel constructor argument (default 16), which is used as a hint for internal sizing.
+ The table is internally partitioned to try to permit the indicated number of concurrent updates without contention.
+ 
+ ============================================================================
+ 2)CopyOnWriteArrayList?
+ => A thread-safe variant of ArrayList in which all mutative operations (add, set, and so on) are implemented by making a fresh copy of the underlying array.
+
+ 
+ >Fail Safe iteration since they operate separate copy of ArrayList.
+ >Does not throw ConcurrentModificationException if you insert or remove elements while iterating.
+ >iter.remove() throws UnsupportedOperationException 
+   Note: So since FailSafe collection makes the only operation that is supported by iterator "remove" doesnot work here.
+   If you modify underlying list that won't be reflected in the iterators.
+  >Its better only if iteration outnumber write by magnifold. I think its not that better for random access even.
+  
+  The "snapshot" style iterator method uses a reference to the state of the array at the point that the iterator was created. This array never changes during the lifetime of the iterator, so interference is impossible and the iterator is guaranteed not to throw ConcurrentModificationException.
+  The iterator will not reflect additions, removals, or changes to the list since the iterator was created.
+  Element-changing operations on iterators themselves (remove, set, and add) are not supported.
+
+  ===========================================================================
+  3)Iterator and ListIterator
+ => Iterator only supports remove() operation, where as listIterator supports set, add etc as well.
+    Note that listIterator is only for Lists.
+    Fail Safe collection will throw UnSupportedOperationException for these methods. 
+
+	ListIterator:
+	An iterator for lists that allows the programmer to < traverse the list in either direction>, < modify the list during iteration>, and obtain the iterator's < current position> in the list.
+	A ListIterator has no current element; its cursor position always lies between the element that would be returned by a call to previous() and the element that would be returned by a call to next().
+	Note that the remove() and set(Object) methods are not defined in terms of the cursor position; they are defined to operate on the last element returned by a call to next() or previous().
+	
+	If you call previous() when you are at first element you will get NoSuchElementException.
+	
+	List<Integer> ls = new ArrayList<>();
+		ls.add(1);ls.add(2);ls.add(3);
+		ListIterator<Integer> lsIter = ls.listIterator(1);
+		while(lsIter.hasNext()){
+			//System.out.println(lsIter.next());
+			System.out.println(lsIter.previous());
+		}
+		
+	It will print 1 and throws exception, since previous() will move the cursor backwards.

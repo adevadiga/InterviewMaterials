@@ -1,0 +1,64 @@
+1. How  hibernate distinguish between transient and detached object?
+=> Hibernate uses version property if there is one.
+   If not uses the identifier value. No identifier value means a new object. This does work only for Hibernate managed surrogate keys. Does not work for natural keys and assigned (i.e. not managed by Hibernate) surrogate keys.
+
+   Write your won strategy with Interceptor.isUnSaved()
+   
+ ====================================================
+ 2. Difference between session.load() and session.get()
+ =>Both method tries to create persistent object by loading the required object from database. But there is difference in the way they load the object. load() throws an exception if there no such object in database where as get() returns NULL.
+ get() loads the data as soon as it is called, byt load() returns a proxy object and loads the data only when it is required.
+ Kind of lazy loading.
+ 
+ get() returns object by fetching it from database or hibernate cache.
+ load() just returns reference(proxy object) that might not actually exists, it loads from db only when we access priperies of Object.
+ 
+  Employee emp = (Employee) session.get(Employee.class, new Long(2));//Query fired
+  
+  Employee emp1 = (Employee) session.load(Employee.class, new Long(1));//Proxy object is returned
+  emp1.getId()
+  emp1.getName()//Query fired here
+  
+  
+  It will always return a “proxy” (Hibernate term) without hitting the database. In Hibernate, proxy is an object with the given identifier value, its properties are not initialized yet, it just look like a temporary fake object.
+
+ 
+ By default hibernate creates runtime proxies.
+ It loads the object as proxy unless a FETCH mode is specified or set to FALSE.
+ That's because once the object is loaded in cache, the next subsequent calls perform repeatable read.
+ Although the state of this object changes from persistent to detached The entity can be retrieved in 2 ways.
+ >load() - returns the proxy object with an identifier.
+ >get() - returns the complete object from database.
+ ======================================================
+ 3)1. Is SessionFactory is thread safe?
+=>Yes. The internal state of a SessionFactory is immutable.
+This internal state includes all of the metadata about Object/Relational Mapping.
+cfg.xml files and hbm mapping files etc
+
+The main contract here is the creation of Session instances. Usually an application has a single SessionFactory instance and threads servicing client requests obtain Session instances from this factory.
+
+ >caches configuration settings (immutably)
+ >caches "compiled" mappings ie. EntityPersisters and CollectionPersisters (immutable)
+ >caches "compiled" queries (memory sensitive cache)
+ >manages PreparedStatements
+ >delegates JDBC Connection management to the ConnectionProvider
+ >factory for instances of SessionImpl
+This class must appear immutable to clients, even if it does all kinds of caching and pooling under the covers. It is crucial that the class is not only thread safe, but also highly concurrent. Synchronization must be used extremely sparingly.
+
+ As these objects are heavy weight because they contains the connection information, hibernate configuration information and mapping files,location path. 
+ Hence it would be one SessionFactory per DataSource.
+ 
+ Because creation of a SessionFactory is an extremely expensive process which involves parsing hibernate configuration/mapping properties and creating database connection pool .Creating a database connection pool requires establishing database connections (i.e creating Connection objects) which has overhead due to the time taken to locate the DB server , establish a communication channel and exchange information to do authentication.
+==========================================
+
+4) Difference between L1 and L2 cache?
+=>< First Level Cache>: this is a "cache" which stores all the entities known by a specific session. So, if you have 3 transactions inside this session, it'll hold all entities touched by all three transactions. It gets cleared when you close the session or when you perform the "clear" method.
+
+First-level cache always Associates with the Session object. Hibernate uses this cache by default. Here, it processes one transaction after another one, means wont process one transaction many times. Mainly it reduces the number of SQL queries it needs to generate within a given transaction. That is instead of updating after every modification done in the transaction, it updates the transaction only at the end of the transaction.
+
+< Second Level Cache>:
+Located at the Session Factory level. 
+
+L1 cache is not so usefule in case of distributed applications.
+
+

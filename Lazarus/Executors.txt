@@ -1,0 +1,46 @@
+1. executor service ,future callable, garbage collection
+2. Reflection -> Runtime access to JVM, Inspect classes at runtime
+3. Difference between Callable and Runnable?
+=>Both are used to represent Task that cab be executed by Thread.
+Callable can return result of operation performed inside call() method  as it returns a Future object which
+we can query on.
+And it can throw checked exception, as interface Callable - call() method throws Exception.
+
+
+We have DO Create template where you config whether to wait for all to finish or not.
+There we create Callable and submit spring task executor and Future objects are added to list.
+If the Wait All is specified we run a loop across the list and call "executor.take().get()",
+since take() can retrieve and remove  the Future representing next completed Task and waits if none available.
+
+Also note that Future.get() will wait.
+
+ExecutorCompletionService<Void> ecs = new ExecutorCompletionService<Void>(executor);
+List<Future<Void>> fobjs = new ArrayList<>();
+		try {
+			for (final Job job : jobList) {
+				Future<Void> f = ecs.submit(new Callable<Void>() {
+					@Override
+					public Void call() throws Exception {
+						job.execute();
+						return null;
+					}
+				});
+				fobjs.add(f);
+			}
+		}
+		
+		
+		
+switch (workManagerWaitType) {
+				case WAIT_FOR_ALL:
+					int jobSize = fobjs.size();
+					for(int i = 1 ; i<= jobSize ; i++) {
+						ecs.take().get();
+					}
+					break;
+				case WAIT_FOR_ANY:
+					ecs.take().get();
+					break;
+				case WAIT_FOR_NONE:
+					break;
+				}

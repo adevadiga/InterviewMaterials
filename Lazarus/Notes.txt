@@ -1,0 +1,127 @@
+1. You can catch Error. InFact anything that is Throwable you can catch.
+Note that if try to catch anything of type Exception then compiler makes sure tat the code block has chance to throw the 
+same type else a compiler will flag error saying unreachable code.
+But with Erorr RunTimeException compiler will not flag any error.
+===============================================================
+2.Parent Class method throws illegalMonitorStateExcpetion,Can the child class Override method throws RuntimeException?
+=> Yes. illegalMonitorStateExcpetion is un-checked and subtype of RuntimeException.
+You can narrow down Exception type.
+Note: InterrupteException is checked.
+===============================================================
+3. No of squares on chess board?
+=> 1^2+2^2+3^2+4^2+...+n^2 =  n(n+1)(2n+1) / 6
+=============================================================
+4. Difference between http and https?
+
+==========================================================
+5. Why we have two dates java.util.Date and java.sql.Date?
+=>Basically databases usually support at least three forms of datetime fields which are date, time and timestamp. Each of these have a corresponding class in JDBC and each of them extend java.util.Date. Quick semantics of each of these three are the following:
+
+java.sql.Date corresponds to SQL DATE which means it stores years, months and days while hour, minute, second and millisecond are ignored. Additionally sql.Date isn't tied to timezones.
+java.sql.Time corresponds to SQL TIME and as should be obvious, only contains information about hour, minutes, seconds and milliseconds.
+java.sql.Timestamp corresponds to SQL TIMESTAMP which is exact date to the nanosecond (note that util.Date only supports milliseconds!) with customizable precision.
+One of the most common bugs when using JDBC drivers in relation to these three types is that the types are handled incorrectly. This means that sql.Date is timezone specific, sql.Time contains current year, month and day et cetera et cetera.
+
+Which one to use:
+Depends on the SQL type of the field, really. PreparedStatement has setters for all three values, #setDate() being the one for sql.Date, #setTime() for sql.Time and #setTimestamp() for sql.Timestamp.
+
+Do note that if you use ps.setObject(fieldIndex, utilDateObject); you can actually give a normal util.Date to most JDBC drivers which will happily devour it as if it was of the correct type but when you request the data afterwards, you may notice that you're actually missing stuff.
+
+======================================================
+6. how do we represent multiple primary key column's in a table on hibernate?
+=>Composite primary key.
+  To map a composite key, you can use the <EmbeddedId> or the <IdClass> annotations.
+  
+  >A primary key class must be defined to represent a composite primary key. 
+  
+  
+ < Using IdClass>
+   public class TimePK implements Serializable {
+    protected Integer levelStation;
+    protected Integer confPathID;
+    public TimePK() {}
+    public TimePK(Integer levelStation, Integer confPathID) {
+        this.levelStation = levelStation;
+        this.confPathID = confPathID;
+    }
+    // equals, hashCode //Must
+   }
+
+   @Entity
+@IdClass(TimePK.class)
+class Time implements Serializable {
+    @Id
+    private Integer levelStation;
+    @Id
+    private Integer confPathID;
+
+    private String src;
+    private String dst;
+    private Integer distance;
+    private Integer price;
+
+    // getters, setters
+}
+
+ < Using EmbeddedId>
+@Embeddable
+public class TimePK implements Serializable {
+    protected Integer levelStation;
+    protected Integer confPathID;
+
+    public TimePK() {}
+
+    public TimePK(Integer levelStation, Integer confPathID) {
+        this.levelStation = levelStation;
+        this.confPathID = confPathID;
+    }
+    // equals, hashCode
+}
+
+@Entity
+class Time implements Serializable {
+    @EmbeddedId
+    private TimePK timePK;
+
+    private String src;
+    private String dst;
+    private Integer distance;
+    private Integer price;
+
+    //...
+}
+===============================================================
+7. System.out.println(Tyre instanceof t1);?
+=>Compilation error
+  Tyre cannot be resolved to variable.
+  t1 cannot be resolved to Type.
+  
+===============================================================
+
+8. Ways to iterate over a map?
+=>There are basically 3 methods in Map which provide a way to iterate over map
+   >Set entrySet()
+   >Set keySet
+   >Collection<v> values
+   
+   1>
+   for (Map.Entry<String,Integer> entry : testMap.entrySet()) {
+     entry.getKey();
+      entry.getValue();
+    }
+	
+	2>Iterator<Map.Entry<String,String>> it = m.entrySet().iterator();
+	
+	
+	3>for (String key : testMap.keySet()) {
+        testMap.get(key);
+      }
+ 
+      Iterator itr2 = testMap.keySet().iterator();
+		while(itr2.hasNext())
+		{
+			String key = itr2.next();
+			testMap.get(key);
+		}
+==========================================================================
+9. 

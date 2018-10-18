@@ -1,0 +1,32 @@
+@GET
+@Produces("application/xml")
+@Path("student/{studentId}") 
+public Contact getXML(@PathParam("studentId") String studentId) {
+  Contact contact = contactService.findByFirstName(firstName);
+  return contact;
+}
+
+@Path("employee/{id}")
+public Employee getEmployee(@PathParam("id") Integer  id){
+
+}
+
+GET
+POST
+PUT 
+DELETE
+
+Produces
+Path
+QueryParam -> request Params
+FormParam -> Param in Post request
+PathParam  -> URL params
+
+QueryParam -> request param
+Consumes -> MIME media types a REST resource can consume.
+MIME media types a rest resource can consume.....
+
+
+(@QueryParam("selectedValue") java.lang.Integer arg1
+
+A

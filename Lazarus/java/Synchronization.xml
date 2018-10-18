@@ -1,0 +1,31 @@
+1. Thread interference: Errors arising out of multiple threads accessing shared data.
+2. Memory Consistency Errors: When different threads have inconsistent view of shared data.
+   happens-before relationship guarantees that memory writes by one specific statement visible another specific statement.
+    >Synchronization
+	>thread.start() and thread.join()
+	
+3. Synchronized keyword
+  >Ensures that threads don't interleave as only one thread can execute and others will block in need of intrinsic lock associates with object.
+  >synchronized method exits it establishes a happens-before relationship with any subsequent invocation of synhcornized
+  method of the same object. (Cache invalidate and cache flush)
+
+4. Constructor cannot be synchronized, syntax error. Does not make sense because only the thread creates object 
+ should have access to it while being constructed.
+ 
+5. Final fields dont do synchronized, its immutable.
+
+6. Synchronization is built around an internal entity known as intrinsic lock or monitor lock.
+It plays an important role in both aspect of synchronization
+  >Enforcing exclusive access to an object state.
+  >Establishing happens-before relationship that are essential to visibility.
+  
+  Every object has an intrinsic lock associated with it. By convention, a thread that needs exclusive and consistent 
+  access to an object's fields has to acquire the object's intrinsic lock before accessing them, and then release the intrinsic lock when it's done with them. A thread is said to own the intrinsic lock between the time it has acquired the lock and released the lock. As long as a thread owns an intrinsic lock, no other thread can acquire the same lock. The other thread will block when it attempts to acquire the lock.
+  
+ 7. In case of static method intrinsic lock for the Class object associated with class need to be obtained.
+ 
+ 8. Reentrant Synchronization: Allowing a thread to acquire the same lock more than once enables reentrant synchronization
+ 
+=================================================================================
+1.Atomic Access
+

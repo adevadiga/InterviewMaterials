@@ -1,0 +1,129 @@
+1. What are undeclared and undefined variables?
+
+Undeclared variables are those that do not exist in a program and are not declared. If the program tries to read the value of an undeclared variable, then a runtime error is encountered.
+
+Undefined variables are those that are declared in the program but have not been given any value. If the program tries to read the value of an undefined variable, an undefined value is returned.
+
+    var foo;
+	console.log(foo);//print Undefined
+	console.log(name);//throws Error
+	
+=================================
+2.  Global Variable.
+The var keyword is used to declare a local variable or object.
+If the var keyword is omitted, a global variable is declared.
+
+    var testGlobal_1 = 1;
+	testGlobal_2 = 2;
+	
+	function callMe()
+	{
+		console.log("testGlobal_1 "+testGlobal_1);//Correct
+		console.log("testGlobal_2 "+testGlobal_2);//Correct
+		
+		isItGlobal = 9;//No var makes it global variable, can be accessed from outside. If var its limited to this scope
+	}
+	callMe();
+	console.log(isItGlobal);
+=======================================
+3.Explain the working of timers in JavaScript? Also elucidate the drawbacks of using the timer, if any?
+
+Timers are used to execute a piece of code at a set time or also to repeat the code in a given interval of time. This is done by using the functions setTimeout, setInterval and clearInterval.
+
+The setTimeout(function, delay) function is used to start a timer that calls a particular function after the mentioned delay. The setInterval(function, delay) function is used to repeatedly execute the given function in the mentioned delay and only halts when cancelled. The clearInterval(id) function instructs the timer to stop.
+
+< Timers are operated within a single thread, and thus events might queue up, waiting to be executed. >
+
+=========================================
+4. Explain the difference between “==” and “===”?
+
+“==” checks only for equality in value whereas “===” is a stricter equality test and returns false if either the value or the type of the two variables are different.
+    var i=1;
+	var j = "1.0";
+	console.log(i==j); //true
+	console.log(i===j); // false
+	
+===========================================
+5. What is the function of delete operator?
+
+The functionality of delete operator is used to delete all variables and objects in a program but it cannot delete variables declared with VAR keyword
+=======================================
+6. What is the use of Void(0)?
+
+Void(0) is used to prevent the page from refreshing and parameter “zero” is passed while calling.
+
+Void(0) is used to call another method without refreshing the page.
+
+==================================
+7.Explain window.onload and onDocumentReady?
+The onload function is not run until all the information on the page is loaded. This leads to a substantial delay before any code is executed.
+onDocumentReady loads the code just after the DOM is loaded. This allows early manipulation of the code.
+
+window.onload will execute code when browser has loaded the DOM tree and all other resources like images, objects, etc, while onDocumentReady allows you to execute code when only the DOM tree has been built, without waiting for images to load. 
+
+The DOMContentLoaded event is fired when the document has been completely loaded and parsed, without waiting for stylesheets, images, and subframes to finish loading (the load event can be used to detect a fully-loaded page).
+
+========================================
+8. Difference between apply and call?
+=>The difference is that apply lets you invoke the function with arguments as an array; call requires the parameters be listed explicitly. A useful mnemonic is "A for array and C for comma."
+
+    var person1 = {name: 'Marvin', age: 42, size: '2xM'};
+	function sayHello(greeting){
+		console.log("Hello "+this.name+" "+greeting);
+	}
+	
+	sayHello.call(person1,"Welcome");
+	sayHello.apply(person1,[" Bye"]);
+	
+==========================================
+9) < Event bubbling and propagation >?
+=>
+==========================================
+10)< Deferred scripts >?
+=>
+=========================================
+11)What are the various functional components in JavaScript?
+
+The different functional components in JavaScript are-
+
+<First-class functions>: Functions in JavaScript are utilized as first class objects. This usually means that these functions can be passed as arguments to other functions, returned as values from other functions, assigned to variables or can also be stored in data structures.
+
+<Nested functions>: The functions, which are defined inside other functions, are called Nested functions. They are called ‘everytime’ the main function is invoked.
+
+====================================
+12)Why innerHTML is bad?
+=>
+Every time innerHTML is set, the HTML has to be parsed, a DOM constructed, and inserted into the document. This takes time.
+
+For example, if elm.innerHTML has thousands of divs, tables, lists, images, etc, then calling .innerHTML += ... is going to cause the parser to re-parse all that stuff over again. This could also break references to already constructed DOM elements and cause other chaos. In reality, all you want to do is append a single new element to the end.
+
+It's better to just call appendChild:
+
+var newElement = document.createElement('div');
+newElement.innerHTML = '<div>Hello World!</div>';
+elm.appendChild(newElement);​​​​​​​​​​​​​​​​
+This way, the existing contents of elm are not parsed again.
+=====================================
+13)What is the drawback of creating true private methods in JavaScript?
+=>very memory-inefficient, as a new copy of the method would be created for each instance.
+
+var Employee = function (name, company, salary) {
+    this.name = name || "";       //Public attribute default value is null
+    this.company = company || ""; //Public attribute default value is null
+    this.salary = salary || 5000; //Public attribute default value is null
+
+    // Private method
+    var increaseSalary = function () {
+        this.salary = this.salary + 1000;
+    };
+
+    // Public method
+    this.dispalyIncreasedSalary = function() {
+        increaseSlary();
+        console.log(this.salary);
+    };
+};
+====================================
+14)< Clousers>
+A closure is a function defined inside another function (called the parent function), and has access to variables that are declared and defined in the parent function scope.
+

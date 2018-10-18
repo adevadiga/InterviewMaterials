@@ -1,0 +1,142 @@
+1. Why we have name and id in spring bean definition?
+=>The only difference between an id and a name is that a name can contain multiple aliases separated by a comma, 
+semicolon or white-space, whereas an id must be a single value.
+Note that bean id uniqueness is still enforced by the container, though no longer by XML parsers.
+Cant have same id or same name for two beans also.
+However if across multiple config files you can have then last none wins.
+=>Creating alias
+------------------------------------------------------------------
+2. How to initialise spring bean at runtime(which beans to be initialize)?
+
+
+------------------------------------------------------------
+3. Difference between Constructor Injection and Setter Injection?
+=>Readability. Since constructor injection depends an index of args.
+With setter injection you might end up with not fully constructed object.
+If the my object is incomplete with out having all my dependency via constructor i will go for constructor injection.
+Circular dependency that A needs B and B needs A can be solved by setter injection. Using constructor injection for both can cause issue.
+
+You can use @Required annotaion to make the filed mandatory to be injected.
+
+By using Constructor Injection, you assert the requirement for the dependency in a container-agnostic manner.
+This mean that you can enforce requirements for all injected fields without using any container specific solution.
+(@Required is Spring container specific)
+
+Mandatory dependency vs optional dependency.
+--------------------------------------------------------------
+4. What are the different type of Spring bean scopes?
+=>Five types of  bean scope available
+   1. Singleton : Single bean instance per Spring IOC container.
+   2. prototype: Returns new bean instance  per request.
+   3. request: Returns a single instance for every HTTP request call.
+   4. session: Returns a single instance for every HTTP session.
+   5) global session: global session scope is equal as session scope on portlet-based web applications.
+   
+ ---------------------------------------------------------------
+ 5.What are the spring container we have and which is better?
+ 
+ =>The BeanFactory interface is the central IoC container interface in Spring. 
+ Its responsibilities include instantiating or sourcing application objects, configuring such objects, and assembling the dependencies between these objects.
+ ApplicationContext is sub-interface of BeanFactory. It adds easier integration with Spring AOP features, message resource handling, event publication and application layer specific contexts such as WebApplicationContext for use in web applications.
+ This container adds more enterprise-specific functionality such as the ability to resolve textual messages from a properties file and the ability to publish application events to interested event listeners. This container is defined by the org.springframework.context.ApplicationContext interface.
+
+
+ 
+ Implementation of Spring ApplicationContext
+ 1. ClassPathXMLApplicationContext
+ 2. FileSystemXMLApplicationCOntext
+ 3. WebXmlApplicationContext: ***Might not be
+ 
+ COnfiguration MetaData input for spring container: XML based, Annotaion based, java based.
+ 
+ ApplicationContext context =
+    new ClassPathXmlApplicationContext(new String[] {"services.xml", "daos.xml"});
+
+Note: Object getBean(String, Class): returns a bean, registered under the given name. The bean returned will be cast to the given Class. If the bean could not be cast, corresponding exceptions will be thrown (BeanNotOfRequiredTypeException). 
+
+LazyIntilizedBean:
+----------------
+Container eagerly create and configure all singleton beans as part of the initialization process. 
+A lazy-initialized bean tells the IoC container to create a bean instance when it is first requested, rather than at startup.
+<bean id="lazy" class="com.foo.ExpensiveToCreateBean" lazy-init="true"/>
+If this bean used as dependency to singleton eagerly initialized bean this bean gets created at startup only.
+
+Initialization callbacks:
+-----------------------
+IntilializingBean interface allows a bean to perform initialization work after all necessary properties on the bean have been set by the container.
+void afterPropertiesSet() throws Exception;
+in XML init-method or @PostConstruct annotation.
+
+Destruction callbacks:
+--------------------
+destroy-method or @PreDestory
+
+factory-method="makeFoo"  OR factory-bean="com.anoop.bar" factory-method="makeBar()"
+
+There are 3 ways to control bean life-cycle behaviour.
+>InitializingBean and DisposableBEAN
+>init() and destroy() methods
+>@PostConstruct and @PreDestory
+
+
+Startup and Shutdown Callbacks:
+------------------------------
+The interface LifeCycle defines essentials methods for any object that has its own life cycle requirements.
+public interface Lifecycle {
+    void start();
+    void stop();
+    boolean isRunning();
+}
+--------------------------------------------------------------------------------------------
+
+6)Following steps explain their life cycle inside container?
+
+1. Container will look the bean definition inside configuration file (e.g. bean.xml).
+2. using reflection container will create the object and if any property is defined inside the bean definition then it will also be set.
+3. If the bean implements the BeanNameAware interface, the factory calls setBeanName() passing the bean’s ID.
+4. If the bean implements the BeanFactoryAware interface, the factory calls setBeanFactory(), passing an instance of itself.
+5. If there are any BeanPostProcessors associated with the bean, their post- ProcessBeforeInitialization() methods will be called before the properties for the Bean are set.
+6. If an init() method is specified for the bean, it will be called.
+7. If the Bean class implements the DisposableBean interface, then the method destroy() will be called when the Application no longer needs the bean reference.
+8. If the Bean definition in the Configuration file contains a 'destroy-method' attribute, then the corresponding method definition in the Bean class will be called
+
+
+. Explain Bean lifecycle in Spring framework
+The spring container finds the bean’s definition from the XML file and instantiates the bean.
+Spring populates all of the properties as specified in the bean definition (DI).
+If the bean implements BeanNameAware interface, spring passes the bean’s id to setBeanName() method.
+If Bean implements BeanFactoryAware interface, spring passes the beanfactory to setBeanFactory() method.
+If there are any bean BeanPostProcessors associated with the bean, Spring calls postProcesserBeforeInitialization() method.
+If the bean implements IntializingBean, its afterPropertySet() method is called. If the bean has init method declaration, the specified initialization method is called.
+If there are any BeanPostProcessors associated with the bean, their postProcessAfterInitialization() methods will be called.
+If the bean implements DisposableBean, it will call the destroy() method.
+
+----------------------------------------------------------------------------------------------
+7) What are the difference between BeanFactory and ApplicationContext in spring?
+ BeanFactory can have only one config or xml file. Where as ApplicationContext can have many.
+ Application contexts can publish events to beans that are registered as listeners.
+ Support internationalization (I18N) messages.
+ Support application life-cycle events, and validation.
+ Support  many enterprise services such JNDI access, EJB integration, remoting
+
+ -------------------------------------------------------------------------------------------------
+ 8) What are different modules in spring?
+Answer : spring have seven core modules
+1.      The Core container module
+2.      Application context module
+3.      AOP module (Aspect Oriented Programming)
+4.      JDBC abstraction and DAO module
+5.      O/R mapping integration module (Object/Relational)
+6.      Web module
+7.      MVC framework module
+---------------------------------------------------------------------------------------
+9)How can you inject a Java Collection in Spring?
+Spring offers the following types of collection configuration elements:
+The <list> type is used for injecting a list of values, in the case that duplicates are allowed.
+The <set> type is used for wiring a set of values but without any duplicates.
+The <map> type is used to inject a collection of name-value pairs where name and value can be of any type.
+The <props> type can be used to inject a collection of name-value pairs where the name and value are both Strings.
+
+--------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,1 @@
+String internal pool where its stored?

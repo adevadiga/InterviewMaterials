@@ -1,0 +1,27 @@
+< Template Method Pattern >:
+Defines a program skeleton of algorithm in a method, called template method,which defers some step to sub classes.
+It lets one redefine certain steps of an algorithm without changing the algorithm's structure.
+
+Ex: We have Rule based system, where based on certain properties certain different steps need to be taken.
+Overall action taken remains same, that is structure of algorithm is same.
+Execute Validation, Find Records, (different how to process the records), send outbound
+
+/* A template method : */
+    public final void playOneGame(int playersCount) {
+        this.playersCount = playersCount;
+        initializeGame();
+        int j = 0;
+        while (!endOfGame()) {
+            makePlay(j);
+            j = (j + 1) % playersCount;
+        }
+        printWinner();
+    }
+
+	
+< Adapter pattern>:
+ Convert the interface of a class into another interface clients expect.
+ It is often used to make existing classes work with others without modifying their source code.
+
+
+Mobile and Server.

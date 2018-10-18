@@ -1,0 +1,10 @@
+ReST: Representational State Transfer.
+----
+To create a resource on the server, use POST.
+To retrieve a resource, use GET.
+To change the state of a resource or to update it, use PUT.
+To remove or delete a resource, use DELETE.
+
+Get should not change the state of server - adding , modifying, deleting resource.
+Post: payload  should be in the body of request.
+Put: Replace the original resource.
