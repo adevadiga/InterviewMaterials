@@ -1,0 +1,8 @@
+package com.absurd.meaning;
+
+public class SynchronizeConstructor {
+
+	SynchronizeConstructor(){
+		
+	}
+}

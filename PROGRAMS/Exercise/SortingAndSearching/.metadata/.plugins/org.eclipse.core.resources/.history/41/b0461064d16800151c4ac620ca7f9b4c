@@ -1,0 +1,13 @@
+package com.company.jpmorgan;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MyEmployeeTress {
+
+	Map<Integer,Employee> staff = new HashMap<Integer,Employee>();
+	
+	class Employee{
+		Integer employeeId;
+	}
+}

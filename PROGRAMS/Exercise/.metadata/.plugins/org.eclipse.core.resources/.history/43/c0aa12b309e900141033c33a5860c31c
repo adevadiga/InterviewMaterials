@@ -1,0 +1,15 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class ClassicSwap {
+
+	public static void test(){
+		Scanner in =  new Scanner(System.in);
+		int a = in.nextInt();
+		int b = in.nextInt();
+		
+		b = a ^ b;
+		a=    b ^ a;
+	}
+}

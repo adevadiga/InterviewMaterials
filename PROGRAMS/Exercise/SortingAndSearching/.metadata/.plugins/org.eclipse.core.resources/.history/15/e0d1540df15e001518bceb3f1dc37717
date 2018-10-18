@@ -1,0 +1,12 @@
+package com.algorithm.sorting;
+
+public class SelectionSortAlgorithm {
+
+	static void selectionSort(int[] a){
+		
+		int len = a.length;
+		for(){
+			
+		}
+	}
+}

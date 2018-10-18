@@ -1,0 +1,13 @@
+package com.cci.questions.linkedlist;
+
+public class NthNodeFromEndOfLinkedList {
+
+	public void nthNodeFromLastMethod1(Node head, int n){
+		int len = 0;
+		Node temp = head;
+		while(temp !=null){
+			temp = temp.next;
+			len++;
+		}
+	}
+}

@@ -1,0 +1,12 @@
+package com.cci.questions.recursion;
+
+import java.util.List;
+
+public class PrintAllSubsetOfSet {
+
+	void print(List<Integer> set, int index){
+		if(index == set.size()){
+			return;
+		}
+	}
+}

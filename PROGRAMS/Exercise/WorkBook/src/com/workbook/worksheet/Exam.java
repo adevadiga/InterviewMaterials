@@ -1,0 +1,18 @@
+package com.workbook.worksheet;
+
+public class Exam {
+
+	public static void main(String[] args){
+		String r = StringReverseRecursive.reverseAlt("PRATIKSHA");
+		//System.out.println(r);
+		//System.out.println(StringReverseRecursive.reversNumber(86947362));
+		new MaximumRepeatedWordsFromFile2().printMaxWords("src/com/workbook/worksheet/words.txt");
+		/*try {
+			int num = StringToInteger.parseInt("45896");
+			System.out.println(num);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+	}
+}

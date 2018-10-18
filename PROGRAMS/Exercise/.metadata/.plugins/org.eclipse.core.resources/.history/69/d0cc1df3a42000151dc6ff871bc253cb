@@ -1,0 +1,8 @@
+package com.absurd.programs.sorting;
+
+public class QuickSortTest {
+
+	public void testQuickSort(){
+		
+	}
+}

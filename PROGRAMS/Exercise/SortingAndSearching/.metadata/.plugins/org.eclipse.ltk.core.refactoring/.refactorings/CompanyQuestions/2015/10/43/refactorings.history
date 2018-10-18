@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.company.jpmorgan.SpirallyPrintNCrossNMatrix&apos; to &apos;WorstSpirallyPrintNCrossNMatrix&apos;&#x0D;&#x0A;- Original project: &apos;CompanyQuestions&apos;&#x0D;&#x0A;- Original element: &apos;com.company.jpmorgan.SpirallyPrintNCrossNMatrix&apos;&#x0D;&#x0A;- Renamed element: &apos;com.company.jpmorgan.WorstSpirallyPrintNCrossNMatrix&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;SpirallyPrintNCrossNMatrix&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.company.jpmorgan{SpirallyPrintNCrossNMatrix.java[SpirallyPrintNCrossNMatrix" matchStrategy="1" name="WorstSpirallyPrintNCrossNMatrix" qualified="false" references="true" similarDeclarations="false" stamp="1445142607331" textual="false" version="1.0"/>
+</session>

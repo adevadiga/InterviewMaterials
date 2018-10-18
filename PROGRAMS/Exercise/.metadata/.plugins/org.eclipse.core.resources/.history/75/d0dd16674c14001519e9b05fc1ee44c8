@@ -1,0 +1,24 @@
+package com.cci.questions.StacksAndQueues.StackofStacks;
+
+import java.util.ArrayList;
+
+public class StackOfStacks {
+	
+	ArrayList<Stack> stacks = new ArrayList<Stack>();
+	
+	public void push(int v){
+		Stack last =  getLastStack();
+		if(last != null && !last.isAtCapacity()){
+			last.push(v);
+		}else{
+			Stack stack = new Stack(5);
+			stack.push(v);
+			stacks.add(stack);
+		}
+	}
+	
+	public int pop(){
+		
+	}
+
+}

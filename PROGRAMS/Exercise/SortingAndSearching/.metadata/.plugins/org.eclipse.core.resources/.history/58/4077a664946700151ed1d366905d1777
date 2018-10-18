@@ -1,0 +1,29 @@
+package com.anoop.algorithms;
+
+public class PascalTraingle {
+
+	static void printPascalWorst(int n){
+		for(int line = 0;line<n;line++){
+			for(int i = 0;i<=line;i++){
+				System.out.print(binomialCoefficient(line, i));
+			}
+			System.out.println();
+		}
+	}
+	static int binomialCoefficient(int n, int k){
+		if(n-k < k){
+			k = n-k;
+		}
+		int result = 1;
+		for(int i = 0;i < k;i++){
+			result *= n-i;
+			result /= k-i;
+		}
+		
+		return result;
+	}
+	
+	public static void main(String[] args){
+		printPascalWorst(5);
+	}
+}

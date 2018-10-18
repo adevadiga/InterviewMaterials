@@ -1,0 +1,8 @@
+package com.prog.questions;
+
+public class CommonElementsInArray {
+
+	public static void findCommon(){
+		
+	}
+}

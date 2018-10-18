@@ -1,0 +1,40 @@
+package com.workbook.worksheet;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Scanner;
+
+public class MaximumRepeatedWordsFromFile2 {
+
+	public Map<String, Integer> getWordCount(String fileName){
+		BufferedReader br;
+		FileInputStream fi;
+		DataInputStream ds;
+		try{
+		fi = new FileInputStream(fileName);
+		ds = new DataInputStream(fi);
+		
+		br = new BufferedReader(new InputStreamReader(ds));
+		String line = null;
+		while( (line = br.readLine()) != null){
+			String[] words = line.split("\s");
+		}
+		
+		}catch(FileNotFoundException fnfe){
+			
+		}catch(IOException ioe){
+			
+		}
+	}
+}

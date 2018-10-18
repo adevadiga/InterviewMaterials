@@ -1,0 +1,9 @@
+package com.absurd.unknown;
+
+public class Anagram {
+	
+	public void anagram(String s, String t){
+		
+	}
+
+}

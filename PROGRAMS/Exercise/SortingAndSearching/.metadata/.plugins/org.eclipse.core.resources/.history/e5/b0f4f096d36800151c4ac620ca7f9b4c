@@ -1,0 +1,98 @@
+package com.company.jpmorgan;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+public class MyEmployeeTress {
+
+	Map<Integer,Employee> staff = new HashMap<Integer,Employee>();
+	
+	class Employee{
+		Integer employeeId;
+		String name;
+		Integer superiorId;
+		Set<Integer> subordinates;
+		
+		Employee(Integer employeeId, String name, Integer superiorId){
+			this.employeeId = employeeId;
+			this.name = name;
+			this.superiorId = superiorId;
+		}
+		public void addSubordinates(Integer eId){
+			if(subordinates == null) subordinates = new HashSet<Integer>();
+			
+			subordinates.add(eId);
+		}
+		
+		public void showTeam(int level){
+			
+			System.out.println(name);
+			for(Integer eId : subordinates){
+				Employee subEmployee = staff.get(eId);
+				if(subEmployee != null){
+					subEmployee.showTeam(level+1);
+				}
+			}
+		}
+	}
+	
+	public void addEmployee(Integer employeeId, String name, Integer superiorId){
+		staff.put(employeeId, new Employee(employeeId, name, superiorId));
+	}
+	//Build Team Heirarchy
+	public void setTeams(){
+		for(Map.Entry<Integer, Employee> record: staff.entrySet()){
+		    Employee emp = record.getValue();
+		    Employee supervisor = staff.get(emp.superiorId);
+		    if(supervisor != null){
+		    	supervisor.addSubordinates(emp.employeeId);
+		    }
+		}
+	}
+	
+	public void showTeamHeirarchy(){
+		setTeams();
+		
+		//Find out the root employee and start printing
+		Iterator<Entry<Integer,Employee>> emps = staff.entrySet().iterator();
+		while(emps.hasNext()){
+			Employee emp = emps.next().getValue();
+			if(emp.superiorId == -1){
+				emp.showTeam(0);
+			}
+		}
+	}
+	
+	
+	
+	
+	public static void main(String[] args){
+		String filePath = "companyHeirarchy.txt";
+		try(BufferedReader br = new BufferedReader(new FileReader(filePath))){
+			
+			String line;
+			while( (line = br.readLine()) != null){
+				String[] record = line.split("\\s+");
+				if(record[2] == null){
+					
+				}
+			}
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+}

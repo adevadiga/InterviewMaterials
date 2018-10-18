@@ -1,0 +1,99 @@
+package com.company.jpmorgan;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.Set;
+
+class CompanyTree {
+	private static String levelPrefix = "    ";
+	private HashMap<Integer, Employ> staff = new HashMap<Integer, Employ>();
+	
+	class Employ{
+		private int id;
+		private String name;
+		private int superiorId;
+		private Set<Integer> subordinateIds;
+		
+		public Employ(int id, String name, int superiorId){
+			this.id = id;
+			this.name = name;
+			this.superiorId = superiorId;
+			this.subordinateIds = null;
+		}
+		public int getId(){
+			return id;
+		}
+		public String getName(){
+			return name;
+		}
+		public int getSuperiorId(){
+			return superiorId;
+		}
+		public void addSubordinate(int id){
+			if(subordinateIds == null)
+				subordinateIds = new HashSet<Integer>();
+			subordinateIds.add(id);
+		}
+		public void showTeam(int level){
+			for(int i = 0; i < level; ++i) System.out.print(levelPrefix);
+			//System.out.println();
+			Employ e = staff.get(id);
+			System.out.println(e.getName());
+			
+			if(subordinateIds != null){
+				Iterator<Integer> iter = subordinateIds.iterator();
+				while(iter.hasNext()){
+					Integer ID = iter.next();
+					staff.get(ID).showTeam(level + 1);
+				}
+			}
+		}
+	}
+	
+	private void setTeams(){
+		Iterator<Entry<Integer, Employ>> iter = staff.entrySet().iterator();
+		while(iter.hasNext()){
+			Entry<Integer, Employ> entry = iter.next();
+			Employ superior = staff.get(entry.getValue().getSuperiorId());
+			if(superior != null) superior.addSubordinate(entry.getKey());
+		}
+	}
+	public void addEmploy(int id, String name, int superiorId){
+		staff.put(id, new Employ(id, name, superiorId));
+	}
+	public void show(){
+		setTeams();
+		
+		Iterator<Entry<Integer, Employ>> iter = staff.entrySet().iterator();
+		while(iter.hasNext()){
+			Entry<Integer, Employ> entry = iter.next();
+			Employ e = entry.getValue();
+			if(e.getSuperiorId() == -1)	e.showTeam(0);
+		}
+	}
+	
+	
+}
+
+public class ManagerHeirarchyFromFile {
+
+	public static void main(String[] args) throws IOException{
+		String filePath = "companyHeirarchy.txt";
+		BufferedReader br = new BufferedReader(new FileReader(filePath));
+		
+		String line;
+		CompanyTree company = new CompanyTree();
+		while((line = br.readLine()) != null){
+			String[] arr = line.split(" +");
+			if(arr[2].equals("null")) company.addEmploy(Integer.parseInt(arr[0]), arr[1], -1);
+			else company.addEmploy(Integer.parseInt(arr[0]), arr[1], Integer.parseInt(arr[2]));
+		}
+		
+		company.show();
+	}
+}

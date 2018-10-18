@@ -1,0 +1,42 @@
+package com.company.jpmorgan;
+
+public class SpirallyPrintNCrossNMatrix {
+
+	/*
+	 * Spirally print
+	 */
+	static void spiralPrint(int[][] a,int n){
+	
+		for(int iter = 0; iter<n/2;iter++){
+			int i=iter, j=iter;
+			while(j < (n-iter)){
+				System.out.print(a[i][j]);
+				j++;
+			}
+			j--;
+			while(i< (n-iter)){
+				System.out.print(a[i][j]);
+				i++;
+			}
+			i--;
+			while(j>(0+iter)){
+				System.out.print(a[i][j]);
+				j--;
+			}
+			while(i> (0+iter)){
+				System.out.print(a[i][j]);
+				i--;
+			}
+		}
+	}
+	
+	public static void main(String[] args){
+		int [][] a  = {
+				{1,2,3,4},
+				{12,13,14,5},
+				{11,16,15,6},
+				{10,9,,8,7}
+		};
+		
+	}
+}

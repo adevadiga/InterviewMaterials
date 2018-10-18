@@ -1,0 +1,12 @@
+package com.ood.callcenter;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CallHandler {
+
+	static final int LEVEL = 3;
+	static final int NUM_FRESHER = 5;
+	ArrayList<Employee>[] employeeLevels = new ArrayList<Employee>()[LEVEL];
+	
+}

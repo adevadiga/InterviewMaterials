@@ -1,0 +1,11 @@
+package com.company.jpmorgan;
+
+class Node{
+	int data;
+	Node previous;
+	Node next;
+	Node
+}
+public class DoublyLinkedListRecursiveReverse {
+
+}

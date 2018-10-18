@@ -1,0 +1,8 @@
+package com.anoop.algorithms;
+
+public class PascalTraingle {
+
+	sttaic void printPascalWorst(){
+		
+	}
+}

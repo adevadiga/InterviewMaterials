@@ -1,0 +1,23 @@
+package com.absurd.thread;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+
+public class Bank {
+
+	private List<Account> accounts = new ArrayList<Account>();
+	private ArrayBlockingQueue<Transaction> queue;
+	
+	static CountDownLatch latch;
+	
+	private final int QUEUESIZE = 30;
+	private final Transaction nullTrans = new Transaction(new Account(-1),new Account(-1),0);
+	private final int numThreads = 5;
+	private final int numAccounts = 20;
+	
+	private void startWorkerThreads(){
+		
+	}
+}

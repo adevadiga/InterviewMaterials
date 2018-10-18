@@ -1,0 +1,9 @@
+package com.anoop.tree;
+
+public class CommonAncestor {
+	
+	public static boolean covers(TreeNode root, TreeNode p){
+		
+	}
+
+}

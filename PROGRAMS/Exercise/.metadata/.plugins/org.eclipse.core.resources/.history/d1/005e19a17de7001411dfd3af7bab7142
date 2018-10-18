@@ -1,0 +1,10 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class TimeToText {
+
+	public static void convert(){
+		Scanner in = new Scanner(System.in);
+	}
+}

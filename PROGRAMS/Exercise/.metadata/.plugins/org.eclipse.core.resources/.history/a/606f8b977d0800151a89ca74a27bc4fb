@@ -1,0 +1,49 @@
+package com.cci.questions;
+
+public class AnagramTest {
+	
+	
+	/*
+	 * sort(s) == sort(t);
+	 * 
+	 */
+	
+	public boolean isAnagram(String s, String t){
+		
+		if(s == null || t == null){
+			return false;
+		}
+		if(s.length() != t.length()){
+			return false;
+		}
+		
+	}
+	
+	public boolean isAnagram_Mine(String str1,  String str2){
+		
+		if(str1 == null || str2 == null){
+			return false;
+		}
+		if(str1.length() != str2.length()){
+			return false;
+		}
+		int len = str1.length();
+		int[] charCount = new int[len];
+		for(int i=0;i<len;i++){
+			charCount[i]=0;
+		}
+		
+		for(int i =0; i<len;i++){
+			charCount[str1.charAt(i)]++;
+			charCount[str2.charAt(i)]--;
+		}
+		//If all zero, its an anagram
+		for(int i =0; i<len;i++){
+			if(charCount[i] != 0){
+				return false;
+			}
+		}
+		return true;
+	}
+
+}

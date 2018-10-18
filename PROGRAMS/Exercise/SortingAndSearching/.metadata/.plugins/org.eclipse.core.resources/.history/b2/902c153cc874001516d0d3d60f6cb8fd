@@ -1,0 +1,17 @@
+package com.company.jpmorgan;
+
+class Node{
+	int data;
+	Node previous;
+	Node next;
+	Node(int data){
+		this.data = data;
+	}
+	
+	Node appendToTail(Node node){
+		
+	}
+}
+public class DoublyLinkedListRecursiveReverse {
+
+}

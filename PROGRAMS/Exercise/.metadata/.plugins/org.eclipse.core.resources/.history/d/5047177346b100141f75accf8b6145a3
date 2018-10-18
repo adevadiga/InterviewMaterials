@@ -1,0 +1,66 @@
+package com.anoop.algorithm.recursion;
+
+public class AllPalindromInString {
+	
+	public static void printAll(){
+		StringBuffer str = new StringBuffer("ABACABA");
+		new AllPalindromInString().printPalindromes(str, 0, str.length()-1);
+	}
+
+	public void fuckPalindrome(String str, int nSetOfChars){
+		if(nSetOfChars < 2){
+			return;
+		}
+		int noOfCharToSkip = str.length() - nSetOfChars;
+		
+		String rest1 = str.substring(noOfCharToSkip);
+		String rest2 = str.substring(0, str.length()-noOfCharToSkip);
+		
+		if(rest1.equals(rest2)){
+			if(isPalindrome(rest1)){
+				System.out.println(rest1);
+			}
+		}else{
+			if(isPalindrome(rest1)){
+				System.out.println(rest1);
+			}else if(isPalindrome(rest2)){
+				System.out.println(rest2);
+			}
+		}
+		fuckPalindrome(str,--nSetOfChars);
+		/*String testingStr = str.substring(0, noOfCharToSkip);
+		String testingStr2 = str.substring(str.length()-noOfCharToSkip);
+		
+		if(testingStr.equals(testingStr2)){
+			
+		}*/
+		
+	}
+	public void printPalindromes(StringBuffer str,int start, int end){
+		if(str.length()<=1){
+			return;
+		}
+		
+		String rest = str.substring(start+1, end);
+		if(str.charAt(start) == str.charAt(end)){			
+			if(isPalindrome(rest)){
+				System.out.println(rest);
+			}
+		}
+		printPalindromes(new StringBuffer(rest), 0 , rest.length()-1);
+		
+	}
+	public boolean isPalindrome(String str){
+		return isPalindrome(str, 0, str.length()-1);
+	}
+      boolean isPalindrome(String s,int startIndex, int endIndex){
+		
+		if(endIndex-startIndex < 1){
+			return true; 
+		}else{
+			
+			return  s.charAt(startIndex) == s.charAt(endIndex) &&  isPalindrome(s, startIndex+1, endIndex-1);
+			
+		}
+	}
+}

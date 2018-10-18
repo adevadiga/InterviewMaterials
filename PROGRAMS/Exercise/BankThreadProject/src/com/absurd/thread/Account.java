@@ -1,0 +1,39 @@
+package com.absurd.thread;
+
+public class Account {
+
+	private Integer accountId;
+	private Integer balance;
+	private Integer noOfTransactions;
+	
+	public Account(Integer accountId){
+		this(accountId, 0);
+	}
+	public Account(Integer accountId, Integer balance){
+		this.accountId = accountId;
+		this.balance = balance;
+	}
+	
+	public Integer getBalance() {
+		return balance;
+	}
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+	public Integer getNoOfTransactions() {
+		return noOfTransactions;
+	}
+	
+	@Override
+	public String toString() {
+		return "Account [id=" + accountId + ", balance=" + balance
+				+ ", numTransactions=" + noOfTransactions + "]";
+	}
+	
+	public synchronized void increment(int amount){
+		this.balance += amount;
+	}
+	public synchronized void decrement(int amount){
+		this.balance -= amount;
+	}
+}

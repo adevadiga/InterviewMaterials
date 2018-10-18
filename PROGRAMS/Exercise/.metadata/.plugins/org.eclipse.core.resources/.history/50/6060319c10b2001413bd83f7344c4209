@@ -1,0 +1,14 @@
+package com.anoop.tree;
+
+public class CommonAncestor {
+	
+	public static boolean covers(TreeNode root, TreeNode p){
+		if(root == null){
+			return false;
+		}
+		if(roo == p){
+			
+		}
+	}
+
+}

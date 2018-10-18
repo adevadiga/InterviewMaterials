@@ -1,0 +1,11 @@
+package com.algorithm.sorting;
+
+public class QuickSortAlgorithm {
+
+	static void quickSort(int[] a){
+		
+	}
+	static void quickSort(){
+		
+	}
+}

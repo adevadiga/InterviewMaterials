@@ -1,0 +1,40 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	   http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+	">
+
+	<bean id="helloBean" class="com.anoop.common.HelloWorld">
+		<property name="name" value="Anoop" />
+	</bean>
+	
+	<context:annotation-config />
+	<!-- <bean id="bBean" class="com.anoop.common.configtest.B" />
+	<bean id="cBean" class="com.anoop.common.configtest.C" />
+	<bean id="aBean" class="com.anoop.common.configtest.A" /> -->
+	
+	<context:component-scan base-package="com.anoop.common.configtest,com.anoop.common.aop" />
+	
+	
+	<!-- AOP Example with xml -->
+	<bean id="logginAspect"
+         class="com.anoop.common.aop.LoggingAspect" />
+     
+   <!--  <aop:config>
+        <aop:pointcut id="loggingPointcut" expression="within(com.anoop.common.aop.TargetDemo)" />
+        
+        <aop:aspect id="loggingAspect" ref="logginAspect">
+            <aop:before pointcut-ref="loggingPointcut" method="logEntry" />
+            <aop:after  pointcut-ref="loggingPointcut" method="logExit" />
+            <aop:after-returning pointcut-ref="loggingPointcut" method="logExitAfterReturn" />
+        </aop:aspect>
+    </aop:config>   -->
+    
+    <aop:aspectj-autoproxy/>
+    
+
+</beans>

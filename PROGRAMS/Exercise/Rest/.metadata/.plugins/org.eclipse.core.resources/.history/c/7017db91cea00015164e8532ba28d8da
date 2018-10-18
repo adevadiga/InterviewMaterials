@@ -1,0 +1,5 @@
+package com.jaxrssample.dao;
+
+public class EmployeeDAO {
+
+}

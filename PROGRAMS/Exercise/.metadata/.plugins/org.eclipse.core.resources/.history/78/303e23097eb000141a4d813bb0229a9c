@@ -1,0 +1,11 @@
+package com.absurd.unknown;
+
+public class Anagram {
+	
+	public boolean anagram(String s, String t){
+		if(s.length() != t.length()){
+			return 
+		}
+	}
+
+}

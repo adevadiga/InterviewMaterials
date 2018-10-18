@@ -1,0 +1,11 @@
+package com.absurd.thread;
+
+public class Tester {
+
+	public static void main(String[] args){
+		if (args.length < 2) {
+			System.err.println("input_file numThreads");
+			System.exit(-1);
+		}
+	}
+}

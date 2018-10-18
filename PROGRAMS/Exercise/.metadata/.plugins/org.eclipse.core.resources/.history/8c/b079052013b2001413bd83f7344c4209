@@ -1,0 +1,19 @@
+package com.anoop.tree;
+
+public class ContainsTree {
+
+	public boolean containsTree(TreeNode t1, TreeNode t2){
+		if(t2 == null){
+			return true;
+		}
+		return isSubTree(t1, t2);
+	}
+	public boolean isSubTree(TreeNode t1, TreeNode t2){
+		if(t1 == null){
+			return false;
+		}
+		if(){
+			
+		}
+	}
+}

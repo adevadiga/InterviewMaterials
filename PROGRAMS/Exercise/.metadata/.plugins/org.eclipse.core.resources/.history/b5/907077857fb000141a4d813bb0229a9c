@@ -1,0 +1,10 @@
+package com.absurd.unknown;
+
+public class ReplaceSpace {
+	
+	
+	public void replaceSpaceinString(){
+		
+	}
+
+}

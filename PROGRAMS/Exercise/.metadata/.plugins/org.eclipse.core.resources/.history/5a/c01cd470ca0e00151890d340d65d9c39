@@ -1,0 +1,9 @@
+package com.cci.questions.linkedlist;
+
+/*
+ * Implement an algorithm to delete a node in the middle of a single linked list,
+ * given only access to that node.
+ */
+public class DeleteNodeMiddleOfLinkedList {
+
+}

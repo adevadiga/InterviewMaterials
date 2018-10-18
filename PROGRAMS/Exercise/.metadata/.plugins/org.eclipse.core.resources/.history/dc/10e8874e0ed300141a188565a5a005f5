@@ -1,0 +1,51 @@
+package com.absurd.thread;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
+
+public class Bank {
+
+	private List<Account> accounts = new ArrayList<Account>();
+	private ArrayBlockingQueue<Transaction> queue;
+	
+	static CountDownLatch latch;
+	
+	private final int QUEUESIZE = 30;
+	private final Transaction nullTrans = new Transaction(new Account(-1),new Account(-1),0);
+	private final int numThreads = 5;
+	private final int numAccounts = 20;
+	
+	
+	
+	private class WorkerThread extends Thread
+	{
+		@Override
+		public void run(){
+			boolean done  = false;
+			while(!done){
+				
+				try {
+					Transaction transaction = queue.take();
+					if(transaction == nullTrans){
+						//Queue is empty now finish it.
+						done = true;
+					}else{
+						transaction.carryOutTransaction();						
+					}
+					
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				
+			}
+			System.out.println(Thread.currentThread().getName() + " is done.");
+			latch.countDown();
+		}
+	}
+	
+	public Bank(int numOfThreads){
+		queue = new ArrayBlockingQueue<Transaction>(numOfThreads);
+	}
+}

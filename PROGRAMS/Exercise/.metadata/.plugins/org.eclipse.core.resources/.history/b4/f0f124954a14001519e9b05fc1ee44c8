@@ -1,0 +1,7 @@
+package com.cci.questions.StacksAndQueues.StackofStacks;
+
+public class Node {
+
+	Node above;
+	Node below;
+}

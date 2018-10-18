@@ -1,0 +1,23 @@
+package com.anoop.expression;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class Application {
+
+  public static void main(String[] args) {
+	/*Scanner scanner = new Scanner("x = 4");
+	ExpNode exp = new IveParser().parseExp(scanner);
+	
+	
+	
+	
+	System.out.println(exp.getString());*/
+	 
+  }
+  
+ 
+}

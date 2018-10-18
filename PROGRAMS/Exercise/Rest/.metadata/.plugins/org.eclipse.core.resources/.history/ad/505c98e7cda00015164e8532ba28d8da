@@ -1,0 +1,11 @@
+package com.jaxrssample.service;
+
+import javax.websocket.server.PathParam;
+import javax.ws.rs.core.Response;
+
+@Path("/employee/{employeeId}")
+public interface EmployeeService {
+
+	public Response getEmployeeDetail(@PathParam("employeeId") String employeeId);
+
+}

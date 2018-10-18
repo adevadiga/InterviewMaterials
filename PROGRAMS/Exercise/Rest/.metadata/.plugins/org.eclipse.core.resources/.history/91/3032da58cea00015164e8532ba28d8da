@@ -1,0 +1,14 @@
+package com.jaxrssample.service;
+
+import javax.ws.rs.core.Response;
+
+public class EmployeeServiceImpl implements EmployeeService {
+
+	@Override
+	public Response getEmployeeDetail(Integer employeeId) {
+		if(){
+			
+		}
+	}
+
+}

@@ -1,0 +1,8 @@
+package com.hackersrank.pgm;
+
+public class TestRune {
+	private void TimeToText() {
+		// TODO Auto-generated method stub
+
+	}
+}

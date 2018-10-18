@@ -1,0 +1,14 @@
+package com.algorithm.sorting;
+
+public class QuickSortAlgorithm {
+
+	static void quickSort(int[] a){
+		
+	}
+	static void quickSort(int[] a, int left, int right){
+		if(left < right){
+			
+		}
+		
+	}
+}

@@ -1,0 +1,26 @@
+package com.absurd.programs;
+
+public class AnagramTest {
+
+	public boolean isAnagram(String s, String t){
+		int[] charCount = new int[256];
+		int num_of_unique_chars = 0;
+		
+		
+		for(int i=0;i<s.length();i++){
+			if(charCount[s.charAt(i)] == 0){
+				num_of_unique_chars++;
+			}
+			charCount[s.charAt(i)]++;
+		}
+		
+		for(int j=0;j<t.length();j++){
+			if(charCount[t.charAt(j)] == 0){//extra char found
+				return false;
+			}
+			charCount[t.charAt(index)]--;
+		}
+		
+		return false;
+	}
+}

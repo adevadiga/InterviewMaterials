@@ -1,0 +1,17 @@
+package com.prog.questions;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommonElementsInArray {
+
+	/*
+	 * All arrays are sorted
+	 */
+	public static void findCommon(int[] a, int[] b, int[] c){
+		
+	   for(){
+		   
+	   }
+	}
+}

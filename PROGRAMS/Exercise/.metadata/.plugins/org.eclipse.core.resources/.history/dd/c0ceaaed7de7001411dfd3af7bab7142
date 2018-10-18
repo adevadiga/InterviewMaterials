@@ -1,0 +1,14 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class TimeToText {
+
+	public static void convert(){
+		Scanner in = new Scanner(System.in);
+		int m = in.nextInt();
+		int h = in.nextInt();
+		
+		String[] numbers = new String[]{"'O Clock"};
+	}
+}

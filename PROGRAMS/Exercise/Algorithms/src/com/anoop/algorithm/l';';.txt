@@ -1,0 +1,8 @@
+Devu and Churu loves to play with cards alot. Today, they both have a deck of playing cards. Each deck consists of N playing cards numbered from 1 to N. Devu calls his sequence of cards S whereas Churu calls his sequence of cards P and also it is known that S != P.
+
+In order to play with these cards they both have come up with the following interesting game. In their respective turn, they will choose some pair of integers i and j such that i != j and 1 <= i, j<= N and will swap the cards present at ith and jth position in their respective sequence. If at any point of time both the sequence S and P becomes equal i.e Si = Pi for all i from [1, N] , Devu wins the game otherwise the game will last long for many years and devu will surely gonna die before it actually ends and therefore, the winner will be Churu. Both players will make moves alternatively and will play optimally i.e Devu will try to make both sequence equal whereas Churu will try his best to stop him.
+
+Devu being smart will choose to play game only if he is going to win it for the given sequence of S and P and therefore, he asked you to tell him the winner for a given game.
+
+Given original sequences S and P consisting of N playing cards and the player who will move first. Can you find the winner of the game ?
+

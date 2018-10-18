@@ -1,0 +1,12 @@
+package com.absurd.programs.sorting;
+
+public class QuickSort {
+
+	public int[] quickSort(int[] a){
+		return quickSort(a, 0, a.length-1);
+	}
+	
+	public int[] quickSort(int[] a, int low, int high){
+		
+	}
+}

@@ -1,0 +1,37 @@
+package com.jaxrssample.dao;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
+import com.jaxrssample.model.Employee;
+
+public class EmployeeDAO {
+
+	public static String fileName = "employee_database.txt";
+	public Employee getEmployeeDetails(String employeeId)
+	{
+		Employee emp = new Employee();
+		emp.setDateOfJoining("01-02-2001");
+		emp.setDepartment("Sales");
+		emp.setEmail("test@example.com");
+		emp.setEmployeeId("675436");
+		emp.setFirstName("John");
+		emp.setLastName("Smith");
+		return emp;
+	}
+	
+	public Employee saveEmployee(Employee employee){
+		
+		
+		return employee;
+	}
+	
+	public boolean writeToFile(Employee emp){
+		try(
+				BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+				){
+			
+		}
+	}
+
+}

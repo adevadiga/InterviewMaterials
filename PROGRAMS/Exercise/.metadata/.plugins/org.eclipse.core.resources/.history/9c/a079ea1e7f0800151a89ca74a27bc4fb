@@ -1,0 +1,9 @@
+package com.cci.questions;
+
+public class ReplaceSpaceWithHtmlEscape {
+	
+	public static void replace(char[] s){
+		int spaceCount = 0, newLength = 0;
+	}
+
+}

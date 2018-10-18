@@ -1,0 +1,8 @@
+package com.absurd.programs;
+
+public class AnagramTest {
+
+	public void isAnagram(String s, String t){
+		
+	}
+}

@@ -1,0 +1,50 @@
+package com.jaxrssample.dao;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import com.jaxrssample.model.Employee;
+
+public class EmployeeDAO {
+
+	public static String fileName = "employee_database.txt";
+	public Employee getEmployeeDetails(String employeeId)
+	{
+		Employee emp = new Employee();
+		emp.setDateOfJoining("01-02-2001");
+		emp.setDepartment("Sales");
+		emp.setEmail("test@example.com");
+		emp.setEmployeeId("675436");
+		emp.setFirstName("John");
+		emp.setLastName("Smith");
+		return emp;
+	}
+	
+	public Employee saveEmployee(Employee employee){
+		
+		writeToFile(employee);
+		return employee;
+	}
+	
+	public boolean writeToFile(Employee emp){
+		try(
+				BufferedWriter bw = new BufferedWriter(new FileWriter(fileName));
+				PrintWriter pw = new PrintWriter(bw);
+			)
+		{
+			pw.print(emp.getFirstName());
+			pw.print(emp.getLastName());
+			pw.print(emp.getEmployeeId());
+			pw.println();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return true;
+	}
+
+}

@@ -1,0 +1,23 @@
+package com.company.jpmorgan;
+
+public class SpiralPrintNbyNMatrixForN {
+
+	public static void main(String[] args){
+		
+	}
+	
+	public static void spiral(int n){
+		int dx = 0,dy=0;
+		int counter=1;
+		int[][] matrix = new int[n][n];
+		int x=0,y=0;
+		
+		while(counter <= n*n){
+			matrix[x][y] = counter++;
+			
+			x += dx;
+			y += dy;
+			
+		}
+	}
+}

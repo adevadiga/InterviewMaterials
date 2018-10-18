@@ -1,0 +1,15 @@
+package com.absurd.thread;
+
+public class Transaction {
+
+	private Account fromAccount;
+	private Account toAccount;
+	private Integer amount;
+	
+	public Transaction(Account fromAccount, Account toAccount, Integer amount){
+	  this.fromAccount  = fromAccount;
+	  this.toAccount = toAccount;
+	  this.amount = amount;
+	}
+	
+}

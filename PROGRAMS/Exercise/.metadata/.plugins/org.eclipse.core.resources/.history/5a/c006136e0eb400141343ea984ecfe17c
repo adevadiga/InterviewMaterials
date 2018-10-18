@@ -1,0 +1,25 @@
+package com.prog.questions;
+
+public class LengthOfLongSubStringNoRepeat {
+
+	public void lenSubStr(String str){
+		int cur_len=1;
+		int max_len=1;
+		int prevIndex = -1;
+		int[] visited = new int[256];
+		for(int i=0; i<256;i++){
+			visited[i]=-1;
+		}
+		
+		visited[0]=0;
+		
+		for(int i=1;i<str.length();i++){
+			prevIndex = visited[str.charAt(i)];
+			if(prevIndex == -1 || i - cur_len > prevIndex){
+				cur_len++;
+			}else{
+				
+			}
+		}
+	}
+}

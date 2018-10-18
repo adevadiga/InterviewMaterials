@@ -1,0 +1,12 @@
+package com.prog.questions.series;
+
+public class EggDrop {
+
+	
+	static int dropEgg(int noOfEggs, int noOfFloors){
+		
+		if(){
+			
+		}
+	}
+}

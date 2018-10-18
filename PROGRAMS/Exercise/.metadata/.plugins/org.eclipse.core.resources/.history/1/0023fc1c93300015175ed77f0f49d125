@@ -1,0 +1,21 @@
+package com.cci.questions.recursion;
+
+public class NCents {
+
+	public int nCents(int n){
+		int t = 0;
+		if(n <= 0){
+			return 0;
+		}else{
+			
+			t += 1 + nCents(n-1);
+			if(n >= 5)
+			  t +=  1 + nCents(n-5);
+			if(n >= 10)
+			  t += 1 + nCents(n-10);
+			if(n >= 25)
+			  t += 1 + nCents(n-25);
+		}
+		return t;
+	}
+}

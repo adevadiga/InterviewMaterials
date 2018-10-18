@@ -1,0 +1,17 @@
+package com.absurd.unknown;
+
+public class ReplaceSpace {
+	
+	
+	public String replaceSpaceinString(String str){
+		char[] s = str.toCharArray();
+		int length = str.length();
+		int numOfSpace = 0;
+		for(int i = 0; i < length; i++){
+			if(str[i] == ''){
+				numOfSpace++;
+			}
+		}
+	}
+
+}

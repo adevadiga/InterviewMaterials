@@ -1,0 +1,11 @@
+package com.prog.questions;
+
+public class LengthOfLongSubStringNoRepeat {
+
+	public void lenSubStr(String str){
+		int cur_len=1;
+		int max_len=1;
+		int prevIndex = -1;
+		
+	}
+}

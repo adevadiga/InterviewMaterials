@@ -1,0 +1,8 @@
+package com.hackersrank.pgm;
+
+public class TestRune {
+
+	public static void main(String[] args){
+		
+	}
+}

@@ -1,0 +1,57 @@
+package com.anoop.expression;
+
+public class CompoundNode implements ExpNode {
+
+	private char operator;
+	private ExpNode lhs;
+	private ExpNode rhs;
+	
+	public CompoundNode(char operator, ExpNode lhs, ExpNode rhs) {
+		this.operator = operator;
+		this.lhs = lhs;
+		this.rhs = rhs;
+	}
+	
+	
+	@Override
+	public ExpressionType getType() {
+		return ExpressionType.CompoundType;
+	}
+
+	@Override
+	public Integer eval(EvalState evalState) {
+		//TODO
+		if(this.operator == '='){
+			int rhsValue = rhs.eval(evalState);
+			IdentifierNode identifier = (IdentifierNode) lhs;
+			evalState.setValue(identifier.getVariableName(), rhsValue);
+		}else{
+			int lhsValue = lhs.eval(evalState);
+			int rhsValue = lhs.eval(evalState);
+			
+			switch(this.operator){
+			case '+': return  lhsValue+rhsValue;
+			case '-': return lhsValue-rhsValue;
+			case '*': return lhsValue*rhsValue;
+			case '/': return lhsValue/rhsValue;
+			}
+		}
+	}
+
+	@Override
+	public String getString() {
+		return "( "+lhs.getString()+"  "+this.operator+"  "+rhs.getString()+" )";
+
+	}
+
+	public char getOperator(){
+		return this.operator;
+	}
+	
+	public ExpNode getLhs(){
+		return this.lhs;
+	}
+	public ExpNode getRhs(){
+		return this.rhs;
+	}
+}

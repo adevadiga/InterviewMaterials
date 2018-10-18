@@ -1,0 +1,56 @@
+package com.anoop.expression;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+
+public class Application {
+
+  public static void main(String[] args) {
+	/*Scanner scanner = new Scanner("x = 4");
+	ExpNode exp = new IveParser().parseExp(scanner);
+	
+	
+	
+	
+	System.out.println(exp.getString());*/
+	  List<Long> isf = new ArrayList<Long>();
+	  isf.add(123l);
+	  test(isf,120);
+  }
+  
+ public static void  test(List<Long> isfIdList, int status){
+	 final String sql = "update ISF isf set isf.statusCode = ";
+		Iterator<Long> isfIdListItr = null;
+		Long isfId = null;
+		StringBuffer whereClause = new StringBuffer("");
+		whereClause.append(status);
+		whereClause.append(" where isf.isfId in ( ");
+		int listLength = 0, i = 1;
+
+		if (isfIdList != null && !isfIdList.isEmpty())
+		{
+			listLength = isfIdList.size();
+
+			isfIdListItr = isfIdList.iterator();
+			while (isfIdListItr.hasNext())
+			{
+				isfId = isfIdListItr.next();
+				whereClause.append(isfId.longValue());
+				if (i < listLength)
+				{
+					i++;
+					whereClause.append(" , ");
+				}
+			}
+		}
+		whereClause.append(" ) ");
+
+		StringBuffer sqlBuffer = new StringBuffer();
+		sqlBuffer.append(sql);
+		sqlBuffer.append(whereClause);
+		System.out.println(sqlBuffer.toString());
+ }
+}

@@ -1,0 +1,22 @@
+package com.company.jpmorgan;
+
+public class SpirallyPrintNCrossNMatrix {
+
+	/*
+	 * Spirally print
+	 */
+	static void spiralPrint(int[][] a,int n){
+	
+		for(int iter = 0; iter<n/2;iter++){
+			int i=iter, j=iter;
+			while(j < n){
+				System.out.print(a[i][j]);
+				j++;
+			}
+			j--;
+			while(i<n){
+				
+			}
+		}
+	}
+}

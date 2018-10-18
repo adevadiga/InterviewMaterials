@@ -1,0 +1,19 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class TestRune {
+
+	public static void main(String[] args){
+		//TimeToText.convert();
+		 Scanner in = new Scanner(System.in);
+			int t = in.nextInt();
+	        int n = 0;
+	        int utopTreeHeight = 0;
+			for(int i=0; i<n;i++){
+	            n = in.nextInt();
+	            
+	        }
+			
+	}
+}

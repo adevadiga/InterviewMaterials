@@ -1,0 +1,9 @@
+package com.prog.questions;
+
+public class CommonElementsInArray {
+
+	public static void findCommon(int[] a, int[] b, int[] c){
+		
+		//Find intersection betwwen 2 arrays, store it in 
+	}
+}

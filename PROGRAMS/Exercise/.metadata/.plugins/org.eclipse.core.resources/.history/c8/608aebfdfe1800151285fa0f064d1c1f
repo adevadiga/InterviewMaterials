@@ -1,0 +1,29 @@
+package com.absurd.programs;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class FirstNonRepeatedCharInStringEff {
+
+	class CountAndIndex{
+		int count;
+		int firtOccuredIndex;
+	}
+	
+	public void getFirstNonRChar(String str){
+		
+	}
+	
+	private CountAndIndex[] getCharCount(String str){
+		CountAndIndex[] counts = new CountAndIndex[256];
+		char[] charStr = str.toCharArray();
+		for(char ch: charStr){
+			
+			if(counts[ch] == null){
+				CountAndIndex cAndI = new CountAndIndex();
+			}
+		}
+	}
+}

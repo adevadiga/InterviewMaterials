@@ -1,0 +1,35 @@
+package com.jaxrssample.service;
+
+import javax.ws.rs.Consumes;
+import javax.ws.rs.PUT;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.jaxrssample.dao.EmployeeDAO;
+import com.jaxrssample.model.Employee;
+
+public class EmployeeServiceImpl implements EmployeeService {
+
+	@Autowired
+	private EmployeeDAO employeeDao; 
+
+	@Override
+	public Response getEmployeeDetail(String employeeId) {
+		if(employeeId == null){
+			return Response.status(Response.Status.BAD_REQUEST).build(); 
+		}
+		
+		Employee e = employeeDao.getEmployeeDetails(employeeId);
+		
+		return Response.ok(e).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response saveEmployee(Employee employee){
+		
+	}
+
+}

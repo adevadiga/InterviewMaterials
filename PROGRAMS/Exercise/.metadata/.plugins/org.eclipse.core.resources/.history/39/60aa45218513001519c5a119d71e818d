@@ -1,0 +1,18 @@
+package com.cci.questions.StacksAndQueues;
+
+import java.util.ArrayList;
+import java.util.Stack;
+
+public class StackOfStacks {
+	
+	ArrayList<Stack> stacks =  new ArrayList<Stack>();
+	
+	public void push(int item){
+		
+	}
+	
+	private Stack getLastStack(){
+		return statcks.get(stacks.size()-1);
+	}
+
+}

@@ -1,0 +1,26 @@
+package com.ood.callcenter;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class CallHandler {
+
+	static final int LEVEL = 3;
+	static final int NUM_FRESHER = 5;
+	ArrayList<Employee>[] employeeLevels = (ArrayList<Employee>[])  new ArrayList[LEVEL];
+	Queue<Call>[] callQueue = new LinkedList[LEVEL];
+	
+	public Employee getCallHandler(Call call){
+		for(int level = call.rank; level < LEVEL-1 ; level++){
+			List<Employee> employees = employeeLevels[level];
+			for(Employee emp:employees){
+				if(emp.free){
+					return emp;
+				}
+			}
+		}
+	}
+	
+}

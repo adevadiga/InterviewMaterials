@@ -1,0 +1,10 @@
+package com.ood.callcenter;
+
+public class Employee {
+
+	boolean free;
+	CallHandler callHandler;
+	public void receiveCall(Call call){
+		
+	}
+}

@@ -1,0 +1,19 @@
+package com.company.jpmorgan;
+
+public class MaximumSubArrayDP {
+
+	static int maxSubArray(int[] a){
+		int maxEndingHere = a[0];
+		int maxSoFar = a[0];
+		for(int i=1;i<a.length;i++){
+			int x = a[i];
+			maxEndingHere = Math.max(x, maxEndingHere+x);
+			maxSoFar = Math.max(maxEndingHere, maxSoFar);
+		}
+		return maxSoFar;
+	}
+	
+	public static void main(String[] args){
+		int[] a = {−2, 1, −3, 4, −1, 2, 1, −5, 4};
+	}
+}

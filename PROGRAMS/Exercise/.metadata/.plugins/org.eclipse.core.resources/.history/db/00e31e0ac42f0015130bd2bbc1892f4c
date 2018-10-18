@@ -1,0 +1,8 @@
+package com.cci.questions.recursion;
+
+public class PrintAllSubsetOfSet {
+
+	void print(){
+		
+	}
+}

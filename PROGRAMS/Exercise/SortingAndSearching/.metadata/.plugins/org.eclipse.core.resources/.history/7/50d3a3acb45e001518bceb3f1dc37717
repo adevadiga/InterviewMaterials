@@ -1,0 +1,12 @@
+package com.algorithm.sorting;
+
+public class MergeSortAlgorithm {
+	
+	public static void mergeSort(int[] a){
+		
+	}
+	private static void mergeSort(){
+		
+	}
+
+}

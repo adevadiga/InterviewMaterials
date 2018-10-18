@@ -1,0 +1,44 @@
+package com.cci.questions.StacksAndQueues.StackofStacks;
+
+public class Stack {
+	Node top;
+	Node bottom;
+	int capacity;
+	int size;
+	
+	public Stack(int capacity){
+		this.capacity = capacity;
+	}
+	public boolean isAtCapacity(){
+		return size == capacity;
+	}
+	
+	public void join(Node above, Node below){
+		if(below != null){
+			below.above = above;
+		}
+		if(above != null){
+			above.below = below;
+		}
+	}
+	
+	public boolean push(int value){
+		if(size >= capacity){
+			return false;
+		}
+		size++;
+		Node n = new Node(value);
+		if(size == 1){
+			bottom = n;
+		}
+		
+		join(n,top);
+		top = n;
+		return true;
+	}
+
+	public int pop(){
+		
+	}
+	
+}

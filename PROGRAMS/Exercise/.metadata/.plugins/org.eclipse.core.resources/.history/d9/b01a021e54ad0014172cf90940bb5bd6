@@ -1,0 +1,41 @@
+package com.anoop.expression;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class EvalState {
+		
+	private static class SingleTonHolder(){
+		
+	}
+	
+	
+	
+	
+
+	private Map<String, Integer> symbolTable;
+	
+	private EvalState(){
+		this.symbolTable = new HashMap<String, Integer>();
+	}
+	
+	public void setValue(String var, Integer value){
+		this.symbolTable.put(var, value);
+	}
+	
+	public Integer getValue(String var){
+		return this.symbolTable.get(var);
+	}
+	
+	public boolean isDefined(String var){
+		return this.symbolTable.containsKey(var) ;
+	}
+}
+/*
+ * 1. Private constructor
+ * 2. Note the distinction between a simple static instance of a class and a singleton: although a singleton can be implemented as a static instance, 
+         can also be lazily constructed, requiring no memory or resources until needed.
+   3. Multithread environment
+*/
+
+

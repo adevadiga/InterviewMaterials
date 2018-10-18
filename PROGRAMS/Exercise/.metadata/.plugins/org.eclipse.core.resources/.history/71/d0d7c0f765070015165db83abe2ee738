@@ -1,0 +1,8 @@
+package com.cci.questions;
+
+public class CStyleStringReverse {
+
+	public static String reverse(String str){
+		char[] rString = new char[str.length()];
+	}
+}

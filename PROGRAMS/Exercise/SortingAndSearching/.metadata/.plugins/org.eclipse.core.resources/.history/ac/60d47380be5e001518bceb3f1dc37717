@@ -1,0 +1,69 @@
+package com.algorithm.sorting;
+
+import java.util.Arrays;
+
+public class MergeSortAlgorithm {
+	
+	public static void mergeSort(int[] a){
+		mergeSort(a, 0, a.length-1);
+	}
+	private static void mergeSort(int[] a, int l, int r){
+		if(l < r){
+			int m = (l+r)/2;
+			mergeSort(a, l, m);
+			mergeSort(a, m+1, r);
+			merge(a, l , m ,r);
+		}
+	}
+	static void merge(int[] a, int left, int mid, int right)
+	{
+		int[] leftPart = new int[mid-left+1];
+		int[] rightPart = new int[right-mid];
+		int i = left;
+		int index = 0;
+		while(i <= mid){
+			leftPart[index++] = a[i++];
+		}
+		index = 0;
+		i = mid+1;
+		while(i <= right){
+			leftPart[index++] = a[i++];
+		}
+		//merge to orig array
+		int storeIndex = left;
+		
+	}
+	/*
+	 * As usual, you have a subscript into the left array segment (x[left]) and the right array segment (x[right]).  If x[left] tests as less than or equal to x[right], then 
+	 * it is already in place within the sorted array segment, so just increment left.  Otherwise, the array element in x[right] needs to move down into the space currently
+	 *  occupied by x[left], and to accommodate this, the entire array segment from x[left] through x[right-1] needs to move up by one —
+	 *  effectively you need to rotate that little segment of the array.  In the process, everything moves up by one, including the end of the left segment (mid).
+	 */
+	static void mergeInplace(int[] a, int l, int m, int r){
+		int i = l;
+		int j = m+1;
+		int temp;
+		while(i<=m && j<=r){
+			
+			if(a[i] <= a[j]){
+				i++;
+			}else{
+				temp = a[j];
+				System.arraycopy(a, i, a, i+1, j-i);
+				a[i] = temp;
+				i++;j++;m++;
+			}
+			
+		}
+		
+		
+	}
+	
+	public static void main(String[] args){
+		int[] a = {3,1,9,4,6,2};
+		System.out.println(Arrays.toString(a));
+		MergeSortAlgorithm.mergeSort(a);
+		System.out.println(Arrays.toString(a));
+	}
+
+}

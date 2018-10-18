@@ -1,0 +1,10 @@
+package com.ood.callcenter;
+
+public class Fresher extends Employee {
+
+	public Fresher(int rank) {
+		super(rank);
+		// TODO Auto-generated constructor stub
+	}
+
+}

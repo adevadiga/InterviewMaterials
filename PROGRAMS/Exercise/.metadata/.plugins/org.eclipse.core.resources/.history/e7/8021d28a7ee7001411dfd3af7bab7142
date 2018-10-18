@@ -1,0 +1,29 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class TimeToText {
+
+	public static void convert(){
+		Scanner in = new Scanner(System.in);
+		int h = in.nextInt();
+		int m = in.nextInt();
+		
+		String[] numbers = new String[]{"", "one", "two", "three", "four", "five", "six","seven","eight","nine",
+				"ten","eleven","tweleve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen",
+				"ninteen","twenty","twenty one","twenty two","twenty three","twenty four","twenty five","twenty six","twenty seven","twenty eight",
+				"twenty nine"};
+		String tellMetheTime = "";
+		
+		if(){
+			
+		}
+		switch(m){
+		    case 0: tellMetheTime = numbers[h]+" 'O clock";
+		            break;
+		    case 
+		
+		}
+		
+	}
+}

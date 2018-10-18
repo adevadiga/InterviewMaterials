@@ -1,0 +1,29 @@
+package com.company.jpmorgan;
+
+public class SpiralPrintNbyNMatrixForN {
+
+	public static void main(String[] args){
+		
+	}
+	
+	public static void spiral(int n){
+		int dx = 0,dy=1;
+		int x=0,y=0;
+		
+		int counter=1;
+		int[][] matrix = new int[n][n];
+		
+		
+		while(counter <= n*n){
+			matrix[x][y] = counter++;
+			
+			int nx = x+dx;
+			int ny = y+dy;
+			//If you hit edge turn
+			if(){
+				
+			}
+			
+		}
+	}
+}

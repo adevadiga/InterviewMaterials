@@ -1,0 +1,16 @@
+package com.algorithm.sorting;
+
+public class SelectionSortAlgorithm {
+
+	static void selectionSort(int[] a){
+		
+		int len = a.length;
+		for(int i=0; i< a.length-1;i++){
+			for(int j = i+1; j<a.length;j++){
+				if(a[j] < a[i]){
+					swap(a,i ,j);
+				}
+			}
+		}
+	}
+}

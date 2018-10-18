@@ -1,0 +1,12 @@
+package com.ood.callcenter;
+
+public class Employee {
+
+	boolean free;
+	CallHandler callHandler;
+	int rank;//Fresher, TL, PM
+	Employee(int rank){this.rank = rank;}
+	public void receiveCall(Call call){
+		
+	}
+}

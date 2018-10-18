@@ -1,0 +1,23 @@
+package com.company.jpmorgan;
+
+class Node{
+	int data;
+	Node previous;
+	Node next;
+	Node(int data){
+		this.data = data;
+	}
+	
+	Node appendToTail(int data){
+		Node t = new Node(data);
+		Node n = this;
+		while(n.next != null){
+			n = n.next;
+		}
+		n.next = node;
+		
+	}
+}
+public class DoublyLinkedListRecursiveReverse {
+
+}

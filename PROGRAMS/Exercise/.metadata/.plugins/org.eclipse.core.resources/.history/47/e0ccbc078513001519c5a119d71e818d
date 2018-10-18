@@ -1,0 +1,7 @@
+package com.cci.questions.StacksAndQueues;
+
+public class StackOfStacks {
+	
+	ArrayList<Stack> stacks =  new ArrayList<Stack>();
+
+}

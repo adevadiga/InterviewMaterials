@@ -1,0 +1,11 @@
+package com.cci.questions;
+
+public class UniqueCharactersInString {
+
+	public static boolean isUniqueChars(String input){
+		boolean[] charSet = new boolean[256];
+		for(int i=0;i<input.length;i++){
+			int value = input.ch
+		}
+	}
+}

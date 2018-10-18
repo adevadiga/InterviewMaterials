@@ -1,0 +1,11 @@
+package com.prog.questions;
+
+public class RunMe {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//new ColorfulNumber().isColorfull(12346);
+		LengthOfLongSubStringNoRepeat.lenSubStr("GEEKSFORGEEKS");
+	}
+
+}

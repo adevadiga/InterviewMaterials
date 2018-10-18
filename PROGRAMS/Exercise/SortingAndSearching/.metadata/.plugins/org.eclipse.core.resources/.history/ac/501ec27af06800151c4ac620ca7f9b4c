@@ -1,0 +1,8 @@
+package com.company.jpmorgan;
+
+public class SpirallyPrintNCrossNMatrix {
+
+	sttaic void spiralPrint(int n){
+		
+	}
+}

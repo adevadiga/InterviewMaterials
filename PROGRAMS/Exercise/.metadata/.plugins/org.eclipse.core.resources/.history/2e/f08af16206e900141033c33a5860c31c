@@ -1,0 +1,12 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class MaxXOR {
+
+	public static void test(){
+		Scanner in = new Scanner(System.in);
+		int l = in.nextInt();
+		int t = in.nextInt();
+	}
+}

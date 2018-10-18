@@ -1,0 +1,5 @@
+package com.cci.questions.linkedlist;
+
+public class DeleteNodeMiddleOfLinkedList {
+
+}

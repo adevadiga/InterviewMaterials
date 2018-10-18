@@ -1,0 +1,13 @@
+package com.prog.questions;
+
+public class CommonElementsInArray {
+
+	/*
+	 * All arrays are sorted
+	 */
+	public static void findCommon(int[] a, int[] b, int[] c){
+		
+		//Find intersection between 2 arrays, store it in temp array
+		int len = a.length>b.length?b.length:a.length;
+	}
+}

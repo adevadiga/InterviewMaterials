@@ -1,0 +1,9 @@
+package com.prog.questions;
+
+public class MaxConsec1s {
+
+	public static void findMaxOnes(int[] a){
+		int cur_len = 0;
+		int maxLen = 0;
+	}
+}

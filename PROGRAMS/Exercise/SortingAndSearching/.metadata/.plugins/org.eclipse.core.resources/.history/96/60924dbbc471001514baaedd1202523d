@@ -1,0 +1,19 @@
+package com.company.jpmorgan;
+
+import java.util.Scanner;
+
+public class LongestSumSubSequnce {
+
+	/*
+	 * O(n2)
+	 */
+	static void findLongestSumSubSequence(String str){
+		Scanner scanner = new Scanner(str);
+		while(scanner.hasNext()){
+			
+		}
+		
+		//char[] letters = str.toCharArray();
+	}
+	
+}

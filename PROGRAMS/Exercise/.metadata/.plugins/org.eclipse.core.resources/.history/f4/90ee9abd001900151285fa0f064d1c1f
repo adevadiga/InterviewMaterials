@@ -1,0 +1,9 @@
+package com.absurd.programs;
+
+public class AnagramTest {
+
+	public void isAnagram(String s, String t){
+		int[] charCount = new int[256];
+		
+	}
+}

@@ -1,0 +1,26 @@
+package com.company.jpmorgan;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+public class MyEmployeeTress {
+
+	Map<Integer,Employee> staff = new HashMap<Integer,Employee>();
+	
+	class Employee{
+		Integer employeeId;
+		String name;
+		Integer superiorId;
+		Set<Integer> subordinates;
+		
+		Employee(Integer employeeId, String name, Integer superiorId){
+			this.employeeId = employeeId;
+			this.name = name;
+			this.superiorId = superiorId;
+		}
+		public void addSubordinates(Ingteger eId){
+			
+		}
+	}
+}

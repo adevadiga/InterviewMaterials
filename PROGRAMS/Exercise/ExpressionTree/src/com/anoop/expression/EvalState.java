@@ -1,0 +1,63 @@
+package com.anoop.expression;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class EvalState {
+		
+	/**
+     * Initializes singleton.
+     *
+     * SingletonHolder is loaded on the first execution of EvalState.getInstance()
+     * or the first access to SingletonHolder.INSTANCE, not before.
+     */
+
+	private static class SingleTonHolder{
+		private static final EvalState instance = new EvalState();
+	}
+	
+	public static EvalState getInstance(){
+		return SingleTonHolder.instance;
+	}
+	
+	
+	
+
+	private Map<String, Integer> symbolTable;
+	
+	private EvalState(){
+		this.symbolTable = new HashMap<String, Integer>();
+	}
+	
+	public void setValue(String var, Integer value){
+		this.symbolTable.put(var, value);
+	}
+	
+	public Integer getValue(String var){
+		return this.symbolTable.get(var);
+	}
+	
+	public boolean isDefined(String var){
+		return this.symbolTable.containsKey(var) ;
+	}
+}
+/*
+ * 1. Private constructor
+ * 2. Note the distinction between a simple static instance of a class and a singleton: although a singleton can be implemented as a static instance, 
+         can also be lazily constructed, requiring no memory or resources until needed.
+   3. Multithread environment
+*/
+
+/*The public method can be written to take any desired types of arguments; a single String argument is used here as an example.
+This approach implements the singleton by taking advantage of Java's guarantee that any enum value is instantiated only once in a Java program.
+Since Java enum values are globally accessible, so is the singleton, initialized lazily by the class loader. The drawback is that the enum type is somewhat inflexible.
+*/
+
+/*public enum Singleton {
+    INSTANCE;
+    public void execute (String arg) {
+        // Perform operation here 
+    }
+}
+
+*/

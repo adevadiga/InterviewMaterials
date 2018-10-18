@@ -1,0 +1,37 @@
+package com.prog.questions.series;
+
+public class EggDrop {
+
+	
+	/*
+	 * Worst case no. of trails(no. Of floors) needed to find the whether egg dropd of not.
+	 * If no of eggs =1 and we need to test for all floor starting from first floor.
+	 * So worst case here in all the floors.
+	 * 
+	 * If there are two cases what is the worst no. of trails needed to find the critical floor
+	 * 
+	 * assume dropEgg(n, k)  -> n denotes egg, k denotes floor
+	 * and run through this from x ->1,2...k
+	 * At a certain floor x, drop the egg
+	 *   -> If the egg breaks consider dropEgg(n-1, x-1)
+	 *   ->If the egg doesn't break consider dropEgg(n, k-x)
+	 *   
+	 *   Next for the worst case calculation do a recurse
+	 *   1(for the current floor) + Minimum of(  (maximum trails needed for lower part)  (maximum trail needed for higher part)    )
+	 */
+	static int dropEgg(int noOfEggs, int noOfFloors){
+		
+		if(noOfFloors == 0 || noOfFloors == 1){
+			return noOfFloors; //Worst case no. of floors
+		}
+		
+		if(noOfEggs == 1){
+			return noOfFloors;
+		}
+		
+		
+		for(){
+			
+		}
+	}
+}

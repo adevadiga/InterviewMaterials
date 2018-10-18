@@ -1,0 +1,12 @@
+package com.anoop.tree;
+
+import org.junit.Test;
+
+public class SortTest {
+
+	@Test
+	public void listTest(){
+		new Sort().linkedListIndex();
+		
+	}
+}

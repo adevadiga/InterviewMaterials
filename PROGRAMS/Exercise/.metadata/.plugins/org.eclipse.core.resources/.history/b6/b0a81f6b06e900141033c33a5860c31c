@@ -1,0 +1,14 @@
+package com.hackersrank.pgm;
+
+import java.util.Scanner;
+
+public class MaxXOR {
+
+	public static void test(){
+		Scanner in = new Scanner(System.in);
+		int l = in.nextInt();
+		int r = in.nextInt();
+		int res = findMaxXor(l,r);
+		System.out.println(res);
+	}
+}

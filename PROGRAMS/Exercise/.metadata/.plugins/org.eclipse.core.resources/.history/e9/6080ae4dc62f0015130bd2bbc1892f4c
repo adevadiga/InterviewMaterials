@@ -1,0 +1,18 @@
+package com.cci.questions.recursion;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.junit.Test;
+
+public class TestPrintAllSubsetOfSet {
+
+	@Test
+	public void testGetSubSets(){
+		ArrayList<Integer> set = new ArrayList<Integer>();
+		ArrayList<ArrayList<Integer>> allSubSets = new PrintAllSubsetOfSet().getSubSets(set);
+		for(ArrayList<Integer> subSet:allSubSets){
+		   System.out.println(subSet.toString());
+		}
+	}
+}

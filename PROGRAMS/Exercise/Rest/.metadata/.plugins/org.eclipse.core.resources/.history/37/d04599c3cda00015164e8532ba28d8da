@@ -1,0 +1,7 @@
+package com.jaxrssample.service;
+
+public interface EmployeeService {
+
+	public Response getEmployeeDetail(@QueryParam("employeeId") String employeeId);
+
+}

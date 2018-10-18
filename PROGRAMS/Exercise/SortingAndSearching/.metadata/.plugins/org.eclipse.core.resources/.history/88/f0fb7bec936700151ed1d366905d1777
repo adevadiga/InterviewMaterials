@@ -1,0 +1,12 @@
+package com.anoop.algorithms;
+
+public class PascalTraingle {
+
+	static void printPascalWorst(int n){
+		for(int line = 0;line<n;line++){
+			for(int i = 0;i<=line;i++){
+				
+			}
+		}
+	}
+}

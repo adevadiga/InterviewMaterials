@@ -1,0 +1,13 @@
+package com.cci.questions.StacksAndQueues.StackofStacks;
+
+public class Stack {
+	Node top;
+	Node below;
+	
+	public void join(Node above, Node below){
+		if(below != null){
+			
+		}
+	}
+
+}

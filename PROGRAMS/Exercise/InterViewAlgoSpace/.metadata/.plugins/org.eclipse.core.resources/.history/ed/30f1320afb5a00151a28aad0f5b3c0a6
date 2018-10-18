@@ -1,0 +1,9 @@
+package com.absurd.meaning;
+
+public class SynchronizeConstructor {
+    static int c = 0;
+	SynchronizeConstructor(){
+		c++;
+		System.out.println(Thread.currentThread().getName());
+	}
+}

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;MaximumRepeatedWordsFromFile.java&apos; to &apos;WorkBook/src/com.workbook.worksheet&apos;&#x0D;&#x0A;- Original project: &apos;WorkBook&apos;&#x0D;&#x0A;- Destination element: &apos;WorkBook/src/com.workbook.worksheet&apos;&#x0D;&#x0A;- Original element: &apos;com.workbook.worksheet.MaximumRepeatedWordsFromFile.java&apos;" description="Copy compilation unit" destination="/src&lt;com.workbook.worksheet" element1="/src&lt;com.workbook.worksheet{MaximumRepeatedWordsFromFile.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1434866734659" units="1" version="1.0"/>
+</session>

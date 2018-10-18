@@ -1,0 +1,13 @@
+package com.absurd.meaning;
+
+class Foo{
+	
+}
+public class ObjectToList {
+
+	public static void main(String[] args) {
+	
+
+	}
+
+}

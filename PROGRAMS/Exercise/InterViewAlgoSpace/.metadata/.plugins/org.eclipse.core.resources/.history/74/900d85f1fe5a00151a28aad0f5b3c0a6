@@ -1,0 +1,15 @@
+package com.absurd.meaning;
+
+import java.util.Collections;
+
+class Foo{
+	
+}
+public class ObjectToList {
+
+	public static void main(String[] args) {
+	
+		List l = Collections.singletonList(new Foo());
+	}
+
+}

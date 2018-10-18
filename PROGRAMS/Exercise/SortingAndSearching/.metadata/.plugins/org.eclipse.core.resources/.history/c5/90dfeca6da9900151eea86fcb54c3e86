@@ -1,0 +1,13 @@
+package com.company.jpmorgan;
+
+public class SpiralPrintNbyNMatrixForN {
+
+	public static void main(String[] args){
+		
+	}
+	
+	public static void spiral(int n){
+		int dx = 0,dy=0;
+		int max = n*n;
+	}
+}

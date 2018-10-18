@@ -1,0 +1,10 @@
+package com.prog.questions.series;
+
+public class ReplaceZeroWithFive {
+
+	static void replace(int n){
+		if(){
+			
+		}
+	}
+}

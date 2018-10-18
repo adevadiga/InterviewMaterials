@@ -1,0 +1,34 @@
+package com.prog.questions;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CommonElementsInArray {
+
+	public static void test(){
+		int[] a={};
+	}
+	/*
+	 * All arrays are sorted
+	 */
+	public static void findCommon(int[] a, int[] b, int[] c){
+		
+	  int i=0,j=0,k=0;
+	  while(i<a.length && j<b.length && k<c.length){
+		  int x=a[i],y=b[j],z=c[k];
+		  if( x == y && x == z){
+			  System.out.println(x);
+			  i++;j++;k++;
+		  } 
+		  else if(x > y && x > z){
+			 j++; k++;
+		 }
+		 else if(y > z){
+			 i++;k++;
+		 }else{
+			 i++;j++;
+		 }
+		  
+	  }
+	}
+}

@@ -1,0 +1,18 @@
+package com.algorithm.sorting;
+
+public class QuickSortAlgorithm {
+
+	static void quickSort(int[] a){
+		
+	}
+	static void quickSort(int[] a, int left, int right){
+		if(left < right){
+			int p = partition(a, left, right);
+			quickSort(a, left, p);
+			quickSort(a, p+1, right);
+		}
+	}
+	sttaic int parition(){
+		
+	}
+}

@@ -1,0 +1,18 @@
+package com.company.jpmorgan;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Box{
+	List<Box> innerBoxes = new ArrayList<Box>();
+	
+	public int getBoxCount(){
+		if(this == null){
+			return 0;
+		}
+		int totalBox = innerBoxes.size();
+	}
+}
+public class RecursiveBox {
+
+}

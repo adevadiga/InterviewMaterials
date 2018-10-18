@@ -1,0 +1,40 @@
+package com.anoop.algorithm.recursion;
+
+public class AllPalindromInString {
+	
+	public static void printAll(){
+		StringBuffer str = new StringBuffer("ABACABA");
+		new AllPalindromInString().printPalindromes(str, 0, str.length()-1);
+	}
+
+	public fuckPalindrome(String str, int nSetOfChars){
+		
+	}
+	public void printPalindromes(StringBuffer str,int start, int end){
+		if(str.length()<=1){
+			return;
+		}
+		
+		String rest = str.substring(start+1, end);
+		if(str.charAt(start) == str.charAt(end)){			
+			if(isPalindrome(rest)){
+				System.out.println(rest);
+			}
+		}
+		printPalindromes(new StringBuffer(rest), 0 , rest.length()-1);
+		
+	}
+	public boolean isPalindrome(String str){
+		return isPalindrome(str, 0, str.length()-1);
+	}
+      boolean isPalindrome(String s,int startIndex, int endIndex){
+		
+		if(endIndex-startIndex < 1){
+			return true; 
+		}else{
+			
+			return  s.charAt(startIndex) == s.charAt(endIndex) &&  isPalindrome(s, startIndex+1, endIndex-1);
+			
+		}
+	}
+}

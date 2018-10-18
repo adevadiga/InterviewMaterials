@@ -1,0 +1,8 @@
+package com.cci.questions.linkedlist;
+
+public class NthNodeFromEndOfLinkedList {
+
+	public void nthNodeFromLastMethod1(){
+		
+	}
+}

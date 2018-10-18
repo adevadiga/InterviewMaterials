@@ -1,0 +1,21 @@
+package com.cci.questions.recursion;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrintAllSubsetOfSet {
+
+	public ArrayList<ArrayList<Integer>> getSubSets(ArrayList<Integer> set, int index){
+		ArrayList<ArrayList<Integer>> allSubSets = new ArrayList<ArrayList<Integer>>();
+		
+		if(set.size() == index){
+			allSubSets = new ArrayList<ArrayList<Integer>>();
+			allSubSets.add(new ArrayList<Integer>()); // Empty set
+		}else{
+			allSubSets = getSubSets(set, index+1);
+		}
+		
+		
+		return allSubSets;
+	}
+}

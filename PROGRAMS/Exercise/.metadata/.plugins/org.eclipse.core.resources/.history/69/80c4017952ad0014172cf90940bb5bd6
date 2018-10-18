@@ -1,0 +1,25 @@
+package com.anoop.expression;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class EvalState {
+
+	private Map<String, Integer> symbolTable;
+	
+	EvalState(){
+		this.symbolTable = new HashMap<String, Integer>();
+	}
+	
+	public void setValue(String var, Integer value){
+		this.symbolTable.put(var, value);
+	}
+	
+	public Integer getValue(String var){
+		return this.symbolTable.get(var);
+	}
+	
+	public boolean isDefined(String var){
+		return this.symbolTable.containsKey(var) ;
+	}
+}

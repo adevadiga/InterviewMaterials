@@ -1,0 +1,45 @@
+package com.algorithm.sorting;
+
+import java.util.Arrays;
+
+public class QuickSortAlgorithm {
+
+	static void quickSort(int[] a){
+		
+	}
+	static void quickSort(int[] a, int left, int right){
+		if(left < right){
+			int p = partition(a, left, right);
+			quickSort(a, left, p);
+			quickSort(a, p+1, right);
+		}
+	}
+	static int partition(int[] a, int p, int r){
+		int pivot = a[r]; //last element as pivot
+		int i = p-1;
+		int j = p;
+		
+		while(j <= r-1){
+			if(a[j] < pivot){
+				i++;
+				swap(a, i, j);
+			}
+		}
+		
+		int q = i+1; //The slot where pivot goes
+		swap(a, q, r);
+		return q;
+	}
+	static void swap(int[] a , int i, int j){
+		int t = a[i];
+		a[i] = a[j];
+		a[j] = t;
+	}
+	
+	public static void main(String[] args){
+		int[] a = {3,1,9,4,6,2};
+		System.out.println(Arrays.toString(a));
+		MergeSortAlgorithm.mergeSort(a);
+		System.out.println(Arrays.toString(a));
+	}
+}

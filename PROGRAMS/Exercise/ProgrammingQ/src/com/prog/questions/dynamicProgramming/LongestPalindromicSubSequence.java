@@ -1,0 +1,38 @@
+package com.prog.questions.dynamicProgramming;
+
+public class LongestPalindromicSubSequence {
+	
+	public static void test(){
+		System.out.println(lpc("BBABCBCAB".toCharArray(),0,"BBABCBCAB".length()-1));
+	}
+	// Returns the length of the longest palindromic subsequence in seq
+	static int lpc(char[] str, int i, int j){
+		
+		//Base Case 1. If only one char its a palindrome
+		if(i == j){
+			return 1;
+		}
+		//Base Case 2. If there are two char and they are same
+		if(str[i]==str[j] && i+1==j){
+			return 2;
+		}
+		
+		//Base Case 3. If first and last char is same
+		if(str[i] == str[j]){
+			return lpc(str, i+1, j-1)+2;
+		}
+		
+		//Base Case 4. If first and last char are different
+		//if(str[i] != str[j]){
+			return max( lpc(str, i+1, j) , lpc(str, i, j-1));
+		//}
+		
+		
+		
+	}
+	
+	static int max(int i, int j){
+		return i>j?i:j;
+	}
+
+}
